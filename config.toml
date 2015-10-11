@@ -1,0 +1,80 @@
+# hostname (and path) to the root eg. http://spf13.com/
+baseurl = "http://www.zybnet.com/"
+
+# Site title
+title = "ZYBNET"
+
+# Copyright
+# copyright = "(c) No copyright on this side!"
+
+# Language
+languageCode = "en-EN"
+
+# Metadata format
+# "yaml", "toml", "json"
+metaDataFormat = "yaml"
+
+# Theme to use (located in /themes/THEMENAME/)
+theme = "hyde-y"
+
+# Pagination
+paginate = 10
+paginatePath = "page"
+
+# Enable Disqus integration
+disqusShortname = "zybnet"
+
+[permalinks]
+    post = "/:year/:month/:day/:slug/"
+    code = "/:slug/"
+
+[taxonomies]
+    tag = "tags"
+    topic = "topics"
+
+[author]
+    name = "Raffaele Sgarro"
+    email = "raffaeleSgarro@gmail.com"
+
+#
+# All parameters below here are optional and can be mixed and matched.
+#
+[params]
+    # You can use markdown here.
+    brand = "ZYBNET"
+    topline = "My hacking journal"
+    # footline = "Made with <i class='fa fa-heart'></i> by me"
+
+    # Sidebar position
+    # false, true, "left", "right"
+    sidebar = "left"
+
+    # Text for the top menu link, which goes the root URL for the site.
+    # Default (if omitted) is "Home".
+    home = "Home"
+
+    # Select a syntax highight.
+    # Check the static/css/highlight directory for options.
+    highlight = "default"
+
+    # Google Analytics.
+    googleAnalytics = "UA-68695313-1"
+
+    # Sidebar social links.
+    github = "RaffaeleSgarro/raffaelesgarro.github.io" # Your Github profile ID
+    bitbucket = "" # Your Bitbucket profile ID
+    linkedin = "" # Your LinkedIn profile ID (from public URL)
+    googleplus = "" # Your Google+ profile ID
+    facebook = "raffaelesgarro" # Your Facebook profile ID
+    twitter = "raffaelesgarro" # Your Twitter profile ID
+    flattr = ""  # populate with your flattr uid
+    stackoverflow = "315306"
+
+[blackfriday]
+    angledQuotes = true
+    fractions = false
+    hrefTargetBlank = false
+    latexDashes = true
+    plainIdAnchors = true
+    extensions = []
+    extensionmask = []
