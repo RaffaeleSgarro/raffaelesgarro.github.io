@@ -1,6 +1,6 @@
 # raffaelesgarro.github.io
 
-This is the source code of the site [www.zybnet.com](www.zybnet.com)
+This is the source code of the site [www.zybnet.com](http://www.zybnet.com)
 
 # Development
 
@@ -18,5 +18,5 @@ the content of `master` is served by GitHub Pages.
  3. Copy the `public` directory somewhere
  4. `git checkout -f master`
  5. Replace the content of the directory with the files in `public` and commit
- 6. `git rebase --root`
+ 6. `git rebase -i --root`
  7. `git push -f origin master`
