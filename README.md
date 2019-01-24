@@ -4,7 +4,8 @@ This is the source code of the site [www.zybnet.com](http://www.zybnet.com)
 
 # Development
 
-This blog is developed with Hugo and uses the hyde-y theme. To start the server:
+This blog is developed with [Hugo V.0.19](https://github.com/gohugoio/hugo/releases/tag/v0.19) and uses
+the hyde-y theme. To start the server:
 
     hugo server -w
 
