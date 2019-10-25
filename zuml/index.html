@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Zuml</title>
+<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+<script type='text/javascript' src='thickbox.js'></script>
+<script type="text/javascript" src="rotator.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+<style type='text/css'>
+#designer {
+background-color: #f2f2f2;
+background-repeat: repeat;
+background-image: url("bg_pattern_1.png");
+width: 100000px;
+height: 100000px;
+position: relative;
+}
+
+.ui-draggable {
+cursor:move;
+}
+
+body {
+padding:0;
+margin: 0;
+overflow: hidden;
+font-family: Georgia, Verdana, Helvetica, Sans;
+font-weight: bold;
+font-style: italic;
+font-size: 12px; /* TODO experiment */
+color: white;
+}
+
+.building_blocks {
+position: absolute;
+/* TODO
+top: 50500px;
+left: 50600px;
+*/
+background-color: red;
+padding: 8px 13px;
+text-align: left;
+border: 3px solid #630254;
+background-image: -moz-linear-gradient(top, #ea00c6, #b00095);
+background-image: -webkit-linear-gradient(top, #ea00c6, #b00095);
+border-radius: 5px;
+-moz-border-radius: 5px;
+box-shadow: 0 0 7px black;
+-moz-box-shadow: 0 0 7px black;
+-webkit-box-shadow: 0 0 7px black;
+text-shadow: black 0px -1px 1px;
+}
+
+.building_blocks hr{
+height: 0;
+border-top-color: #DF00BC;
+border-bottom-color: #FF00D8;
+width: 100%;
+}
+
+h3 {
+margin: 0 auto;
+font-size: 1.4em;
+text-align: center;
+}
+
+.notes {
+color: black;
+position:absolute;
+/*
+top: 50300px;
+left: 50600px;
+*/
+font-family: 'Indie Flower', cursive;
+-webkit-transform: rotate(1deg);
+-moz-transform: rotate(1deg);
+}
+
+#trash_container {
+position: fixed;
+bottom: 0;
+right: 0;
+}
+
+/* This prevents img and div selection */
+img, .building_blocks {
+-moz-user-select: none;
+-webkit-user-select: none;
+}
+
+.notes, .building_blocks {
+z-index: 1;
+}
+
+#toolbar {
+position: fixed;
+top: 0;
+left: 0;
+}
+
+#edit_text {
+background-color: black;
+color: white;
+position: fixed;
+left: 10px;
+bottom: 10px;
+padding: 10px;
+border-radius: 5px;
+-moz-border-radius: 5px;
+margin-bottom: 10px;
+height: 140px;
+width: 300px;
+border: 0px;
+opacity: 0.7;
+outline: none;
+resize: none;
+}
+
+.inline {
+display: inline;
+}
+
+.clickable {
+cursor: pointer;
+}
+
+#toolbar, #edit_text, #trash_container {
+z-index: 2;
+}
+</style>
+<script type='text/javascript'>
+//<![CDATA[
+var isDraggingCanvas = false;
+var x = 0;
+var y = 0;
+
+setCurrentEditable = function(element) {
+  // TODO update old ui
+  // TODO update new ui
+  var textArea = $("#edit_text");
+  textArea.data("currentEditable", element);
+  textArea.val(element.html().trim());
+  element.update = (function(e, s) {
+    return function() {
+      e.html(s.val());
+    }
+  })(element, textArea);
+}
+  
+
+$(document).ready(function() {
+  window.scroll(50000, 50000);
+
+  $("#designer").draggable();
+  $("#designer").droppable({
+    accept: "#block, #write",
+    drop: function(evt, ui) {
+      var element = $(ui.helper).clone();
+      if (element.hasClass("dropped"))
+        return;
+      element.addClass("dropped");
+      $("#designer").append(element);
+      // TODO remove this
+      initWidget([element]);
+      if (element.hasClass("editable")) {
+        setCurrentEditable(element);
+      }
+    }
+  });
+  $(".building_blocks").draggable();
+  $("#block").draggable({
+    helper: function() {
+      return $("#testblock").clone()
+    },
+    appendTo: $("#designer")});
+  $("#write").draggable({
+    helper: function() {
+      return $("#note_element").clone();
+    },
+    appendTo: $("#designer")
+  });
+  $("#trash").droppable({
+    accept: "*",
+    drop: function(evt, ui) {
+      ui.helper.hide("scale", {}, "fast", (function(element){
+        return function() {
+          area = $("#edit_text");
+          if (area.data("currentEditable").get(0) === element.get(0)) {
+            area.data("currentEditable", null);
+            area.val("");
+          }
+          element.remove();
+        }
+      })(ui.helper));
+    }
+  });
+  $("img").each(function(index,el) {
+    $(el).mousedown(function(evt){
+      if (evt.preventDefault)
+        evt.preventDefault();
+    });
+  });
+  
+  // Setup #edit_text
+  edit_text = $("#edit_text");
+  edit_text.data("currentEditable", null);
+  edit_text.keyup((function(textarea) {
+    return function() {
+      if (textarea.data("currentEditable") == null)
+        return;
+      textarea.data("currentEditable").update(textarea);
+    }
+  })(edit_text));
+});
+//]]>
+</script>
+</head>
+<body>
+
+<div id="designer">
+<div class="building_blocks editable" id="testblock">
+<h3>HelloWorldClass</h3><hr/>
+<p>
+doThis()<br/>
+doThat()<br/>
+doSomething()
+</p>
+</div>
+<div id="note_element" class="notes editable">- - many to many - -&gt;</div>
+</div>
+<textarea id="edit_text" wrap="off" rows="1000" cols="1000">&lt;h3&gt;Trallallero&lt;/h3&gt;</textarea>
+<div id="trash_container">
+  <img id="trash" src="trash.png" alt="trash" />
+</div>
+<div id="toolbar" >
+  <img id="logo" src="logo.png" />
+  <img id="new" class="clickable" src="new.png" />
+  <img id="save" class="clickable" src="save.png" />
+  <img id="write" src="write.png" />
+  <img id="block" src="block.png" />
+</div>
+</body>
+</html> 
