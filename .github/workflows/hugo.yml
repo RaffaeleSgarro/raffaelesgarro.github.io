@@ -49,8 +49,7 @@ jobs:
           # For maximum backward compatibility with Hugo modules
           HUGO_ENVIRONMENT: production
           HUGO_ENV: production
-        run: |
-          hugo; [ $? -eq 255 ] && exit 0 || exit $?
+        run: hugo
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
