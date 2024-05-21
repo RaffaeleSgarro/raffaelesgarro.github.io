@@ -9,16 +9,8 @@ the hyde-y theme. To start the server:
 
     hugo server -w
 
-Note that the markdown sources are kept in the `src` branch of GitHub, becase
-the content of `master` is served by GitHub Pages.
-
 # Deployment
 
- 1. Stop the development server
- 2. Build the site with `hugo`
- 3. Move to the `public` directory and delete any `.git`
- 4. `git init .`
- 5. `git add .`
- 6. `git commit -m "Deploy"`
- 7. `git remote add origin git@github.com:RaffaeleSgarro/raffaelesgarro.github.io.git`
- 8. `git push -f origin master`
+Source files are compiled to `public/` and deployed to GitHub Pages by a GitHub action so
+just push your commit. Note that sources are kept in the `src` branch because the content
+of `master` used to be served by GitHub Pages.
