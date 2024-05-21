@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Javascript on ZYBNET</title>
+    <link>https://www.zybnet.com/tags/javascript/index.xml</link>
+    <description>Recent content in Javascript on ZYBNET</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <managingEditor>raffaeleSgarro@gmail.com (Raffaele Sgarro)</managingEditor>
+    <webMaster>raffaeleSgarro@gmail.com (Raffaele Sgarro)</webMaster>
+    <atom:link href="https://www.zybnet.com/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>jQuery.Deferred to queue ajax calls</title>
+      <link>https://www.zybnet.com/2012/06/24/jquery-deferred-to-queue-ajax-calls/</link>
+      <pubDate>Sun, 24 Jun 2012 21:55:36 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2012/06/24/jquery-deferred-to-queue-ajax-calls/</guid>
+      <description>&lt;p&gt;A &lt;a href=&#34;http://api.jquery.com/category/deferred-object/&#34;&gt;&lt;code&gt;jQuery.Deferred&lt;/code&gt; object&lt;/a&gt; is an interface to describe asynchronous operations. The Deferred interface gives the client programmer two hooks:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Deferred.done(callback)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;and Deferred.fail(callback)&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The callback signature is estabilished by the implementor. For example &lt;code&gt;jQuery.get()&lt;/code&gt; returns a &lt;code&gt;jqXHR&lt;/code&gt;, implementing the Promise interface (a subset of Deferred, used to prevent users from changing the state of the Deferred), and the callback for &lt;code&gt;done()&lt;/code&gt; uses up to three parameters: data, textStatus, jqXHR. So instead of using the jQuery &amp;laquo;proprietary&amp;raquo;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$.get(&amp;quot;http://host/resource&amp;quot;, {}, function(data, textStatus, jqXHR) { /* do something with the response*/ });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;one can use the promise-style (remember $.get returns a promise)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$.get(&amp;quot;http://host/resource&amp;quot;).done(function(data, textStatus, jqXHR) { /* do something with the response*/ });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To enqueue asynchronous calls one can use &lt;code&gt;Deferred.pipe(doneFilter, failFilter)&lt;/code&gt; (prior to 1.8 you must use &lt;code&gt;pipe()&lt;/code&gt;, while in 1.8 the implementation of pipe() is renamed then() and pipe() becomes an alias to it).&lt;/p&gt;
+
+&lt;p&gt;Things get interesting when doneFilter() itself returns a Promise and you want to register a callback when this new promise is resolved. Imagine the scenario where you want to&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;get authorization token&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;get last order&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;delete last order&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Thanks to jQuery and promise we can accomplish this via&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$.get(&amp;quot;/token&amp;quot;, params)
+  .pipe(function(data){
+     // Note that here &amp;quot;this&amp;quot; refers to the
+     // jqXHR, which also is a deferred
+     return $.get(&amp;quot;/order/last&amp;quot;, params);
+  })
+  .pipe(function(data){
+    return $.delete(&amp;quot;/order&amp;quot;, params);
+  })
+  .pipe(function(data){
+    $(&amp;quot;#some_div&amp;quot;).text(&amp;quot;OK&amp;quot;);
+  });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Without promise, we would have needed to nest calls like this&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$.get(&amp;quot;/token&amp;quot;, params, function (data) {
+  $.get(&amp;quot;/order/last&amp;quot;, params2, function(data) {
+    $.delete(&amp;quot;/order&amp;quot;, params3, function(data) {
+      $(&amp;quot;#some_div&amp;quot;).text(&amp;quot;OK&amp;quot;);
+    });
+  });
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As a bonus, we&amp;rsquo;ll review Deferred implementation in another post.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>My odyssey in vTiger CRM</title>
+      <link>https://www.zybnet.com/2012/04/15/my-odssey-in-vtiger-crm/</link>
+      <pubDate>Sun, 15 Apr 2012 22:07:13 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2012/04/15/my-odssey-in-vtiger-crm/</guid>
+      <description>&lt;p&gt;The problem: replace a popup with an Ajax autocomplete. In vTiger a Contact belongs to an organisation (called an Account), so the typical UI for a Contact shows both the Contact&amp;rsquo;s data (name, email, phone number) and the Account data (ship address, bill address and so on). If you happen to switch the organisation this Contact belongs to (maybe because you entered the wrong one) you have to click an icon, which opens a new browser window and lets you choose the new Account. When you pick one, the popup is closed and the data are sent back to &lt;code&gt;window.opener.form&lt;/code&gt;. A more user-friendly UI, of course, is the autocompleter.&lt;/p&gt;
+
+&lt;p&gt;An autocompleter is a bit of Javascript that asynchronously retrieves and displays matching records while the user is typing. The database is exposed via webservices.&lt;/p&gt;
+
+&lt;p&gt;First problem: vTiger includes Prototype, jQuery 1.2 and jQuery 1.6. In the Javascript namespace &lt;code&gt;$()&lt;/code&gt; is for Prototype, &lt;code&gt;jQuery()&lt;/code&gt; is for 1.2 and &amp;hellip; well 1.6 is not reachable. I wanted to use chosen.js for the autocomplete, but both Prototype and jQuery are too old. So I switched to jQuery UI, which has a nice autocomplete, but it requires at least jQuery 1.3.2. I had to import a new jQuery version, made it available via &lt;code&gt;jQuery172()&lt;/code&gt; and manually assign this to jQuery UI, by two or three trivial modifications to the source js.&lt;/p&gt;
+
+&lt;p&gt;vTiget has a nice JSON REST API, but it&amp;rsquo;s very difficult to access with AJAX, because you need an authentication token that is generated after two calls: one asks the server for a challenge, and one gets the auth token. Obviously I can&amp;rsquo;t make two calls before every Ajax operation: the token must be available on the server side, so I can generate the appropriate javascript calls. Accessing the webservices with the current logged in user does not work (neither via cookies nor via &lt;code&gt;SESSIONID&lt;/code&gt; in GET parameters). vTiger is not documented at all, so I had to manually dig into the sources, and work with my XDebug. I added the method &lt;code&gt;getWebServiceSessionName()&lt;/code&gt; to the User API. It is intended to be used in Smarty to provide a Javascript variable &lt;code&gt;ws_session_name&lt;/code&gt;. The logic is straightforward: cache the previously generated token, see if it&amp;rsquo;s still valid, and if it&amp;rsquo;s not, generate a new one. It took me quite some time to get this part to work, because nothing is documented, especially that I had to create a new &lt;code&gt;Session&lt;/code&gt;. Anyway this is what I added to &lt;code&gt;modules/Users/Users.php&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var $ws_session_name = false;
+var $ws_access_key = false; // this is the md5(token . accessKey)
+
+public function getWebServiceSessionName() {
+    $isStillValid = false;
+
+    try {
+        // README: this is actually silly. ws_access_key must be stored in the db
+        // and retrieved at User creation time
+        $user = vtws_login($this-&amp;gt;user_name, $this-&amp;gt;ws_access_key);
+        if ($user != null)
+            $isStillValid = true;
+        } catch (Exception $e) {
+           // nothing really here
+    }
+
+    if ($isStillValid) {
+        return $this-&amp;gt;ws_session_name;
+    }
+
+    $challenge = vtws_getchallenge($this-&amp;gt;user_name);
+    $token = $challenge[&amp;quot;token&amp;quot;];
+
+    $this-&amp;gt;ws_access_key = md5($token . $this-&amp;gt;accesskey);
+    $params = array(
+    &amp;quot;username&amp;quot; =&amp;gt; $this-&amp;gt;user_name,
+    &amp;quot;accessKey&amp;quot; =&amp;gt; $this-&amp;gt;ws_access_key
+    );
+    $sessionManager = new SessionManager();
+    $sessionManager-&amp;gt;startSession(null, false);
+    $operationManager = new OperationManager($this-&amp;gt;db, &amp;quot;login&amp;quot;, &amp;quot;json&amp;quot;, $sessionManager);
+
+    $loginResult = $operationManager-&amp;amp;gt;runOperation($params, $this);
+    $this-&amp;gt;ws_session_name = $loginResult[&amp;quot;sessionName&amp;quot;];
+    // TODO save $this-&amp;gt;ws_session_name in the database
+    return $this-&amp;gt;ws_session_name;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then the appropriate Javascript and markup must be generated. This is very specific to my implementation (and I also think I didn&amp;rsquo;t place my code in the right place, so I&amp;rsquo;ll have to talk to someone at vTiger) anyway I put the HTML includes in the template &lt;code&gt;Smarty/templates/salesEditView.tpl&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- This provides a jQuery172() for autocomplete --&amp;gt;
+&amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;include/js/jquery172-ui-autocomplete.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;
+  {*This value will be used in Contact.js to authenticate the ajax search request*}
+  ws_session_name = &amp;quot;{php}global $current_user; echo $current_user-&amp;gt;getWebServiceSessionName();{/php}&amp;quot;
+&amp;lt;/script&amp;gt;
+&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; type=&amp;quot;text/css&amp;quot; href=&amp;quot;include/js/jquery172-css/ui-lightness/jquery-ui-1.8.18.custom.css&amp;quot; /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And modified the Smarty/template/EditViewUI.tpl to replace the old buttons and inputs with the new one&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- this is really the organisation ID and is accessed in JS with form.account_id --&amp;gt;
+&amp;lt;input name=&amp;quot;{$fldname}&amp;quot; type=&amp;quot;hidden&amp;quot; value=&amp;quot;{$secondvalue}&amp;quot;&amp;gt;
+&amp;lt;input id=&amp;quot;account_name&amp;quot; name=&amp;quot;account_name&amp;quot; style=&amp;quot;border:1px solid #bababa;&amp;quot; type=&amp;quot;text&amp;quot; value=&amp;quot;{$fldvalue}&amp;quot; /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finally, the Javascript part. This is quiiiite eaaasy because jQuery UI is waaaay more documented than vTiger and there is really nothing special to this project. I appended my implementations in modules/Contacts/Contacts.js I think this is not really the right place for reuse and DRY, but just wanted to make things work until I get more focused on the big picture.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// This is the database of accounts built with the AJAX
+// request fired by autocomplete
+ws_accounts = [];
+
+(function($) {
+    $(function() {
+        $(&amp;quot;#account_name&amp;quot;).autocomplete({
+            minLength: 3,
+            source: function(request, response) {
+                // request.term contains the search term
+                $.getJSON(&amp;quot;webservice.php&amp;quot;, {
+                    operation: &amp;quot;query&amp;quot;,
+                    sessionName: ws_session_name,
+                    query: &amp;quot;select * from Accounts where accountname like &#39;%&amp;quot; + request.term + &amp;quot;%&#39; limit 20;&amp;quot;
+                }, function(json) {
+                    if (json.success === false || (json.success === true &amp;amp;&amp;amp; json.result.length == 0)) {
+                        response([{label: &amp;quot;No matching item&amp;quot;, value: -1}]);
+                        return;
+                    }
+                    ws_accounts = json.result;
+                    var result = json.result.map(function(record){
+                        return {label: record.accountname, value: record.id};
+                    });
+                    response(result);
+                });
+            },
+            focus: function(event, ui) {
+                event.preventDefault();
+                event.target.value = ui.item.label;
+            },
+            select: function(event, ui) {
+                // use ws_accounts data to call set_return_contact_address
+                event.preventDefault();
+                event.target.value = ui.item.label;
+                ws_accounts.each(function(account) {
+                    if (ui.item.value == account.id) {
+                        var form = document.forms[&amp;quot;EditView&amp;quot;];
+                        // account.id is 11x23, or 11x64 or 11x2
+                        // the first part is the identifier of the Account entity
+                        // the second is the ID of the specific account
+                        console.log(form.account_id);
+                        form.account_id.value = /\d+x(\d+)/.exec(account.id)[1];
+
+                        // Damnit.. why do they call them in a thousand different ways???
+                        form.mailingstreet.value = account.bill_street  || &amp;quot;&amp;quot;;
+                        form.otherstreet.value   = account.other_street || &amp;quot;&amp;quot;;
+                        form.mailingcity.value   = account.bill_city    || &amp;quot;&amp;quot;;
+                        form.othercity.value     = account.ship_city    || &amp;quot;&amp;quot;;
+                        form.mailingstate.value  = account.bill_state   || &amp;quot;&amp;quot;;
+                        form.otherstate.value    = account.ship_state   || &amp;quot;&amp;quot;;
+                        form.mailingzip.value    = account.bill_code    || &amp;quot;&amp;quot;;
+                        form.otherzip.value      = account.ship_code    || &amp;quot;&amp;quot;;
+                        form.mailingcountry.value= account.bill_country || &amp;quot;&amp;quot;;
+                        form.othercountry.value  = account.ship_country || &amp;quot;&amp;quot;;
+                        form.mailingpobox.value  = account.bill_pobox   || &amp;quot;&amp;quot;;
+                        form.otherpobox.value    = account.ship_pobox   || &amp;quot;&amp;quot;;
+
+                        return false;
+                    }
+                });
+            }
+        });
+    });
+})(jQuery172);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A screenshot&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://zybnet.com/wordpress/wp-content/uploads/vtiger-autocomplete.png&#34;&gt;&lt;img src=&#34;http://zybnet.com/wordpress/wp-content/uploads/vtiger-autocomplete.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This implementation in broken in a number of ways, since it&amp;rsquo;s only a reference for my future work. For example, the session key should be cached in the database to avoid creating a new &lt;code&gt;Session&lt;/code&gt; for each new request. The Javascript should attempt to guess the name of the account_id form field, because in Smarty it&amp;rsquo;s defined as &lt;code&gt;$fldName&lt;/code&gt;. The script itself should not be placed in Contacts.js, because it assumes a &lt;code&gt;#account_name&lt;/code&gt; element which is not guaranteed to exist in all pages which include the script. And there are certainly more flaws, but this post is only intended as proof of concept and as a technical reference.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Rotate a shape about an arbitrary point</title>
+      <link>https://www.zybnet.com/2012/03/14/rotate-a-shape-about-an-arbitrary-point/</link>
+      <pubDate>Wed, 14 Mar 2012 23:31:25 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2012/03/14/rotate-a-shape-about-an-arbitrary-point/</guid>
+      <description>&lt;p&gt;I wrote this to answer &lt;a href=&#34;http://stackoverflow.com/q/9701784/315306&#34;&gt;a question on StackOverflow&lt;/a&gt;.
+It&amp;rsquo;s a piece of Javascript code to rotate an object around an arbitrary point. I underestimated the complexity
+of this problem and found no available solution online. To be honest, the objective is quite simple to achieve,
+but neverthless it made me review trigonometry and linear algebra and exercise the canvas API.
+Here is &lt;a href=&#34;http://jsfiddle.net/raffaele181188/Cfdcn/&#34;&gt;the original JSFiddle&lt;/a&gt; and this is the final result:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://www.zybnet.com/images/rotate.png&#34; alt=&#34;Rotate rectangle&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;Here the code&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/*
+ * This demo program draws a rectangle rotated
+ * about a pivot point for the amount &amp;quot;gamma&amp;quot;
+ *
+ */
+var context = document.getElementById(&amp;quot;canvas&amp;quot;).getContext(&amp;quot;2d&amp;quot;);
+// rectangle&#39;s dimensions
+var width = 75;
+var height = 35;
+// rotation angle
+var gamma = 45 * Math.PI / 180;
+// the pivot coordinates
+var x = 200;
+var y = 170;
+
+// Some padding
+context.translate(100, 100);
+
+// Draw a rectangle in (0,0) and
+
+function draw(color) {
+    context.strokeStyle = color;
+    context.lineWidth = 4;
+    // Random offset
+    context.strokeRect(23, 13, width, height);
+    arrow(0, 0, width * 1.5, 0, color);
+    arrow(0, 0, 0, height * 1.5, color);
+}
+
+function sqr(number) {
+    return number * number;
+}
+
+function distance(x1, y1, x2, y2) {
+    return Math.sqrt(sqr(x1 - x2) + sqr(y1 - y2));
+}
+
+// Draw an arrow from (x1, y1) to (x2, y2)
+
+function arrow(x1, y1, x2, y2, color) {
+    context.strokeStyle = color || &amp;quot;#0b0&amp;quot;;
+    context.lineWidth = 1;
+    // draw the line
+    context.beginPath();
+    context.moveTo(x1, y1);
+    context.lineTo(x2, y2);
+    context.stroke();
+    context.closePath();
+    // draw the head
+    context.save();
+    context.translate(x2, y2);
+    m = distance(x1, y1, x2, y2);
+    sin = (y2 - y1) / m;
+    cos = (x2 - x1) / m;
+    alpha = Math.asin(sin);
+    if (alpha &amp;gt; 0 &amp;amp;&amp;amp; cos &amp;lt; 0) alpha = Math.PI - alpha;
+    if (alpha &amp;lt; 0 &amp;amp;&amp;amp; cos &amp;lt; 0) alpha = -Math.PI + Math.abs(alpha);
+    context.rotate(alpha);
+    context.beginPath();
+    context.moveTo(0, 0);
+    context.lineTo(-5, 2);
+    context.moveTo(0, 0);
+    context.lineTo(-5, -2);
+    context.stroke();
+    context.closePath();
+    context.restore();
+}
+
+// Draw the base rectangle with grey
+draw(&amp;quot;#bbb&amp;quot;);
+
+// Rotate about an arbitrary point (red)
+// 1. normalize
+magnitude = Math.sqrt(x * x + y * y);
+senA = -y / magnitude;
+cosA = -x / magnitude;
+
+// 2. compute the sin and cos of (alpha + gamma)
+senAG = Math.cos(gamma) * senA + Math.sin(gamma) * cosA;
+cosAG = Math.cos(gamma) * cosA - Math.sin(gamma) * senA;
+
+// 3. Back to the old coordinate space
+originTranslatedX = cosAG * magnitude + x;
+originTranslatedY = senAG * magnitude + y;
+
+// Draw arrows to show the rotation of the origin
+// about the pivot point for the specified amount
+arrow(x, y, 0, 0);
+arrow(x, y, originTranslatedX, originTranslatedY);
+context.save();
+context.translate(originTranslatedX, originTranslatedY);
+context.rotate(gamma);
+draw(&amp;quot;#b00&amp;quot;);
+context.restore();​
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

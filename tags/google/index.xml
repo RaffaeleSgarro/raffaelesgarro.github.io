@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Google on ZYBNET</title>
+    <link>https://www.zybnet.com/tags/google/index.xml</link>
+    <description>Recent content in Google on ZYBNET</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <managingEditor>raffaeleSgarro@gmail.com (Raffaele Sgarro)</managingEditor>
+    <webMaster>raffaeleSgarro@gmail.com (Raffaele Sgarro)</webMaster>
+    <atom:link href="https://www.zybnet.com/tags/google/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Google OpenID URL</title>
+      <link>https://www.zybnet.com/2012/08/22/google-openid-ur/</link>
+      <pubDate>Wed, 22 Aug 2012 22:37:41 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2012/08/22/google-openid-ur/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve always thought that the URL for my Google OpenID were something like &lt;code&gt;http://google.com/account/RaffaeleSgarro&lt;/code&gt;. Instead, it turns out that when a site request that URL to sign up (and in the case it doesn&amp;rsquo;t provide a Google icon), you can simply enter&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;https://www.google.com/accounts/o8/id&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;and it will redirect you to the Google server to confirm the authorization, and then back to the original site&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

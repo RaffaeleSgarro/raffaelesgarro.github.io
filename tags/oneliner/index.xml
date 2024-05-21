@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Oneliner on ZYBNET</title>
+    <link>https://www.zybnet.com/tags/oneliner/index.xml</link>
+    <description>Recent content in Oneliner on ZYBNET</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <managingEditor>raffaeleSgarro@gmail.com (Raffaele Sgarro)</managingEditor>
+    <webMaster>raffaeleSgarro@gmail.com (Raffaele Sgarro)</webMaster>
+    <atom:link href="https://www.zybnet.com/tags/oneliner/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Multiple substitutions with sed</title>
+      <link>https://www.zybnet.com/2012/03/16/multiple-substitutions-with-sed/</link>
+      <pubDate>Fri, 16 Mar 2012 12:46:11 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2012/03/16/multiple-substitutions-with-sed/</guid>
+      <description>&lt;p&gt;$echo &amp;lsquo;hello world!&amp;rsquo; | sed &amp;laquo;s/hello/good/g;s/world/bye/g&amp;raquo;
+    good bye!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Join multidimensional array elements with a Ruby oneliner</title>
+      <link>https://www.zybnet.com/2012/03/14/join-multidimensional-array-elements-with-a-ruby-oneliner/</link>
+      <pubDate>Wed, 14 Mar 2012 23:07:30 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2012/03/14/join-multidimensional-array-elements-with-a-ruby-oneliner/</guid>
+      <description>&lt;p&gt;Just the code&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;matrix = Array[
+[1, 2, 3],
+[4, 5, 6],
+[0, 0, 0]
+]
+puts matrix[0..1].transpose.map {|col| col.join(&#39;, &#39;)}.join(&#39;, &#39;)
+&amp;gt;&amp;gt;&amp;gt; 1, 4, 2, 5, 3, 6
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I thought of this because of &lt;a href=&#34;http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html#dom-context-2d-settransform&#34;&gt;canvas.setTransform()&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

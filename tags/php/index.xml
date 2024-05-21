@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Php on ZYBNET</title>
+    <link>https://www.zybnet.com/tags/php/index.xml</link>
+    <description>Recent content in Php on ZYBNET</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <managingEditor>raffaeleSgarro@gmail.com (Raffaele Sgarro)</managingEditor>
+    <webMaster>raffaeleSgarro@gmail.com (Raffaele Sgarro)</webMaster>
+    <atom:link href="https://www.zybnet.com/tags/php/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>CakePHP: the basics</title>
+      <link>https://www.zybnet.com/2012/07/24/cakephp-the-basics/</link>
+      <pubDate>Tue, 24 Jul 2012 22:08:33 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2012/07/24/cakephp-the-basics/</guid>
+      <description>&lt;p&gt;CakePHP is a PHP framework to easily build MVC applications. To install it clone the repository on GitHub&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git clone https://github.com/cakephp/cakephp.git cakephp-2.2.1
+git checkout 2.2.1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now we can use the Cake code generator from command line - it&amp;rsquo;s called &lt;code&gt;bake&lt;/code&gt; and is run like &lt;code&gt;cake bake&lt;/code&gt;. The path to the &lt;code&gt;cake&lt;/code&gt; executable (really a tiny shell script which invokes the real PHP-cli one) is like &lt;code&gt;cake-2.2.1/lib/Cake/Console/cake&lt;/code&gt;. For convenience, you can add this to your &lt;code&gt;PATH&lt;/code&gt;. We are now ready to generate the skeleton of the directory structure plus common files required by a CakePHP application:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cake bake
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Bake will ask you the path of the project, the credentials for accessing the database and so on. You can keep the default for the majority of the settings. Let&amp;rsquo;s see what files/directory bake just created:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;myapp/
+myapp/.htaccess
+myapp/Locale
+myapp/Locale/eng
+myapp/Locale/eng/LC_MESSAGES
+myapp/Lib
+myapp/Console
+myapp/Console/cake.bat
+myapp/Console/Command
+myapp/Console/Command/AppShell.php
+myapp/Console/Command/Task
+myapp/Console/cake.php
+myapp/Console/cake
+myapp/Console/Templates
+myapp/index.php
+myapp/Plugin
+myapp/tmp
+myapp/tmp/cache
+myapp/tmp/cache/models
+myapp/tmp/cache/persistent
+myapp/tmp/cache/persistent/myapp_cake_core_cake_console_
+myapp/tmp/cache/views
+myapp/tmp/logs
+myapp/tmp/tests
+myapp/tmp/sessions
+myapp/Vendor
+myapp/Model
+myapp/Model/AppModel.php
+myapp/Model/Datasource
+myapp/Model/Behavior
+myapp/Controller
+myapp/Controller/Component
+myapp/Controller/AppController.php
+myapp/Controller/PagesController.php
+myapp/Config
+myapp/Config/email.php.default
+myapp/Config/routes.php
+myapp/Config/acl.ini.php
+myapp/Config/database.php.default
+myapp/Config/bootstrap.php
+myapp/Config/core.php
+myapp/Config/database.php
+myapp/Config/Schema
+myapp/Config/Schema/sessions.sql
+myapp/Config/Schema/sessions.php
+myapp/Config/Schema/db_acl.php
+myapp/Config/Schema/db_acl.sql
+myapp/Config/Schema/i18n.sql
+myapp/Config/Schema/i18n.php
+myapp/webroot
+myapp/webroot/img
+myapp/webroot/img/test-fail-icon.png
+myapp/webroot/img/cake.icon.png
+myapp/webroot/img/test-pass-icon.png
+myapp/webroot/img/cake.power.gif
+myapp/webroot/img/test-skip-icon.png
+myapp/webroot/img/test-error-icon.png
+myapp/webroot/.htaccess
+myapp/webroot/index.php
+myapp/webroot/css
+myapp/webroot/css/cake.generic.css
+myapp/webroot/test.php
+myapp/webroot/js
+myapp/webroot/files
+myapp/webroot/favicon.ico
+myapp/Test
+myapp/Test/Fixture
+myapp/Test/Case
+myapp/Test/Case/Model
+myapp/Test/Case/Model/Behavior
+myapp/Test/Case/Controller
+myapp/Test/Case/Controller/Component&amp;lt;cod
+myapp/Test/Case/View
+myapp/Test/Case/View/Helper
+myapp/View
+myapp/View/Elements
+myapp/View/Emails
+myapp/View/Emails/text
+myapp/View/Emails/text/default.ctp
+myapp/View/Emails/html
+myapp/View/Emails/html/default.ctp
+myapp/View/Scaffolds
+myapp/View/Helper
+myapp/View/Helper/AppHelper.php
+myapp/View/Errors
+myapp/View/Errors/error500.ctp
+myapp/View/Errors/error400.ctp
+myapp/View/Pages
+myapp/View/Pages/home.ctp
+myapp/View/Layouts
+myapp/View/Layouts/error.ctp
+myapp/View/Layouts/ajax.ctp
+myapp/View/Layouts/Emails
+myapp/View/Layouts/Emails/text
+myapp/View/Layouts/Emails/text/default.ctp
+myapp/View/Layouts/Emails/html
+myapp/View/Layouts/Emails/html/default.ctp
+myapp/View/Layouts/xml
+myapp/View/Layouts/xml/default.ctp
+myapp/View/Layouts/js
+myapp/View/Layouts/js/default.ctp
+myapp/View/Layouts/rss
+myapp/View/Layouts/rss/default.ctp
+myapp/View/Layouts/flash.ctp
+myapp/View/Layouts/default.ctp
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now, enable &lt;code&gt;mod_rewrite&lt;/code&gt; on your Apache webserver (or the equivalent) and point a browser to &lt;code&gt;http://localhost/myapp&lt;/code&gt;. You will see an error asking you to set the value for the Cake library files under the constant &lt;code&gt;CAKE_CORE_INCLUDE_PATH&lt;/code&gt; in &lt;code&gt;webroot/index.php&lt;/code&gt;. Before setting this, it&amp;rsquo;s time to init the git repository for our new project:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git init
+find . -empty -type d -not -iwholename &#39;*/.git/*&#39; -exec touch &#39;{}&#39;/EMPTY \;
+touch README.md
+git add .
+git commit -m &amp;quot;Initial commit&amp;quot;
+git remote add origin $URL
+git push -u origin master
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;(Note that the &lt;code&gt;find&lt;/code&gt; on line 2 is there to preserve the directory structure in git). Now it&amp;rsquo;s time to configure the cake path seen above, but we don&amp;rsquo;t want to put the edit in Git. Finally, we&amp;rsquo;ll add a &lt;code&gt;.gitignore&lt;/code&gt; with the &lt;code&gt;tmp/&lt;/code&gt; directory as the only content&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git update-index --assume-unchanged webroot/index.php
+# uncomment around line 60 in the file
+echo &amp;quot;tmp/&amp;quot; &amp;gt;&amp;gt; .gitignore
+git add .gitignore
+git commit -m &amp;quot;Added .gitignore&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It&amp;rsquo;s time to see out app in a browser window
+&lt;a href=&#34;http://zybnet.com/wordpress/wp-content/uploads/CakePHP-the-rapid-development-php-framework-Home.png&#34;&gt;&lt;img src=&#34;http://zybnet.com/wordpress/wp-content/uploads/CakePHP-the-rapid-development-php-framework-Home.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;
+What can be seen here is a &lt;code&gt;View&lt;/code&gt; rendered by the &lt;code&gt;PagesController&lt;/code&gt;. Here is the flow&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;The browser issues a &lt;code&gt;HTTP GET /myapp/&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Cake reads its routing table (defined in &lt;code&gt;Config/routes.php&lt;/code&gt;) and finds the line matching &lt;code&gt;/&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;PagesController&lt;/code&gt; invokes its  &lt;code&gt;display&lt;/code&gt; method&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;These are the main components when dealing a Cake app: first you write a &lt;code&gt;Controller&lt;/code&gt; and its associated &lt;code&gt;View&lt;/code&gt;, then you declare a &lt;code&gt;route&lt;/code&gt; and finally define the DB part: database + &lt;code&gt;Model&lt;/code&gt; (in the case of the &lt;code&gt;PagesController&lt;/code&gt;, it really doesn&amp;rsquo;t store contents in a db, but access raw files stored under &lt;code&gt;View/Page/&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;In the next post, we&amp;rsquo;ll enhance the &lt;code&gt;PagesController&lt;/code&gt; by adding authentication and database storage&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>My odyssey in vTiger CRM</title>
+      <link>https://www.zybnet.com/2012/04/15/my-odssey-in-vtiger-crm/</link>
+      <pubDate>Sun, 15 Apr 2012 22:07:13 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2012/04/15/my-odssey-in-vtiger-crm/</guid>
+      <description>&lt;p&gt;The problem: replace a popup with an Ajax autocomplete. In vTiger a Contact belongs to an organisation (called an Account), so the typical UI for a Contact shows both the Contact&amp;rsquo;s data (name, email, phone number) and the Account data (ship address, bill address and so on). If you happen to switch the organisation this Contact belongs to (maybe because you entered the wrong one) you have to click an icon, which opens a new browser window and lets you choose the new Account. When you pick one, the popup is closed and the data are sent back to &lt;code&gt;window.opener.form&lt;/code&gt;. A more user-friendly UI, of course, is the autocompleter.&lt;/p&gt;
+
+&lt;p&gt;An autocompleter is a bit of Javascript that asynchronously retrieves and displays matching records while the user is typing. The database is exposed via webservices.&lt;/p&gt;
+
+&lt;p&gt;First problem: vTiger includes Prototype, jQuery 1.2 and jQuery 1.6. In the Javascript namespace &lt;code&gt;$()&lt;/code&gt; is for Prototype, &lt;code&gt;jQuery()&lt;/code&gt; is for 1.2 and &amp;hellip; well 1.6 is not reachable. I wanted to use chosen.js for the autocomplete, but both Prototype and jQuery are too old. So I switched to jQuery UI, which has a nice autocomplete, but it requires at least jQuery 1.3.2. I had to import a new jQuery version, made it available via &lt;code&gt;jQuery172()&lt;/code&gt; and manually assign this to jQuery UI, by two or three trivial modifications to the source js.&lt;/p&gt;
+
+&lt;p&gt;vTiget has a nice JSON REST API, but it&amp;rsquo;s very difficult to access with AJAX, because you need an authentication token that is generated after two calls: one asks the server for a challenge, and one gets the auth token. Obviously I can&amp;rsquo;t make two calls before every Ajax operation: the token must be available on the server side, so I can generate the appropriate javascript calls. Accessing the webservices with the current logged in user does not work (neither via cookies nor via &lt;code&gt;SESSIONID&lt;/code&gt; in GET parameters). vTiger is not documented at all, so I had to manually dig into the sources, and work with my XDebug. I added the method &lt;code&gt;getWebServiceSessionName()&lt;/code&gt; to the User API. It is intended to be used in Smarty to provide a Javascript variable &lt;code&gt;ws_session_name&lt;/code&gt;. The logic is straightforward: cache the previously generated token, see if it&amp;rsquo;s still valid, and if it&amp;rsquo;s not, generate a new one. It took me quite some time to get this part to work, because nothing is documented, especially that I had to create a new &lt;code&gt;Session&lt;/code&gt;. Anyway this is what I added to &lt;code&gt;modules/Users/Users.php&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var $ws_session_name = false;
+var $ws_access_key = false; // this is the md5(token . accessKey)
+
+public function getWebServiceSessionName() {
+    $isStillValid = false;
+
+    try {
+        // README: this is actually silly. ws_access_key must be stored in the db
+        // and retrieved at User creation time
+        $user = vtws_login($this-&amp;gt;user_name, $this-&amp;gt;ws_access_key);
+        if ($user != null)
+            $isStillValid = true;
+        } catch (Exception $e) {
+           // nothing really here
+    }
+
+    if ($isStillValid) {
+        return $this-&amp;gt;ws_session_name;
+    }
+
+    $challenge = vtws_getchallenge($this-&amp;gt;user_name);
+    $token = $challenge[&amp;quot;token&amp;quot;];
+
+    $this-&amp;gt;ws_access_key = md5($token . $this-&amp;gt;accesskey);
+    $params = array(
+    &amp;quot;username&amp;quot; =&amp;gt; $this-&amp;gt;user_name,
+    &amp;quot;accessKey&amp;quot; =&amp;gt; $this-&amp;gt;ws_access_key
+    );
+    $sessionManager = new SessionManager();
+    $sessionManager-&amp;gt;startSession(null, false);
+    $operationManager = new OperationManager($this-&amp;gt;db, &amp;quot;login&amp;quot;, &amp;quot;json&amp;quot;, $sessionManager);
+
+    $loginResult = $operationManager-&amp;amp;gt;runOperation($params, $this);
+    $this-&amp;gt;ws_session_name = $loginResult[&amp;quot;sessionName&amp;quot;];
+    // TODO save $this-&amp;gt;ws_session_name in the database
+    return $this-&amp;gt;ws_session_name;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then the appropriate Javascript and markup must be generated. This is very specific to my implementation (and I also think I didn&amp;rsquo;t place my code in the right place, so I&amp;rsquo;ll have to talk to someone at vTiger) anyway I put the HTML includes in the template &lt;code&gt;Smarty/templates/salesEditView.tpl&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- This provides a jQuery172() for autocomplete --&amp;gt;
+&amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;include/js/jquery172-ui-autocomplete.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;
+  {*This value will be used in Contact.js to authenticate the ajax search request*}
+  ws_session_name = &amp;quot;{php}global $current_user; echo $current_user-&amp;gt;getWebServiceSessionName();{/php}&amp;quot;
+&amp;lt;/script&amp;gt;
+&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; type=&amp;quot;text/css&amp;quot; href=&amp;quot;include/js/jquery172-css/ui-lightness/jquery-ui-1.8.18.custom.css&amp;quot; /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And modified the Smarty/template/EditViewUI.tpl to replace the old buttons and inputs with the new one&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- this is really the organisation ID and is accessed in JS with form.account_id --&amp;gt;
+&amp;lt;input name=&amp;quot;{$fldname}&amp;quot; type=&amp;quot;hidden&amp;quot; value=&amp;quot;{$secondvalue}&amp;quot;&amp;gt;
+&amp;lt;input id=&amp;quot;account_name&amp;quot; name=&amp;quot;account_name&amp;quot; style=&amp;quot;border:1px solid #bababa;&amp;quot; type=&amp;quot;text&amp;quot; value=&amp;quot;{$fldvalue}&amp;quot; /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finally, the Javascript part. This is quiiiite eaaasy because jQuery UI is waaaay more documented than vTiger and there is really nothing special to this project. I appended my implementations in modules/Contacts/Contacts.js I think this is not really the right place for reuse and DRY, but just wanted to make things work until I get more focused on the big picture.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// This is the database of accounts built with the AJAX
+// request fired by autocomplete
+ws_accounts = [];
+
+(function($) {
+    $(function() {
+        $(&amp;quot;#account_name&amp;quot;).autocomplete({
+            minLength: 3,
+            source: function(request, response) {
+                // request.term contains the search term
+                $.getJSON(&amp;quot;webservice.php&amp;quot;, {
+                    operation: &amp;quot;query&amp;quot;,
+                    sessionName: ws_session_name,
+                    query: &amp;quot;select * from Accounts where accountname like &#39;%&amp;quot; + request.term + &amp;quot;%&#39; limit 20;&amp;quot;
+                }, function(json) {
+                    if (json.success === false || (json.success === true &amp;amp;&amp;amp; json.result.length == 0)) {
+                        response([{label: &amp;quot;No matching item&amp;quot;, value: -1}]);
+                        return;
+                    }
+                    ws_accounts = json.result;
+                    var result = json.result.map(function(record){
+                        return {label: record.accountname, value: record.id};
+                    });
+                    response(result);
+                });
+            },
+            focus: function(event, ui) {
+                event.preventDefault();
+                event.target.value = ui.item.label;
+            },
+            select: function(event, ui) {
+                // use ws_accounts data to call set_return_contact_address
+                event.preventDefault();
+                event.target.value = ui.item.label;
+                ws_accounts.each(function(account) {
+                    if (ui.item.value == account.id) {
+                        var form = document.forms[&amp;quot;EditView&amp;quot;];
+                        // account.id is 11x23, or 11x64 or 11x2
+                        // the first part is the identifier of the Account entity
+                        // the second is the ID of the specific account
+                        console.log(form.account_id);
+                        form.account_id.value = /\d+x(\d+)/.exec(account.id)[1];
+
+                        // Damnit.. why do they call them in a thousand different ways???
+                        form.mailingstreet.value = account.bill_street  || &amp;quot;&amp;quot;;
+                        form.otherstreet.value   = account.other_street || &amp;quot;&amp;quot;;
+                        form.mailingcity.value   = account.bill_city    || &amp;quot;&amp;quot;;
+                        form.othercity.value     = account.ship_city    || &amp;quot;&amp;quot;;
+                        form.mailingstate.value  = account.bill_state   || &amp;quot;&amp;quot;;
+                        form.otherstate.value    = account.ship_state   || &amp;quot;&amp;quot;;
+                        form.mailingzip.value    = account.bill_code    || &amp;quot;&amp;quot;;
+                        form.otherzip.value      = account.ship_code    || &amp;quot;&amp;quot;;
+                        form.mailingcountry.value= account.bill_country || &amp;quot;&amp;quot;;
+                        form.othercountry.value  = account.ship_country || &amp;quot;&amp;quot;;
+                        form.mailingpobox.value  = account.bill_pobox   || &amp;quot;&amp;quot;;
+                        form.otherpobox.value    = account.ship_pobox   || &amp;quot;&amp;quot;;
+
+                        return false;
+                    }
+                });
+            }
+        });
+    });
+})(jQuery172);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A screenshot&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://zybnet.com/wordpress/wp-content/uploads/vtiger-autocomplete.png&#34;&gt;&lt;img src=&#34;http://zybnet.com/wordpress/wp-content/uploads/vtiger-autocomplete.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This implementation in broken in a number of ways, since it&amp;rsquo;s only a reference for my future work. For example, the session key should be cached in the database to avoid creating a new &lt;code&gt;Session&lt;/code&gt; for each new request. The Javascript should attempt to guess the name of the account_id form field, because in Smarty it&amp;rsquo;s defined as &lt;code&gt;$fldName&lt;/code&gt;. The script itself should not be placed in Contacts.js, because it assumes a &lt;code&gt;#account_name&lt;/code&gt; element which is not guaranteed to exist in all pages which include the script. And there are certainly more flaws, but this post is only intended as proof of concept and as a technical reference.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

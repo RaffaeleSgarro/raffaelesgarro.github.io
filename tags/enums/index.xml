@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Enums on ZYBNET</title>
+    <link>https://www.zybnet.com/tags/enums/index.xml</link>
+    <description>Recent content in Enums on ZYBNET</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <managingEditor>raffaeleSgarro@gmail.com (Raffaele Sgarro)</managingEditor>
+    <webMaster>raffaeleSgarro@gmail.com (Raffaele Sgarro)</webMaster>
+    <atom:link href="https://www.zybnet.com/tags/enums/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Puzzled by generics and enums</title>
+      <link>https://www.zybnet.com/2013/06/27/puzzled-by-generics-and-enums/</link>
+      <pubDate>Thu, 27 Jun 2013 20:01:08 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2013/06/27/puzzled-by-generics-and-enums/</guid>
+      <description>&lt;p&gt;I had to write a method which, given an &lt;code&gt;Enum&lt;/code&gt; class, returned the set of values. First signature attempt:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public Set&amp;lt;Enum&amp;lt;?&amp;gt;&amp;gt; getValuesForEnum(Class&amp;lt;Enum&amp;lt;?&amp;gt;&amp;gt; klass);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Unfortunately this doesn&amp;rsquo;t work. When you try to invoke this method you got the error:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;getValuesForEnum() can&#39;t be applied to &amp;quot;name.of.the.Enum&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s say we have an enum named &lt;code&gt;com.example.MyEnum&lt;/code&gt;. The compiler complains because &lt;code&gt;MyEnum.class&lt;/code&gt; is not a subtype of &lt;code&gt;Class&amp;lt;Enum&amp;lt;?&amp;gt;&amp;gt;&lt;/code&gt;. Can you spot the error? Nested type parameters are always tricky to deal with. In this case I had to perform the following reasoning:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;A&amp;lt;Y&amp;gt;&lt;/code&gt; is a subtype of &lt;code&gt;A&amp;lt;X&amp;gt;&lt;/code&gt; if &amp;hellip; well this never happens! For the subtype relationship to exist, wildcard must come into play, and there are no wildcards here. Except, well, there is a wildcard indeed: &lt;code&gt;Enum&amp;lt;?&amp;gt;&lt;/code&gt;! Unfortunately it&amp;rsquo;s in the wrong place. We have:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Class&amp;lt;Enum&amp;lt;?&amp;gt;&amp;gt;&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Class&amp;lt;MyEnum&amp;gt;&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To fix this problem the signature needs to be:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public Set&amp;lt;Enum&amp;lt;?&amp;gt;&amp;gt; getValuesForEnum( Class&amp;lt;? extends Enum&amp;lt;?&amp;gt;&amp;gt; klass);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Generics are invariant in Java: a &lt;code&gt;List&amp;lt;String&amp;gt;&lt;/code&gt; can&amp;rsquo;t be used where a &lt;code&gt;List&amp;lt;Object&amp;gt;&lt;/code&gt; is expected, regardless of the subtype relation between String and Object. It&amp;rsquo;s not different in this case: just that we don&amp;rsquo;t have String and Object, but &lt;code&gt;Enum&amp;lt;?&amp;gt;&lt;/code&gt; and &lt;code&gt;Enum&amp;lt;MyEnum&amp;gt;&lt;/code&gt;. There exists a subtype relation between the two arguments, but it&amp;rsquo;s irrelevant because our &lt;code&gt;X&lt;/code&gt; is &lt;code&gt;Enum&amp;lt;?&amp;gt;&lt;/code&gt;, so it&amp;rsquo;s not a wildcard.&lt;/p&gt;
+
+&lt;p&gt;What puzzled me is that it&amp;rsquo;s a generic type and the type argument happens to be a wildcard.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

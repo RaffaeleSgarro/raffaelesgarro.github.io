@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Css on ZYBNET</title>
+    <link>https://www.zybnet.com/tags/css/index.xml</link>
+    <description>Recent content in Css on ZYBNET</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <managingEditor>raffaeleSgarro@gmail.com (Raffaele Sgarro)</managingEditor>
+    <webMaster>raffaeleSgarro@gmail.com (Raffaele Sgarro)</webMaster>
+    <atom:link href="https://www.zybnet.com/tags/css/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>The magics of table-layout</title>
+      <link>https://www.zybnet.com/2014/02/12/the-magics-of-table-layout/</link>
+      <pubDate>Wed, 12 Feb 2014 12:20:18 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2014/02/12/the-magics-of-table-layout/</guid>
+      <description>&lt;p&gt;See &lt;a href=&#34;http://jsfiddle.net/7k7Z7/&#34;&gt;this JSFiddle&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;div&amp;gt;
+    &amp;lt;div&amp;gt;cell lorem ipsum&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div&amp;gt;
+    &amp;lt;div&amp;gt;cell lorem ipsum&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;cell lorem ipsum&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div&amp;gt;
+    &amp;lt;div&amp;gt;cell lorem ipsum&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;cell&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;cell lorem ipsum&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div&amp;gt;
+    &amp;lt;div&amp;gt;cell lorem ipsum&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;cell&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;cell&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;c&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div&amp;gt;
+    &amp;lt;div&amp;gt;cell lorem ipsum&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;cell&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;c&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;cell&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;c&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div&amp;gt;
+    &amp;lt;div&amp;gt;cell lorem ipsum&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;c&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;c&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;cell&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;cell&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;c&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;Now the CSS:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;div {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    margin-bottom: 20px;
+    border-spacing: 5px;
+}
+
+div &amp;gt; div {
+    display: table-cell;
+    border: 1px dotted red;
+    padding: 4px 6px;
+    width: 100%;
+    margin-bottom: 0;
+    overflow:hidden;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The magic is done with &lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout&#34;&gt;&lt;code&gt;table-layout&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Floating elements and overflow</title>
+      <link>https://www.zybnet.com/2013/06/27/floating-elements-and-overflow/</link>
+      <pubDate>Thu, 27 Jun 2013 19:32:24 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2013/06/27/floating-elements-and-overflow/</guid>
+      <description>&lt;p&gt;Starting point: a container with N &lt;div&gt; elements: one is float: right and the rest is float: none.&lt;/p&gt;
+
+&lt;p&gt;If you set &lt;code&gt;overflow: hidden&lt;/code&gt; on a &lt;code&gt;float: none&lt;/code&gt; box it will not overlap the floating siblings. In this screenshot, the semi-transparent red box is &lt;code&gt;float: right&lt;/code&gt;, and the yellow box is &lt;code&gt;overflow:hidden&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://zybnet.com/wordpress/wp-content/uploads/zn.png&#34;&gt;&lt;img src=&#34;http://zybnet.com/wordpress/wp-content/uploads/zn.png&#34; alt=&#34;With overflow: hidden&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;And here you what happens when &lt;code&gt;overflow: visible&lt;/code&gt; is applied to the yellow box:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://zybnet.com/wordpress/wp-content/uploads/zn2.png&#34;&gt;&lt;img src=&#34;http://zybnet.com/wordpress/wp-content/uploads/zn2.png&#34; alt=&#34;With overflow: visible&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Play it on &lt;a href=&#34;http://jsbin.com/atopaz/2/edit&#34;&gt;JSBin&lt;/a&gt;
+This is because elements with &lt;code&gt;overflow: hidden&lt;/code&gt; estabilish a new &lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Block_formatting_context&#34;&gt;block formatting context&lt;/a&gt; and&lt;/p&gt;
+
+&lt;blockquote&gt;The rules for positioning and clearing of floats apply only to things within the same block formatting context. Floats do not affect the layout of things in other block formatting contexts&lt;/blockquote&gt;
+
+&lt;p&gt;I played with it to build a search bar that expands to fill the remaining space:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://jsbin.com/riwof/1/embed?html,css,output&#34;&gt;JS Bin&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Xpath on ZYBNET</title>
+    <link>https://www.zybnet.com/tags/xpath/index.xml</link>
+    <description>Recent content in Xpath on ZYBNET</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <managingEditor>raffaeleSgarro@gmail.com (Raffaele Sgarro)</managingEditor>
+    <webMaster>raffaeleSgarro@gmail.com (Raffaele Sgarro)</webMaster>
+    <atom:link href="https://www.zybnet.com/tags/xpath/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>XPath and namespaces</title>
+      <link>https://www.zybnet.com/2012/07/28/xpath-and-namespaces/</link>
+      <pubDate>Sat, 28 Jul 2012 11:45:58 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2012/07/28/xpath-and-namespaces/</guid>
+      <description>&lt;p&gt;Let&amp;rsquo;s consider the following XML&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
+&amp;lt;notes&amp;gt;
+   &amp;lt;note&amp;gt;
+      &amp;lt;heading&amp;gt;Remember the milk&amp;lt;/heading&amp;gt;
+      &amp;lt;body&amp;gt;Don&#39;t forget me this weekend!&amp;lt;/body&amp;gt;
+   &amp;lt;/note&amp;gt;
+   &amp;lt;note&amp;gt;
+      &amp;lt;heading&amp;gt;Call Anna&amp;lt;/heading&amp;gt;
+      &amp;lt;body&amp;gt;Don&#39;t forget me this weekend!&amp;lt;/body&amp;gt;
+   &amp;lt;/note&amp;gt;
+   &amp;lt;note&amp;gt;
+      &amp;lt;heading&amp;gt;Feed the trolls&amp;lt;/heading&amp;gt;
+      &amp;lt;body&amp;gt;Don&#39;t forget me this weekend!&amp;lt;/body&amp;gt;
+   &amp;lt;/note&amp;gt;
+   &amp;lt;note&amp;gt;
+      &amp;lt;heading&amp;gt;Hooray!&amp;lt;/heading&amp;gt;
+      &amp;lt;body&amp;gt;Don&#39;t forget me this weekend!&amp;lt;/body&amp;gt;
+   &amp;lt;/note&amp;gt;
+&amp;lt;/notes&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And the following Java program:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;NodeList notes = (NodeList) xpath.evaluate(&amp;quot;//note/heading/text()&amp;quot;,
+    builder.parse(ColladaXPath.class.getResourceAsStream(&amp;quot;notes.xml&amp;quot;)),
+    XPathConstants.NODESET);
+
+for (int i = 0; i &amp;lt; notes.getLength(); i++) {
+    System.out.println(notes.item(i).getNodeValue());
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Everything works fine until one adds the infamous &lt;code&gt;xmlns&lt;/code&gt; attribute to the root element. At this point, XPath won&amp;rsquo;t be able to find anything without a &lt;code&gt;prefix&lt;/code&gt;, so we&amp;rsquo;ll have to change the XPath expression to something like&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;//n:note/n:heading/text()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note that the &lt;code&gt;n:&lt;/code&gt; prefix does not need to appear in the source XML. It is used on the XPath side and mapped to a xmlns with a subclass of &lt;code&gt;javax.xml.namespace.NamespaceContext&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class NotesNamespaceCtx implements NamespaceContext {
+    public String getNamespaceURI(String prefix) {
+        return &amp;quot;foobarbaz&amp;quot;;
+    }
+
+    public String getPrefix(String namespaceURI) {
+        return &amp;quot;n&amp;quot;;
+    }
+
+    public Iterator&amp;lt;?&amp;gt; getPrefixes(String namespaceURI) {
+        return null;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The String returned by &lt;code&gt;getNamespaceURI()&lt;/code&gt; must be the value of xmlnls. In this case it&amp;rsquo;s &lt;code&gt;xmlns=&amp;quot;foobarbaz&amp;quot;&lt;/code&gt;. Here is a full implementation (it needs &lt;a href=&#34;http://code.google.com/p/guava-libraries/&#34;&gt;Guava&lt;/a&gt; to be compiled and run)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;package com.zybnet;
+
+import java.util.Iterator;
+
+import javax.xml.namespace.NamespaceContext;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathFactory;
+
+import org.w3c.dom.NodeList;
+
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
+
+public class ColladaXPath {
+
+    public static void main(String[] args) throws Exception {
+        NodeList notes = (NodeList) xpath.evaluate(&amp;quot;//n:note/n:heading/text()&amp;quot;,
+                builder.parse(ColladaXPath.class.getResourceAsStream(&amp;quot;notes.xml&amp;quot;)),
+                XPathConstants.NODESET);
+
+        for (int i = 0; i &amp;lt; notes.getLength(); i++) {
+            System.out.println(notes.item(i).getNodeValue());
+        }
+
+    }
+
+    static XPath xpath;
+    static DocumentBuilder builder;
+
+    static {
+        DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
+        domFactory.setNamespaceAware(true); // !IMPORTANT
+
+        try {
+            builder = domFactory.newDocumentBuilder();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+
+        xpath = XPathFactory.newInstance().newXPath();
+        NamespaceCtxImpl ns = new NamespaceCtxImpl();
+        ns.register(&amp;quot;n&amp;quot;, &amp;quot;foobarbaz&amp;quot;);
+        xpath.setNamespaceContext(ns);
+    }
+
+    private static class NamespaceCtxImpl implements NamespaceContext {
+        private BiMap&amp;lt;String, String&amp;gt; xmlns = HashBiMap.create();
+
+        public void register(String prefix, String uri) {
+            xmlns.put(prefix, uri);
+        }
+
+        @Override
+        public String getNamespaceURI(String prefix) {
+            return xmlns.get(prefix);
+        }
+
+        @Override
+        public String getPrefix(String namespaceURI) {
+            return xmlns.inverse().get(namespaceURI);
+        }
+
+        @Override
+        public Iterator&amp;lt;String&amp;gt; getPrefixes(String namespaceURI) {
+            return xmlns.keySet().iterator();
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

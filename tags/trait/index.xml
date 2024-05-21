@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Trait on ZYBNET</title>
+    <link>https://www.zybnet.com/tags/trait/index.xml</link>
+    <description>Recent content in Trait on ZYBNET</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <managingEditor>raffaeleSgarro@gmail.com (Raffaele Sgarro)</managingEditor>
+    <webMaster>raffaeleSgarro@gmail.com (Raffaele Sgarro)</webMaster>
+    <atom:link href="https://www.zybnet.com/tags/trait/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Defining the types a Trait can be mixed in</title>
+      <link>https://www.zybnet.com/2013/06/28/defining-the-types-a-trait-can-be-mixed-in/</link>
+      <pubDate>Fri, 28 Jun 2013 15:07:29 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2013/06/28/defining-the-types-a-trait-can-be-mixed-in/</guid>
+      <description>&lt;p&gt;In Scala you can write&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;trait ConstrainedTrait { self: ParentType =&amp;gt;
+  // code here
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://scala-programming-language.1934581.n4.nabble.com/Newbie-question-Limiting-where-traits-can-be-mixed-in-td1941813.html&#34;&gt;Mail thread here&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

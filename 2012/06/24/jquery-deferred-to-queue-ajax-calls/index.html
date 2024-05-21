@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>jQuery.Deferred to queue ajax calls  &middot; ZYBNET</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="javascript, jquery, ">
+
+
+<meta property="og:title" content="jQuery.Deferred to queue ajax calls  &middot; ZYBNET ">
+<meta property="og:site_name" content="ZYBNET"/>
+<meta property="og:url" content="https://www.zybnet.com/2012/06/24/jquery-deferred-to-queue-ajax-calls/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="2012-06-24T21:55:36Z" />
+<meta property="og:article:modified_time" content="2012-06-24T21:55:36Z" />
+
+  
+    
+<meta property="og:article:tag" content="javascript">
+    
+<meta property="og:article:tag" content="jquery">
+    
+  
+
+  
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@raffaelesgarro" />
+<meta name="twitter:creator" content="@raffaelesgarro" />
+<meta name="twitter:title" content="jQuery.Deferred to queue ajax calls" />
+<meta name="twitter:description" content="" />
+<meta name="twitter:url" content="https://www.zybnet.com/2012/06/24/jquery-deferred-to-queue-ajax-calls/" />
+<meta name="twitter:domain" content="https://www.zybnet.com/">
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "jQuery.Deferred to queue ajax calls",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+?rel=author"
+    },
+    "datePublished": "2012-06-24",
+    "description": "",
+    "wordCount": 258
+  }
+</script>
+
+
+
+<link rel="canonical" href="https://www.zybnet.com/2012/06/24/jquery-deferred-to-queue-ajax-calls/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://www.zybnet.com/touch-icon-144-precomposed.png">
+<link href="https://www.zybnet.com/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.19" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://www.zybnet.com/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://www.zybnet.com/css/style.css">
+<link rel="stylesheet" href="https://www.zybnet.com/css/highlight/default.css">
+
+  
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="https://www.zybnet.com/">
+  ZYBNET
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  My hacking journal
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="https://www.zybnet.com/">Home</a>
+
+
+  
+<a href="https://www.zybnet.com/about">About</a>
+
+<a href="https://www.zybnet.com/post" title="Show list of posts">Posts</a>
+
+<a href="https://www.zybnet.com/tags" title="Show list of tags">Tags</a>
+
+<a href="https://www.zybnet.com/zuml" title="ZUML">ZUML</a>
+
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" href="mailto:raffaeleSgarro@gmail.com">
+  <span class="fa fa-envelope-square"></span><span>email</span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" href="https://github.com/RaffaeleSgarro/raffaelesgarro.github.io">
+  <span class="fa fa-github-square"></span><span>github</span></a>
+
+
+
+
+
+
+
+
+
+<a id="contact-link-facebook" class="contact_link" href="https://www.facebook.com/raffaelesgarro">
+  <span class="fa fa-facebook-square"></span><span>facebook</span></a>
+
+
+
+<a id="contact-link-twitter" class="contact_link" href="https://twitter.com/raffaelesgarro">
+  <span class="fa fa-twitter-square"></span><span>twitter</span></a>
+
+
+
+
+
+
+
+<a id="contact-link-stackoverflow" class="contact_link" href="https://stackoverflow.com/users/315306">
+  <span class="fa fa-stack-overflow"></span><span>stackoverflow</span></a>
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>jQuery.Deferred to queue ajax calls
+</h1>
+
+  <div class="metas">
+<time datetime="2012-06-24">24 Jun, 2012</time>
+
+
+  
+    &middot; by admin
+  
+  &middot; Read in about 2 min
+  &middot; (258 Words)
+  <br>
+  
+<a class="label" href="https://www.zybnet.com/tags/javascript">javascript</a>
+
+<a class="label" href="https://www.zybnet.com/tags/jquery">jquery</a>
+
+
+
+</div>
+
+</header>
+
+  <div class="container content">
+  <p>A <a href="http://api.jquery.com/category/deferred-object/"><code>jQuery.Deferred</code> object</a> is an interface to describe asynchronous operations. The Deferred interface gives the client programmer two hooks:</p>
+
+<ul>
+<li><p>Deferred.done(callback)</p></li>
+
+<li><p>and Deferred.fail(callback)</p></li>
+</ul>
+
+<p>The callback signature is estabilished by the implementor. For example <code>jQuery.get()</code> returns a <code>jqXHR</code>, implementing the Promise interface (a subset of Deferred, used to prevent users from changing the state of the Deferred), and the callback for <code>done()</code> uses up to three parameters: data, textStatus, jqXHR. So instead of using the jQuery &laquo;proprietary&raquo;</p>
+
+<pre><code>$.get(&quot;http://host/resource&quot;, {}, function(data, textStatus, jqXHR) { /* do something with the response*/ });
+</code></pre>
+
+<p>one can use the promise-style (remember $.get returns a promise)</p>
+
+<pre><code>$.get(&quot;http://host/resource&quot;).done(function(data, textStatus, jqXHR) { /* do something with the response*/ });
+</code></pre>
+
+<p>To enqueue asynchronous calls one can use <code>Deferred.pipe(doneFilter, failFilter)</code> (prior to 1.8 you must use <code>pipe()</code>, while in 1.8 the implementation of pipe() is renamed then() and pipe() becomes an alias to it).</p>
+
+<p>Things get interesting when doneFilter() itself returns a Promise and you want to register a callback when this new promise is resolved. Imagine the scenario where you want to</p>
+
+<ol>
+<li><p>get authorization token</p></li>
+
+<li><p>get last order</p></li>
+
+<li><p>delete last order</p></li>
+</ol>
+
+<p>Thanks to jQuery and promise we can accomplish this via</p>
+
+<pre><code>$.get(&quot;/token&quot;, params)
+  .pipe(function(data){
+     // Note that here &quot;this&quot; refers to the
+     // jqXHR, which also is a deferred
+     return $.get(&quot;/order/last&quot;, params);
+  })
+  .pipe(function(data){
+    return $.delete(&quot;/order&quot;, params);
+  })
+  .pipe(function(data){
+    $(&quot;#some_div&quot;).text(&quot;OK&quot;);
+  });
+</code></pre>
+
+<p>Without promise, we would have needed to nest calls like this</p>
+
+<pre><code>$.get(&quot;/token&quot;, params, function (data) {
+  $.get(&quot;/order/last&quot;, params2, function(data) {
+    $.delete(&quot;/order&quot;, params3, function(data) {
+      $(&quot;#some_div&quot;).text(&quot;OK&quot;);
+    });
+  });
+});
+</code></pre>
+
+<p>As a bonus, we&rsquo;ll review Deferred implementation in another post.</p>
+</div>
+
+
+  <footer class="container">
+  <div class="container navigation no-print">
+  <h2>Navigation</h2>
+  
+  
+
+    
+    <a class="prev" href="https://www.zybnet.com/2012/04/15/my-odssey-in-vtiger-crm/" title="My odyssey in vTiger CRM">
+      Previous
+    </a>
+    
+
+    
+    <a class="next" href="https://www.zybnet.com/2012/07/13/java-logging-with-log4j/" title="Java logging with log4j">
+      Next
+    </a>
+    
+
+  
+
+
+</div>
+
+  <div class="container comments">
+  <h2>Comments</h2>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//zybnet.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+
+</footer>
+
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+<a href="http://www.wtfpl.net/txt/copying/">Do What The Fuck You Want To Public License</a>
+
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+
+</div>
+
+
+  
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//zybnet.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="https://www.zybnet.com/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+    
+  </body>
+</html>
+

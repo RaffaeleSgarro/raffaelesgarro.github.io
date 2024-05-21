@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Apache on ZYBNET</title>
+    <link>https://www.zybnet.com/tags/apache/index.xml</link>
+    <description>Recent content in Apache on ZYBNET</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <managingEditor>raffaeleSgarro@gmail.com (Raffaele Sgarro)</managingEditor>
+    <webMaster>raffaeleSgarro@gmail.com (Raffaele Sgarro)</webMaster>
+    <atom:link href="https://www.zybnet.com/tags/apache/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Apache mod_authz_host: what do Order, Deny and Allow mean?</title>
+      <link>https://www.zybnet.com/2012/04/12/apache-mod_authz_host-what-do-order-deny-and-allow-mean/</link>
+      <pubDate>Thu, 12 Apr 2012 16:11:40 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2012/04/12/apache-mod_authz_host-what-do-order-deny-and-allow-mean/</guid>
+      <description>&lt;p&gt;This is really silly - I admit, but I never had to mess with Order, Deny and Allow inside &lt;Directory&gt; contexts in Apache configuration files and .htaccess. But Today I got an error: &amp;laquo;403 Forbidden: You are not allowed to access / on this server&amp;raquo;. This turned out to be a missing +Indexes in my virtual host configuration, neverthless it was an opportunity to revise the Apache documentation.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;VirtualHost *:80&amp;gt;
+    ServerName w.zybnet.com
+    ServerAdmin webmaster@localhost
+    DocumentRoot /data/projects
+
+    &amp;lt;Directory /&amp;gt;
+        Options +Indexes -FollowSymLinks
+        AllowOverride None
+        Order Deny,Allow
+    &amp;lt;/Directory&amp;gt;
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    LogLevel warn
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+&amp;lt;/VirtualHost&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Options +Indexes means that when a request is made that maps to a directory of the filesystem and there are no index files (index.html, index.php, index.jsp) in there, Apache will list the content of the directory. This is what I wanted for my local server.&lt;/p&gt;
+
+&lt;p&gt;Order, Deny and Allow are used to tell if the request must be accepted or rejected. Allow and Deny are followed by ip addresses or hostnames. &lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_access_compat.html&#34;&gt;Here are the rules&lt;/a&gt;. You can see from the link that now this directives are in mod_access_compat, because &lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_authz_host.html&#34;&gt;the new mod_authz_host has introduced Require&lt;/a&gt;. However this is for 2.4, while on my Ubuntu 11.10 there is still 2.2&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Reverse proxy on development machine to get rid of ports in URLs</title>
+      <link>https://www.zybnet.com/2012/02/21/reverse-proxy-on-development-machine-to/</link>
+      <pubDate>Tue, 21 Feb 2012 00:56:40 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2012/02/21/reverse-proxy-on-development-machine-to/</guid>
+      <description>&lt;p&gt;As a web developer I deal with several HTTP servers: Apache, Tomcat6, Tomcat7, Play!, WEBrick. In order to run all of them on the same machine (possibly at the same time) each needs to be bound on a port different than well known 80, so that you need to specify the port as part of the URL (for example in the browser). This is cumbersome and ugly: my purpose is to reach the servers as if they were on different machines, like this:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;a.host.example.com (Tomcat6, localhost:8080)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;b.host.example.com (WEBrick, localhost:8181)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;c.host.example.com (Nginx, localhost:8282)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;d.host.example.com (CouchDB, localhost:8383)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&amp;hellip;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;HUGOMORE42&lt;/p&gt;
+
+&lt;p&gt;First step is to allow client machines to resolve hostnames (ie translate hostnames to IP addresses). This is accomplished by adding records to /etc/hosts or by adding CNAME records to the DNS server.&lt;/p&gt;
+
+&lt;p&gt;Enabling mod_proxy and mod_proxy_http is done this way&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$sudo a2enmod proxy
+$sudo a2enmod proxy_http
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now, let&amp;rsquo;s configure Apache to act as a Reverse Proxy. The following ensures that Apache runs virtual hosts&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# /etc/apache2/ports.conf
+NameVirtualHost *:80
+Listen 80
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finally, let&amp;rsquo;s create a site for each virtual host. For example, to link play.my.example.com to localhost:9000, put the following in a new /etc/apache2/sites-available/play&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;VirtualHost *:80&amp;gt;
+   ServerName play.aldebaran.zybnet.com
+   &amp;lt;Proxy *&amp;gt;
+      Order deny,allow
+      Allow from all
+   &amp;lt;/Proxy&amp;gt;
+   ProxyPreserveHost On
+   ProxyPass / http://localhost:9000/
+   ProxyPassReverse / http://localhost:9000/
+&amp;lt;/VirtualHost&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And enable it with&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$sudo a2ensite play
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

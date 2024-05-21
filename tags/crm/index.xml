@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Crm on ZYBNET</title>
+    <link>https://www.zybnet.com/tags/crm/index.xml</link>
+    <description>Recent content in Crm on ZYBNET</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <managingEditor>raffaeleSgarro@gmail.com (Raffaele Sgarro)</managingEditor>
+    <webMaster>raffaeleSgarro@gmail.com (Raffaele Sgarro)</webMaster>
+    <atom:link href="https://www.zybnet.com/tags/crm/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>My odyssey in vTiger CRM</title>
+      <link>https://www.zybnet.com/2012/04/15/my-odssey-in-vtiger-crm/</link>
+      <pubDate>Sun, 15 Apr 2012 22:07:13 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2012/04/15/my-odssey-in-vtiger-crm/</guid>
+      <description>&lt;p&gt;The problem: replace a popup with an Ajax autocomplete. In vTiger a Contact belongs to an organisation (called an Account), so the typical UI for a Contact shows both the Contact&amp;rsquo;s data (name, email, phone number) and the Account data (ship address, bill address and so on). If you happen to switch the organisation this Contact belongs to (maybe because you entered the wrong one) you have to click an icon, which opens a new browser window and lets you choose the new Account. When you pick one, the popup is closed and the data are sent back to &lt;code&gt;window.opener.form&lt;/code&gt;. A more user-friendly UI, of course, is the autocompleter.&lt;/p&gt;
+
+&lt;p&gt;An autocompleter is a bit of Javascript that asynchronously retrieves and displays matching records while the user is typing. The database is exposed via webservices.&lt;/p&gt;
+
+&lt;p&gt;First problem: vTiger includes Prototype, jQuery 1.2 and jQuery 1.6. In the Javascript namespace &lt;code&gt;$()&lt;/code&gt; is for Prototype, &lt;code&gt;jQuery()&lt;/code&gt; is for 1.2 and &amp;hellip; well 1.6 is not reachable. I wanted to use chosen.js for the autocomplete, but both Prototype and jQuery are too old. So I switched to jQuery UI, which has a nice autocomplete, but it requires at least jQuery 1.3.2. I had to import a new jQuery version, made it available via &lt;code&gt;jQuery172()&lt;/code&gt; and manually assign this to jQuery UI, by two or three trivial modifications to the source js.&lt;/p&gt;
+
+&lt;p&gt;vTiget has a nice JSON REST API, but it&amp;rsquo;s very difficult to access with AJAX, because you need an authentication token that is generated after two calls: one asks the server for a challenge, and one gets the auth token. Obviously I can&amp;rsquo;t make two calls before every Ajax operation: the token must be available on the server side, so I can generate the appropriate javascript calls. Accessing the webservices with the current logged in user does not work (neither via cookies nor via &lt;code&gt;SESSIONID&lt;/code&gt; in GET parameters). vTiger is not documented at all, so I had to manually dig into the sources, and work with my XDebug. I added the method &lt;code&gt;getWebServiceSessionName()&lt;/code&gt; to the User API. It is intended to be used in Smarty to provide a Javascript variable &lt;code&gt;ws_session_name&lt;/code&gt;. The logic is straightforward: cache the previously generated token, see if it&amp;rsquo;s still valid, and if it&amp;rsquo;s not, generate a new one. It took me quite some time to get this part to work, because nothing is documented, especially that I had to create a new &lt;code&gt;Session&lt;/code&gt;. Anyway this is what I added to &lt;code&gt;modules/Users/Users.php&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var $ws_session_name = false;
+var $ws_access_key = false; // this is the md5(token . accessKey)
+
+public function getWebServiceSessionName() {
+    $isStillValid = false;
+
+    try {
+        // README: this is actually silly. ws_access_key must be stored in the db
+        // and retrieved at User creation time
+        $user = vtws_login($this-&amp;gt;user_name, $this-&amp;gt;ws_access_key);
+        if ($user != null)
+            $isStillValid = true;
+        } catch (Exception $e) {
+           // nothing really here
+    }
+
+    if ($isStillValid) {
+        return $this-&amp;gt;ws_session_name;
+    }
+
+    $challenge = vtws_getchallenge($this-&amp;gt;user_name);
+    $token = $challenge[&amp;quot;token&amp;quot;];
+
+    $this-&amp;gt;ws_access_key = md5($token . $this-&amp;gt;accesskey);
+    $params = array(
+    &amp;quot;username&amp;quot; =&amp;gt; $this-&amp;gt;user_name,
+    &amp;quot;accessKey&amp;quot; =&amp;gt; $this-&amp;gt;ws_access_key
+    );
+    $sessionManager = new SessionManager();
+    $sessionManager-&amp;gt;startSession(null, false);
+    $operationManager = new OperationManager($this-&amp;gt;db, &amp;quot;login&amp;quot;, &amp;quot;json&amp;quot;, $sessionManager);
+
+    $loginResult = $operationManager-&amp;amp;gt;runOperation($params, $this);
+    $this-&amp;gt;ws_session_name = $loginResult[&amp;quot;sessionName&amp;quot;];
+    // TODO save $this-&amp;gt;ws_session_name in the database
+    return $this-&amp;gt;ws_session_name;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then the appropriate Javascript and markup must be generated. This is very specific to my implementation (and I also think I didn&amp;rsquo;t place my code in the right place, so I&amp;rsquo;ll have to talk to someone at vTiger) anyway I put the HTML includes in the template &lt;code&gt;Smarty/templates/salesEditView.tpl&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- This provides a jQuery172() for autocomplete --&amp;gt;
+&amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;include/js/jquery172-ui-autocomplete.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;
+  {*This value will be used in Contact.js to authenticate the ajax search request*}
+  ws_session_name = &amp;quot;{php}global $current_user; echo $current_user-&amp;gt;getWebServiceSessionName();{/php}&amp;quot;
+&amp;lt;/script&amp;gt;
+&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; type=&amp;quot;text/css&amp;quot; href=&amp;quot;include/js/jquery172-css/ui-lightness/jquery-ui-1.8.18.custom.css&amp;quot; /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And modified the Smarty/template/EditViewUI.tpl to replace the old buttons and inputs with the new one&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- this is really the organisation ID and is accessed in JS with form.account_id --&amp;gt;
+&amp;lt;input name=&amp;quot;{$fldname}&amp;quot; type=&amp;quot;hidden&amp;quot; value=&amp;quot;{$secondvalue}&amp;quot;&amp;gt;
+&amp;lt;input id=&amp;quot;account_name&amp;quot; name=&amp;quot;account_name&amp;quot; style=&amp;quot;border:1px solid #bababa;&amp;quot; type=&amp;quot;text&amp;quot; value=&amp;quot;{$fldvalue}&amp;quot; /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finally, the Javascript part. This is quiiiite eaaasy because jQuery UI is waaaay more documented than vTiger and there is really nothing special to this project. I appended my implementations in modules/Contacts/Contacts.js I think this is not really the right place for reuse and DRY, but just wanted to make things work until I get more focused on the big picture.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// This is the database of accounts built with the AJAX
+// request fired by autocomplete
+ws_accounts = [];
+
+(function($) {
+    $(function() {
+        $(&amp;quot;#account_name&amp;quot;).autocomplete({
+            minLength: 3,
+            source: function(request, response) {
+                // request.term contains the search term
+                $.getJSON(&amp;quot;webservice.php&amp;quot;, {
+                    operation: &amp;quot;query&amp;quot;,
+                    sessionName: ws_session_name,
+                    query: &amp;quot;select * from Accounts where accountname like &#39;%&amp;quot; + request.term + &amp;quot;%&#39; limit 20;&amp;quot;
+                }, function(json) {
+                    if (json.success === false || (json.success === true &amp;amp;&amp;amp; json.result.length == 0)) {
+                        response([{label: &amp;quot;No matching item&amp;quot;, value: -1}]);
+                        return;
+                    }
+                    ws_accounts = json.result;
+                    var result = json.result.map(function(record){
+                        return {label: record.accountname, value: record.id};
+                    });
+                    response(result);
+                });
+            },
+            focus: function(event, ui) {
+                event.preventDefault();
+                event.target.value = ui.item.label;
+            },
+            select: function(event, ui) {
+                // use ws_accounts data to call set_return_contact_address
+                event.preventDefault();
+                event.target.value = ui.item.label;
+                ws_accounts.each(function(account) {
+                    if (ui.item.value == account.id) {
+                        var form = document.forms[&amp;quot;EditView&amp;quot;];
+                        // account.id is 11x23, or 11x64 or 11x2
+                        // the first part is the identifier of the Account entity
+                        // the second is the ID of the specific account
+                        console.log(form.account_id);
+                        form.account_id.value = /\d+x(\d+)/.exec(account.id)[1];
+
+                        // Damnit.. why do they call them in a thousand different ways???
+                        form.mailingstreet.value = account.bill_street  || &amp;quot;&amp;quot;;
+                        form.otherstreet.value   = account.other_street || &amp;quot;&amp;quot;;
+                        form.mailingcity.value   = account.bill_city    || &amp;quot;&amp;quot;;
+                        form.othercity.value     = account.ship_city    || &amp;quot;&amp;quot;;
+                        form.mailingstate.value  = account.bill_state   || &amp;quot;&amp;quot;;
+                        form.otherstate.value    = account.ship_state   || &amp;quot;&amp;quot;;
+                        form.mailingzip.value    = account.bill_code    || &amp;quot;&amp;quot;;
+                        form.otherzip.value      = account.ship_code    || &amp;quot;&amp;quot;;
+                        form.mailingcountry.value= account.bill_country || &amp;quot;&amp;quot;;
+                        form.othercountry.value  = account.ship_country || &amp;quot;&amp;quot;;
+                        form.mailingpobox.value  = account.bill_pobox   || &amp;quot;&amp;quot;;
+                        form.otherpobox.value    = account.ship_pobox   || &amp;quot;&amp;quot;;
+
+                        return false;
+                    }
+                });
+            }
+        });
+    });
+})(jQuery172);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A screenshot&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://zybnet.com/wordpress/wp-content/uploads/vtiger-autocomplete.png&#34;&gt;&lt;img src=&#34;http://zybnet.com/wordpress/wp-content/uploads/vtiger-autocomplete.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This implementation in broken in a number of ways, since it&amp;rsquo;s only a reference for my future work. For example, the session key should be cached in the database to avoid creating a new &lt;code&gt;Session&lt;/code&gt; for each new request. The Javascript should attempt to guess the name of the account_id form field, because in Smarty it&amp;rsquo;s defined as &lt;code&gt;$fldName&lt;/code&gt;. The script itself should not be placed in Contacts.js, because it assumes a &lt;code&gt;#account_name&lt;/code&gt; element which is not guaranteed to exist in all pages which include the script. And there are certainly more flaws, but this post is only intended as proof of concept and as a technical reference.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

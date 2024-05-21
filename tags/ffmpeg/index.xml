@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ffmpeg on ZYBNET</title>
+    <link>https://www.zybnet.com/tags/ffmpeg/index.xml</link>
+    <description>Recent content in Ffmpeg on ZYBNET</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <managingEditor>raffaeleSgarro@gmail.com (Raffaele Sgarro)</managingEditor>
+    <webMaster>raffaeleSgarro@gmail.com (Raffaele Sgarro)</webMaster>
+    <atom:link href="https://www.zybnet.com/tags/ffmpeg/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>ffmpeg: split video and extract audio</title>
+      <link>https://www.zybnet.com/2012/10/20/ffmpeg-split-video-and-extract-audio/</link>
+      <pubDate>Sat, 20 Oct 2012 13:25:08 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2012/10/20/ffmpeg-split-video-and-extract-audio/</guid>
+      <description>&lt;p&gt;This is the command to extract a piece from a video file in the most efficient manner:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ffmpeg -ss $START -i &amp;quot;My 21st Birthday&amp;quot; -t $DURATION -c:v copy -c:a copy &amp;quot;Funny moment.webm&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Where&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;$START&lt;/code&gt; is the start moment, in &lt;code&gt;hh:mm:ss[.mmm]&lt;/code&gt; format&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;$DURATION&lt;/code&gt; is the length in the same format as above&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Note that in this case the order of parameters matters! If the input file is given before &lt;code&gt;-ss&lt;/code&gt;, ffmpeg will still decode the streams from the beginning of the file. Instead, if &lt;code&gt;-ss&lt;/code&gt; is given first, the streams are first seek&amp;rsquo;d, and only after the start point decoding begins.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;-c&lt;/code&gt; switch is parameterized with a stream index, which is a number like 0, 1, 2. In this case &lt;code&gt;-c:v&lt;/code&gt; is a special syntax for all video streams. Following the swich, one should name an explicit decoder; in this case, the special word &lt;code&gt;copy&lt;/code&gt; is used to keep the source format instead of decoding/encoding again.&lt;/p&gt;
+
+&lt;p&gt;To extract the audio stream from a video file, one can use&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ffmpeg -i &amp;quot;my video.webm&amp;quot; -map 0:a -c:a copy &amp;quot;soundtrack.ogg&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;-map&lt;/code&gt; switch &lt;a href=&#34;http://ffmpeg.org/ffmpeg.html#toc-Advanced-options&#34;&gt;explained&lt;/a&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt; the first number is a 0 (zero) which identifies the source file id. In this case only one file is given, so its index will be zero&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;the second character is a stream identifier. Again, here we use the special character a to identify all audio streams&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;-c:a copy&lt;/code&gt; has the same meaning as above: keep the audio encoding&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This little Ruby function can help to compute the &lt;code&gt;$DURATION&lt;/code&gt; parameter&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# first argument is start time, second is end time
+def time_diff(start, end)
+  t = Time.at( Time.parse(end) - Time.parse(start) )
+  (t - t.gmt_offset).strftime(&amp;quot;%H:%M:%S.%L&amp;quot;)
+end
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

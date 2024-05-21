@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Configuration on ZYBNET</title>
+    <link>https://www.zybnet.com/tags/configuration/index.xml</link>
+    <description>Recent content in Configuration on ZYBNET</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <managingEditor>raffaeleSgarro@gmail.com (Raffaele Sgarro)</managingEditor>
+    <webMaster>raffaeleSgarro@gmail.com (Raffaele Sgarro)</webMaster>
+    <atom:link href="https://www.zybnet.com/tags/configuration/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Apache mod_authz_host: what do Order, Deny and Allow mean?</title>
+      <link>https://www.zybnet.com/2012/04/12/apache-mod_authz_host-what-do-order-deny-and-allow-mean/</link>
+      <pubDate>Thu, 12 Apr 2012 16:11:40 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2012/04/12/apache-mod_authz_host-what-do-order-deny-and-allow-mean/</guid>
+      <description>&lt;p&gt;This is really silly - I admit, but I never had to mess with Order, Deny and Allow inside &lt;Directory&gt; contexts in Apache configuration files and .htaccess. But Today I got an error: &amp;laquo;403 Forbidden: You are not allowed to access / on this server&amp;raquo;. This turned out to be a missing +Indexes in my virtual host configuration, neverthless it was an opportunity to revise the Apache documentation.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;VirtualHost *:80&amp;gt;
+    ServerName w.zybnet.com
+    ServerAdmin webmaster@localhost
+    DocumentRoot /data/projects
+
+    &amp;lt;Directory /&amp;gt;
+        Options +Indexes -FollowSymLinks
+        AllowOverride None
+        Order Deny,Allow
+    &amp;lt;/Directory&amp;gt;
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    LogLevel warn
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+&amp;lt;/VirtualHost&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Options +Indexes means that when a request is made that maps to a directory of the filesystem and there are no index files (index.html, index.php, index.jsp) in there, Apache will list the content of the directory. This is what I wanted for my local server.&lt;/p&gt;
+
+&lt;p&gt;Order, Deny and Allow are used to tell if the request must be accepted or rejected. Allow and Deny are followed by ip addresses or hostnames. &lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_access_compat.html&#34;&gt;Here are the rules&lt;/a&gt;. You can see from the link that now this directives are in mod_access_compat, because &lt;a href=&#34;http://httpd.apache.org/docs/2.4/mod/mod_authz_host.html&#34;&gt;the new mod_authz_host has introduced Require&lt;/a&gt;. However this is for 2.4, while on my Ubuntu 11.10 there is still 2.2&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Gcc on ZYBNET</title>
+    <link>https://www.zybnet.com/tags/gcc/index.xml</link>
+    <description>Recent content in Gcc on ZYBNET</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <managingEditor>raffaeleSgarro@gmail.com (Raffaele Sgarro)</managingEditor>
+    <webMaster>raffaeleSgarro@gmail.com (Raffaele Sgarro)</webMaster>
+    <atom:link href="https://www.zybnet.com/tags/gcc/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Rants on C, GCC, ...</title>
+      <link>https://www.zybnet.com/2013/03/03/rants-on-c-gcc/</link>
+      <pubDate>Sun, 03 Mar 2013 22:26:22 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2013/03/03/rants-on-c-gcc/</guid>
+      <description>&lt;p&gt;I don&amp;rsquo;t know C, but as a seasoned Java programmer (not to mention that I do a lot of scripting) I really didn&amp;rsquo;t expect:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Makefile are idiotic (tab is significant!)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;You need those stupid header files&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Shared Objects are a mess&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The order of the arguments on the GCC command line matters!&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

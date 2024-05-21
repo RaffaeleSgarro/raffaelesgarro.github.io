@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>SimpleTemplateEngine escaping  &middot; ZYBNET</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="escaping, groovy, ">
+
+
+<meta property="og:title" content="SimpleTemplateEngine escaping  &middot; ZYBNET ">
+<meta property="og:site_name" content="ZYBNET"/>
+<meta property="og:url" content="https://www.zybnet.com/2013/10/05/simpletemplateengine-escaping/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="2013-10-05T17:27:48Z" />
+<meta property="og:article:modified_time" content="2013-10-05T17:27:48Z" />
+
+  
+    
+<meta property="og:article:tag" content="escaping">
+    
+<meta property="og:article:tag" content="groovy">
+    
+  
+
+  
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@raffaelesgarro" />
+<meta name="twitter:creator" content="@raffaelesgarro" />
+<meta name="twitter:title" content="SimpleTemplateEngine escaping" />
+<meta name="twitter:description" content="" />
+<meta name="twitter:url" content="https://www.zybnet.com/2013/10/05/simpletemplateengine-escaping/" />
+<meta name="twitter:domain" content="https://www.zybnet.com/">
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "SimpleTemplateEngine escaping",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+?rel=author"
+    },
+    "datePublished": "2013-10-05",
+    "description": "",
+    "wordCount": 226
+  }
+</script>
+
+
+
+<link rel="canonical" href="https://www.zybnet.com/2013/10/05/simpletemplateengine-escaping/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://www.zybnet.com/touch-icon-144-precomposed.png">
+<link href="https://www.zybnet.com/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.19" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://www.zybnet.com/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://www.zybnet.com/css/style.css">
+<link rel="stylesheet" href="https://www.zybnet.com/css/highlight/default.css">
+
+  
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="https://www.zybnet.com/">
+  ZYBNET
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  My hacking journal
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="https://www.zybnet.com/">Home</a>
+
+
+  
+<a href="https://www.zybnet.com/about">About</a>
+
+<a href="https://www.zybnet.com/post" title="Show list of posts">Posts</a>
+
+<a href="https://www.zybnet.com/tags" title="Show list of tags">Tags</a>
+
+<a href="https://www.zybnet.com/zuml" title="ZUML">ZUML</a>
+
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" href="mailto:raffaeleSgarro@gmail.com">
+  <span class="fa fa-envelope-square"></span><span>email</span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" href="https://github.com/RaffaeleSgarro/raffaelesgarro.github.io">
+  <span class="fa fa-github-square"></span><span>github</span></a>
+
+
+
+
+
+
+
+
+
+<a id="contact-link-facebook" class="contact_link" href="https://www.facebook.com/raffaelesgarro">
+  <span class="fa fa-facebook-square"></span><span>facebook</span></a>
+
+
+
+<a id="contact-link-twitter" class="contact_link" href="https://twitter.com/raffaelesgarro">
+  <span class="fa fa-twitter-square"></span><span>twitter</span></a>
+
+
+
+
+
+
+
+<a id="contact-link-stackoverflow" class="contact_link" href="https://stackoverflow.com/users/315306">
+  <span class="fa fa-stack-overflow"></span><span>stackoverflow</span></a>
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>SimpleTemplateEngine escaping
+</h1>
+
+  <div class="metas">
+<time datetime="2013-10-05">5 Oct, 2013</time>
+
+
+  
+    &middot; by admin
+  
+  &middot; Read in about 2 min
+  &middot; (226 Words)
+  <br>
+  
+<a class="label" href="https://www.zybnet.com/tags/escaping">escaping</a>
+
+<a class="label" href="https://www.zybnet.com/tags/groovy">groovy</a>
+
+
+
+</div>
+
+</header>
+
+  <div class="container content">
+  <p>The method <code>createTemplate()</code> inside <code>SimpleTemplateEngine</code> builds a template from a <code>String</code>, and then <code>make(bindings)</code> replaces placeholders with values from the hash.</p>
+
+<p>As advertised <a href="http://groovy.codehaus.org/api/groovy/text/SimpleTemplateEngine.html">in the documentation</a>, placeholders are given in JSP or GString style, so the problem is: how do we escape JSP and GString delimiters? That is, how can we insert a plain <code>$foo</code> or a literal <code>&lt;%=bar%&gt;</code> without the engine complaining about missing keys when binding?</p>
+
+<p></p>
+
+<p>First, the GString part. Your first bet would be using a backslash to escape the dollar. The intuition is right, but the implementation is tricky. For example using:</p>
+
+<pre><code>engine.createTemplate(&quot;\$foo&quot;);
+</code></pre>
+
+<p>won&rsquo;t work, because the backslash is taken from the GString before converting to String, and then you have a <code>&quot;$foo&quot;</code> which can be evaluated as a GString placeholder from the template engine. We need to keep the backslash in that String, and the solution is a triple backslash:</p>
+
+<pre><code>engine.createTemplate(&quot;\\\$foo&quot;);
+</code></pre>
+
+<p>The first <code>\\</code> is a literal <code>\</code>, the <code>\$</code> is a literal <code>$</code>, so the engine receives a <code>\$foo</code>, and won&rsquo;t attempt to do any substitution. If you don&rsquo;t like the triple escape, another option is:</p>
+
+<pre><code>engine.createTemplate(&quot;${'foo'}&quot;);
+</code></pre>
+
+<p>which, to my understanding, means that the code will be evaluated as a GString, but instead of the name of a variable it finds a literal string, so doesn&rsquo;t look for a value for the given name.</p>
+
+<p>Links:</p>
+
+<p><a href="http://ideone.com/Dh12hc">Working on ideone</a>
+<a href="http://groovy.329449.n5.nabble.com/SimpleTemplateEngine-How-to-preserve-strings-in-template-td5717067.html">Original thread</a></p>
+</div>
+
+
+  <footer class="container">
+  <div class="container navigation no-print">
+  <h2>Navigation</h2>
+  
+  
+
+    
+    <a class="prev" href="https://www.zybnet.com/2013/06/28/rails-content-negotiation-explained/" title="Rails content negotiation explained">
+      Previous
+    </a>
+    
+
+    
+    <a class="next" href="https://www.zybnet.com/2013/10/10/update-from-select/" title="Derby: UPDATE FROM SELECT">
+      Next
+    </a>
+    
+
+  
+
+
+</div>
+
+  <div class="container comments">
+  <h2>Comments</h2>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//zybnet.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+
+</footer>
+
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+<a href="http://www.wtfpl.net/txt/copying/">Do What The Fuck You Want To Public License</a>
+
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+
+</div>
+
+
+  
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//zybnet.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="https://www.zybnet.com/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+    
+  </body>
+</html>
+

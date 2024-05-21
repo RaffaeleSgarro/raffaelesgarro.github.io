@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cakephp on ZYBNET</title>
+    <link>https://www.zybnet.com/tags/cakephp/index.xml</link>
+    <description>Recent content in Cakephp on ZYBNET</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <managingEditor>raffaeleSgarro@gmail.com (Raffaele Sgarro)</managingEditor>
+    <webMaster>raffaeleSgarro@gmail.com (Raffaele Sgarro)</webMaster>
+    <atom:link href="https://www.zybnet.com/tags/cakephp/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>CakePHP: the basics</title>
+      <link>https://www.zybnet.com/2012/07/24/cakephp-the-basics/</link>
+      <pubDate>Tue, 24 Jul 2012 22:08:33 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2012/07/24/cakephp-the-basics/</guid>
+      <description>&lt;p&gt;CakePHP is a PHP framework to easily build MVC applications. To install it clone the repository on GitHub&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git clone https://github.com/cakephp/cakephp.git cakephp-2.2.1
+git checkout 2.2.1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now we can use the Cake code generator from command line - it&amp;rsquo;s called &lt;code&gt;bake&lt;/code&gt; and is run like &lt;code&gt;cake bake&lt;/code&gt;. The path to the &lt;code&gt;cake&lt;/code&gt; executable (really a tiny shell script which invokes the real PHP-cli one) is like &lt;code&gt;cake-2.2.1/lib/Cake/Console/cake&lt;/code&gt;. For convenience, you can add this to your &lt;code&gt;PATH&lt;/code&gt;. We are now ready to generate the skeleton of the directory structure plus common files required by a CakePHP application:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cake bake
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Bake will ask you the path of the project, the credentials for accessing the database and so on. You can keep the default for the majority of the settings. Let&amp;rsquo;s see what files/directory bake just created:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;myapp/
+myapp/.htaccess
+myapp/Locale
+myapp/Locale/eng
+myapp/Locale/eng/LC_MESSAGES
+myapp/Lib
+myapp/Console
+myapp/Console/cake.bat
+myapp/Console/Command
+myapp/Console/Command/AppShell.php
+myapp/Console/Command/Task
+myapp/Console/cake.php
+myapp/Console/cake
+myapp/Console/Templates
+myapp/index.php
+myapp/Plugin
+myapp/tmp
+myapp/tmp/cache
+myapp/tmp/cache/models
+myapp/tmp/cache/persistent
+myapp/tmp/cache/persistent/myapp_cake_core_cake_console_
+myapp/tmp/cache/views
+myapp/tmp/logs
+myapp/tmp/tests
+myapp/tmp/sessions
+myapp/Vendor
+myapp/Model
+myapp/Model/AppModel.php
+myapp/Model/Datasource
+myapp/Model/Behavior
+myapp/Controller
+myapp/Controller/Component
+myapp/Controller/AppController.php
+myapp/Controller/PagesController.php
+myapp/Config
+myapp/Config/email.php.default
+myapp/Config/routes.php
+myapp/Config/acl.ini.php
+myapp/Config/database.php.default
+myapp/Config/bootstrap.php
+myapp/Config/core.php
+myapp/Config/database.php
+myapp/Config/Schema
+myapp/Config/Schema/sessions.sql
+myapp/Config/Schema/sessions.php
+myapp/Config/Schema/db_acl.php
+myapp/Config/Schema/db_acl.sql
+myapp/Config/Schema/i18n.sql
+myapp/Config/Schema/i18n.php
+myapp/webroot
+myapp/webroot/img
+myapp/webroot/img/test-fail-icon.png
+myapp/webroot/img/cake.icon.png
+myapp/webroot/img/test-pass-icon.png
+myapp/webroot/img/cake.power.gif
+myapp/webroot/img/test-skip-icon.png
+myapp/webroot/img/test-error-icon.png
+myapp/webroot/.htaccess
+myapp/webroot/index.php
+myapp/webroot/css
+myapp/webroot/css/cake.generic.css
+myapp/webroot/test.php
+myapp/webroot/js
+myapp/webroot/files
+myapp/webroot/favicon.ico
+myapp/Test
+myapp/Test/Fixture
+myapp/Test/Case
+myapp/Test/Case/Model
+myapp/Test/Case/Model/Behavior
+myapp/Test/Case/Controller
+myapp/Test/Case/Controller/Component&amp;lt;cod
+myapp/Test/Case/View
+myapp/Test/Case/View/Helper
+myapp/View
+myapp/View/Elements
+myapp/View/Emails
+myapp/View/Emails/text
+myapp/View/Emails/text/default.ctp
+myapp/View/Emails/html
+myapp/View/Emails/html/default.ctp
+myapp/View/Scaffolds
+myapp/View/Helper
+myapp/View/Helper/AppHelper.php
+myapp/View/Errors
+myapp/View/Errors/error500.ctp
+myapp/View/Errors/error400.ctp
+myapp/View/Pages
+myapp/View/Pages/home.ctp
+myapp/View/Layouts
+myapp/View/Layouts/error.ctp
+myapp/View/Layouts/ajax.ctp
+myapp/View/Layouts/Emails
+myapp/View/Layouts/Emails/text
+myapp/View/Layouts/Emails/text/default.ctp
+myapp/View/Layouts/Emails/html
+myapp/View/Layouts/Emails/html/default.ctp
+myapp/View/Layouts/xml
+myapp/View/Layouts/xml/default.ctp
+myapp/View/Layouts/js
+myapp/View/Layouts/js/default.ctp
+myapp/View/Layouts/rss
+myapp/View/Layouts/rss/default.ctp
+myapp/View/Layouts/flash.ctp
+myapp/View/Layouts/default.ctp
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now, enable &lt;code&gt;mod_rewrite&lt;/code&gt; on your Apache webserver (or the equivalent) and point a browser to &lt;code&gt;http://localhost/myapp&lt;/code&gt;. You will see an error asking you to set the value for the Cake library files under the constant &lt;code&gt;CAKE_CORE_INCLUDE_PATH&lt;/code&gt; in &lt;code&gt;webroot/index.php&lt;/code&gt;. Before setting this, it&amp;rsquo;s time to init the git repository for our new project:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git init
+find . -empty -type d -not -iwholename &#39;*/.git/*&#39; -exec touch &#39;{}&#39;/EMPTY \;
+touch README.md
+git add .
+git commit -m &amp;quot;Initial commit&amp;quot;
+git remote add origin $URL
+git push -u origin master
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;(Note that the &lt;code&gt;find&lt;/code&gt; on line 2 is there to preserve the directory structure in git). Now it&amp;rsquo;s time to configure the cake path seen above, but we don&amp;rsquo;t want to put the edit in Git. Finally, we&amp;rsquo;ll add a &lt;code&gt;.gitignore&lt;/code&gt; with the &lt;code&gt;tmp/&lt;/code&gt; directory as the only content&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git update-index --assume-unchanged webroot/index.php
+# uncomment around line 60 in the file
+echo &amp;quot;tmp/&amp;quot; &amp;gt;&amp;gt; .gitignore
+git add .gitignore
+git commit -m &amp;quot;Added .gitignore&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It&amp;rsquo;s time to see out app in a browser window
+&lt;a href=&#34;http://zybnet.com/wordpress/wp-content/uploads/CakePHP-the-rapid-development-php-framework-Home.png&#34;&gt;&lt;img src=&#34;http://zybnet.com/wordpress/wp-content/uploads/CakePHP-the-rapid-development-php-framework-Home.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;
+What can be seen here is a &lt;code&gt;View&lt;/code&gt; rendered by the &lt;code&gt;PagesController&lt;/code&gt;. Here is the flow&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;The browser issues a &lt;code&gt;HTTP GET /myapp/&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Cake reads its routing table (defined in &lt;code&gt;Config/routes.php&lt;/code&gt;) and finds the line matching &lt;code&gt;/&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;PagesController&lt;/code&gt; invokes its  &lt;code&gt;display&lt;/code&gt; method&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;These are the main components when dealing a Cake app: first you write a &lt;code&gt;Controller&lt;/code&gt; and its associated &lt;code&gt;View&lt;/code&gt;, then you declare a &lt;code&gt;route&lt;/code&gt; and finally define the DB part: database + &lt;code&gt;Model&lt;/code&gt; (in the case of the &lt;code&gt;PagesController&lt;/code&gt;, it really doesn&amp;rsquo;t store contents in a db, but access raw files stored under &lt;code&gt;View/Page/&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;In the next post, we&amp;rsquo;ll enhance the &lt;code&gt;PagesController&lt;/code&gt; by adding authentication and database storage&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

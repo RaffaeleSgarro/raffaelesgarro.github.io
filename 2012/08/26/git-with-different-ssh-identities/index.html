@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Git with different SSH identities  &middot; ZYBNET</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="git, ssh, ">
+
+
+<meta property="og:title" content="Git with different SSH identities  &middot; ZYBNET ">
+<meta property="og:site_name" content="ZYBNET"/>
+<meta property="og:url" content="https://www.zybnet.com/2012/08/26/git-with-different-ssh-identities/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="2012-08-26T09:03:52Z" />
+<meta property="og:article:modified_time" content="2012-08-26T09:03:52Z" />
+
+  
+    
+<meta property="og:article:tag" content="git">
+    
+<meta property="og:article:tag" content="ssh">
+    
+  
+
+  
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@raffaelesgarro" />
+<meta name="twitter:creator" content="@raffaelesgarro" />
+<meta name="twitter:title" content="Git with different SSH identities" />
+<meta name="twitter:description" content="" />
+<meta name="twitter:url" content="https://www.zybnet.com/2012/08/26/git-with-different-ssh-identities/" />
+<meta name="twitter:domain" content="https://www.zybnet.com/">
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "Git with different SSH identities",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+?rel=author"
+    },
+    "datePublished": "2012-08-26",
+    "description": "",
+    "wordCount": 450
+  }
+</script>
+
+
+
+<link rel="canonical" href="https://www.zybnet.com/2012/08/26/git-with-different-ssh-identities/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://www.zybnet.com/touch-icon-144-precomposed.png">
+<link href="https://www.zybnet.com/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.19" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://www.zybnet.com/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://www.zybnet.com/css/style.css">
+<link rel="stylesheet" href="https://www.zybnet.com/css/highlight/default.css">
+
+  
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="https://www.zybnet.com/">
+  ZYBNET
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  My hacking journal
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="https://www.zybnet.com/">Home</a>
+
+
+  
+<a href="https://www.zybnet.com/about">About</a>
+
+<a href="https://www.zybnet.com/post" title="Show list of posts">Posts</a>
+
+<a href="https://www.zybnet.com/tags" title="Show list of tags">Tags</a>
+
+<a href="https://www.zybnet.com/zuml" title="ZUML">ZUML</a>
+
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" href="mailto:raffaeleSgarro@gmail.com">
+  <span class="fa fa-envelope-square"></span><span>email</span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" href="https://github.com/RaffaeleSgarro/raffaelesgarro.github.io">
+  <span class="fa fa-github-square"></span><span>github</span></a>
+
+
+
+
+
+
+
+
+
+<a id="contact-link-facebook" class="contact_link" href="https://www.facebook.com/raffaelesgarro">
+  <span class="fa fa-facebook-square"></span><span>facebook</span></a>
+
+
+
+<a id="contact-link-twitter" class="contact_link" href="https://twitter.com/raffaelesgarro">
+  <span class="fa fa-twitter-square"></span><span>twitter</span></a>
+
+
+
+
+
+
+
+<a id="contact-link-stackoverflow" class="contact_link" href="https://stackoverflow.com/users/315306">
+  <span class="fa fa-stack-overflow"></span><span>stackoverflow</span></a>
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>Git with different SSH identities
+</h1>
+
+  <div class="metas">
+<time datetime="2012-08-26">26 Aug, 2012</time>
+
+
+  
+    &middot; by admin
+  
+  &middot; Read in about 3 min
+  &middot; (450 Words)
+  <br>
+  
+<a class="label" href="https://www.zybnet.com/tags/git">git</a>
+
+<a class="label" href="https://www.zybnet.com/tags/ssh">ssh</a>
+
+
+
+</div>
+
+</header>
+
+  <div class="container content">
+  <p>Nowdays the best way to access remote Git repositories is through the HTTP transport. However most service still offer SSH connectivity, and there are times when you want to access different hosts with SSH identities different than the default one (id_rsa). Useful links</p>
+
+<ul>
+<li><p><a href="http://superuser.com/questions/272465/using-multiple-ssh-public-keys">Superuser question about multiple keys</a></p></li>
+
+<li><p><a href="http://sealedabstract.com/code/github-ssh-with-multiple-identities-the-slightly-more-definitive-guide/">The blog post that links to the previous question</a></p></li>
+</ul>
+
+<p><strong>Disclaimer: I pasted content from the aforementioned sources. I hope I have the time to review it and clarify and make it my own. For the time, it&rsquo;s only a reference for myself.</strong></p>
+
+<p>If you have an active _ssh-agent_ that has your <code>id_rsa</code> key loaded, then the problem is likely that _ssh_ is offering that key first. Unfuddle probably accepts it for authentication (e.g. in <em>sshd</em>) but rejects it for authorization to access the company repositories (e.g. in whatever internal software they use for authorization, possibly something akin to Gitolite). Perhaps there is a way to add your personal key to the company account (multiple people are not sharing the same <code>corp_rsa</code> public and private key files, are they?).</p>
+
+<p></p>
+
+<p>The <code>IdentitiesOnly</code> <code>.ssh/config</code> configuration keyword can be used to limit the keys that _ssh_offers to the remote _sshd_ to just those specified via <code>IdentityFile</code> keywords (i.e. it will refuse to use any additional keys that happen to be loaded into an active <em>ssh-agent</em>).</p>
+
+<p>Try these <code>.ssh/config</code> sections:</p>
+
+<pre><code>Host {personalaccount}.unfuddle.com
+   IdentityFile ~/.ssh/id_rsa
+   IdentitiesOnly yes
+Host {companyaccount}.unfuddle.com
+   IdentityFile ~/.ssh/{companyaccount}_rsa
+   IdentitiesOnly yes
+</code></pre>
+
+<p>Then, use Git URLs like these:</p>
+
+<pre><code>git@{personalaccount}.unfuddle.com:{personalaccount}/my-stuff.git 
+git@{companyaccount}.unfuddle.com:{companyaccount}/their-stuff.git
+</code></pre>
+
+<p>If you want to take full advantage of the <code>.ssh/config</code> mechanism, you can supply your own custom hostname and change the default user name:</p>
+
+<pre><code>Host uf-mine
+    HostName {personalaccount}.unfuddle.com
+    User git
+    IdentityFile ~/.ssh/id_rsa
+    IdentitiesOnly yes
+Host uf-comp
+    HostName {companyaccount}.unfuddle.com
+    User git
+    IdentityFile ~/.ssh/{companyaccount}_rsa
+    IdentitiesOnly yes
+</code></pre>
+
+<p>Then, use Git URLs like these:</p>
+
+<pre><code>uf-mine:{personalaccount}/my-stuff.git
+uf-comp:{companyaccount}/their-stuff.git
+</code></pre>
+
+<p>This SCP-like syntax (which is not a valid URL by the way) is <a href="http://git-scm.com/docs/git-clone#_git_urls">permitted by git</a>. Also note <code>uf-mine</code> can either be a <a href="http://git-scm.com/docs/git-remote">remote</a> or a <code>Host</code> set in <code>~/.ssh/config</code> <a href="http://www.manpagez.com/man/5/ssh_config/">[man ssh_config]</a>:</p>
+
+<blockquote>Restricts the following declarations (up to the next Host keyword) to be only for those hosts that match one of the patterns given after the keyword. If more than one pattern is provided, they should be separated by whitespace. A single `*' as a pattern can be used to provide global defaults for all hosts. The host is the hostname argument given on the command line (i.e. the name is not converted to a canonicalized host name before matching)</blockquote>
+
+<blockquote>What you actually do, it turns out, is use the IdentitiesOnly “yes” directive in ~/.ssh/config. This means that none of the ssh-agent magical keys will get in the priority queue, and only things explicitly specified either in config or on the commandline are allowed</blockquote>
+</div>
+
+
+  <footer class="container">
+  <div class="container navigation no-print">
+  <h2>Navigation</h2>
+  
+  
+
+    
+    <a class="prev" href="https://www.zybnet.com/2012/08/22/google-openid-ur/" title="Google OpenID URL">
+      Previous
+    </a>
+    
+
+    
+    <a class="next" href="https://www.zybnet.com/2012/09/06/ack-better-than-grep/" title="ACK: Better than GREP!">
+      Next
+    </a>
+    
+
+  
+
+
+</div>
+
+  <div class="container comments">
+  <h2>Comments</h2>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//zybnet.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+
+</footer>
+
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+<a href="http://www.wtfpl.net/txt/copying/">Do What The Fuck You Want To Public License</a>
+
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+
+</div>
+
+
+  
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//zybnet.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="https://www.zybnet.com/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+    
+  </body>
+</html>
+

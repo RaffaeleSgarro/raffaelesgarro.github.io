@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Table on ZYBNET</title>
+    <link>https://www.zybnet.com/tags/table/index.xml</link>
+    <description>Recent content in Table on ZYBNET</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <managingEditor>raffaeleSgarro@gmail.com (Raffaele Sgarro)</managingEditor>
+    <webMaster>raffaeleSgarro@gmail.com (Raffaele Sgarro)</webMaster>
+    <atom:link href="https://www.zybnet.com/tags/table/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>The magics of table-layout</title>
+      <link>https://www.zybnet.com/2014/02/12/the-magics-of-table-layout/</link>
+      <pubDate>Wed, 12 Feb 2014 12:20:18 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2014/02/12/the-magics-of-table-layout/</guid>
+      <description>&lt;p&gt;See &lt;a href=&#34;http://jsfiddle.net/7k7Z7/&#34;&gt;this JSFiddle&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;div&amp;gt;
+    &amp;lt;div&amp;gt;cell lorem ipsum&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div&amp;gt;
+    &amp;lt;div&amp;gt;cell lorem ipsum&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;cell lorem ipsum&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div&amp;gt;
+    &amp;lt;div&amp;gt;cell lorem ipsum&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;cell&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;cell lorem ipsum&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div&amp;gt;
+    &amp;lt;div&amp;gt;cell lorem ipsum&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;cell&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;cell&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;c&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div&amp;gt;
+    &amp;lt;div&amp;gt;cell lorem ipsum&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;cell&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;c&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;cell&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;c&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div&amp;gt;
+    &amp;lt;div&amp;gt;cell lorem ipsum&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;c&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;c&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;cell&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;cell&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;c&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;Now the CSS:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;div {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    margin-bottom: 20px;
+    border-spacing: 5px;
+}
+
+div &amp;gt; div {
+    display: table-cell;
+    border: 1px dotted red;
+    padding: 4px 6px;
+    width: 100%;
+    margin-bottom: 0;
+    overflow:hidden;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The magic is done with &lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout&#34;&gt;&lt;code&gt;table-layout&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

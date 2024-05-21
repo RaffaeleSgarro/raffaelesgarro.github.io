@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Groovy on ZYBNET</title>
+    <link>https://www.zybnet.com/tags/groovy/index.xml</link>
+    <description>Recent content in Groovy on ZYBNET</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <managingEditor>raffaeleSgarro@gmail.com (Raffaele Sgarro)</managingEditor>
+    <webMaster>raffaeleSgarro@gmail.com (Raffaele Sgarro)</webMaster>
+    <atom:link href="https://www.zybnet.com/tags/groovy/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>SimpleTemplateEngine escaping</title>
+      <link>https://www.zybnet.com/2013/10/05/simpletemplateengine-escaping/</link>
+      <pubDate>Sat, 05 Oct 2013 17:27:48 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2013/10/05/simpletemplateengine-escaping/</guid>
+      <description>&lt;p&gt;The method &lt;code&gt;createTemplate()&lt;/code&gt; inside &lt;code&gt;SimpleTemplateEngine&lt;/code&gt; builds a template from a &lt;code&gt;String&lt;/code&gt;, and then &lt;code&gt;make(bindings)&lt;/code&gt; replaces placeholders with values from the hash.&lt;/p&gt;
+
+&lt;p&gt;As advertised &lt;a href=&#34;http://groovy.codehaus.org/api/groovy/text/SimpleTemplateEngine.html&#34;&gt;in the documentation&lt;/a&gt;, placeholders are given in JSP or GString style, so the problem is: how do we escape JSP and GString delimiters? That is, how can we insert a plain &lt;code&gt;$foo&lt;/code&gt; or a literal &lt;code&gt;&amp;lt;%=bar%&amp;gt;&lt;/code&gt; without the engine complaining about missing keys when binding?&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;First, the GString part. Your first bet would be using a backslash to escape the dollar. The intuition is right, but the implementation is tricky. For example using:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;engine.createTemplate(&amp;quot;\$foo&amp;quot;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;won&amp;rsquo;t work, because the backslash is taken from the GString before converting to String, and then you have a &lt;code&gt;&amp;quot;$foo&amp;quot;&lt;/code&gt; which can be evaluated as a GString placeholder from the template engine. We need to keep the backslash in that String, and the solution is a triple backslash:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;engine.createTemplate(&amp;quot;\\\$foo&amp;quot;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The first &lt;code&gt;\\&lt;/code&gt; is a literal &lt;code&gt;\&lt;/code&gt;, the &lt;code&gt;\$&lt;/code&gt; is a literal &lt;code&gt;$&lt;/code&gt;, so the engine receives a &lt;code&gt;\$foo&lt;/code&gt;, and won&amp;rsquo;t attempt to do any substitution. If you don&amp;rsquo;t like the triple escape, another option is:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;engine.createTemplate(&amp;quot;${&#39;foo&#39;}&amp;quot;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;which, to my understanding, means that the code will be evaluated as a GString, but instead of the name of a variable it finds a literal string, so doesn&amp;rsquo;t look for a value for the given name.&lt;/p&gt;
+
+&lt;p&gt;Links:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://ideone.com/Dh12hc&#34;&gt;Working on ideone&lt;/a&gt;
+&lt;a href=&#34;http://groovy.329449.n5.nabble.com/SimpleTemplateEngine-How-to-preserve-strings-in-template-td5717067.html&#34;&gt;Original thread&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Groovy star-dot operator *.</title>
+      <link>https://www.zybnet.com/2013/06/28/groovy-star-dot-operator/</link>
+      <pubDate>Fri, 28 Jun 2013 15:04:31 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2013/06/28/groovy-star-dot-operator/</guid>
+      <description>&lt;p&gt;Explain the following Groovy code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[ compileJava, compileTestJava ]*.options*.encoding = &#39;UTF-8&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Explanation here&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

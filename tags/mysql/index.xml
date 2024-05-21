@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mysql on ZYBNET</title>
+    <link>https://www.zybnet.com/tags/mysql/index.xml</link>
+    <description>Recent content in Mysql on ZYBNET</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <managingEditor>raffaeleSgarro@gmail.com (Raffaele Sgarro)</managingEditor>
+    <webMaster>raffaeleSgarro@gmail.com (Raffaele Sgarro)</webMaster>
+    <atom:link href="https://www.zybnet.com/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>MySQL Recipes</title>
+      <link>https://www.zybnet.com/2012/08/22/mysql-recipes/</link>
+      <pubDate>Wed, 22 Aug 2012 08:52:43 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2012/08/22/mysql-recipes/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Table management (create, alter table)&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Foreign keys&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;UTF-8 as default character set&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Know the actual column encoding&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Variables&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Useful tips&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Easily reading query output wider than the terminal&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;system-variables&#34;&gt;System variables&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;SHOW VARIABLES;
+# note here &#39;version&#39; is the exact name
+SHOW VARIABLES LIKE &#39;version&#39;;
+# note _ (underscore) is a jolly for single character
+SHOW VARIABLES LIKE &#39;wait_timeout&#39;;
+SHOW VARIABLES LIKE &#39;%character%&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;vertical-output-for-wide-query-results&#34;&gt;Vertical output for wide query results&lt;/h2&gt;
+
+&lt;p&gt;End queries with &lt;code&gt;\G&lt;/code&gt; instead of &lt;code&gt;;&lt;/code&gt; (semicolon) produces a suitable output for tables with more than a few columns. Or you can add this line in &lt;code&gt;.bashrc&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;alias mysql=&#39;mysql --auto-vertical-output&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;default-to-utf-8&#34;&gt;Default to UTF-8&lt;/h2&gt;
+
+&lt;p&gt;Set server character encoding and collation (will be inherited by databases, connection, tables and so on)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[mysqld]
+collation-server=utf8_unicode_ci
+character-set-server=utf8
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Every table has a character set and a collaction, which single column will inherit upon creation when no different value is specified &lt;a href=&#34;http://dev.mysql.com/doc/refman/5.1/en/charset-table.html&#34;&gt;[link]&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;CREATE TABLE tbl_name (column_list)
+    [[DEFAULT] CHARACTER SET charset_name]
+    [COLLATE collation_name]]
+
+ALTER TABLE tbl_name
+    [[DEFAULT] CHARACTER SET charset_name]
+    [COLLATE collation_name]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;know-the-actual-column-encoding&#34;&gt;Know the actual column encoding&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;SELECT character_set_name, collation_name
+    FROM information_schema.columns
+    WHERE table_schema = :DATABASE
+        AND table_name = :TABLE
+        AND column_name = :COLUMN;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;foreign-keys&#34;&gt;Foreign keys&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;# In create table statement
+ CREATE TABLE ORDER_ITEMS (
+   PRODUCT_ID INT,
+   QUANTITY DECIMAL(5,2),
+   PRICE DECIMAL(5,2),
+   ORDER_ID INT,
+   FOREIGN KEY (`PRODUCT_ID`) REFERENCES `PRODUCTS`(`ID`) ON DELETE CASCADE ON UPDATE CASCADE
+ );
+ # In alter table
+ ALTER TABLE `ORDER_ITEMS` ADD FOREIGN KEY (`ORDER_ID`) REFERENCES `ORDERS`(`ID`);
+ # Remove the constraint
+ ALTER TABLE `OTHER_TABLE` DROP FOREIGN KEY `0_38775`;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can get the foreign key name via the &lt;code&gt;SHOW CREATE TABLE&lt;/code&gt;OTHER_TABLE`` command. Remember the table engine must be InnoDB. &lt;a href=&#34;http://dev.mysql.com/doc/refman/5.5/en/innodb-foreign-key-constraints.html&#34;&gt;[Doc]&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

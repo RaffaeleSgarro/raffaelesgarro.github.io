@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ubuntu on ZYBNET</title>
+    <link>https://www.zybnet.com/tags/ubuntu/index.xml</link>
+    <description>Recent content in Ubuntu on ZYBNET</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <managingEditor>raffaeleSgarro@gmail.com (Raffaele Sgarro)</managingEditor>
+    <webMaster>raffaeleSgarro@gmail.com (Raffaele Sgarro)</webMaster>
+    <atom:link href="https://www.zybnet.com/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Bamboo Fun Pen on Ubuntu 12.04 Precise Pangoline</title>
+      <link>https://www.zybnet.com/2012/10/29/bamboo-fun-pen-on-ubuntu-12-04-precise-pangoline/</link>
+      <pubDate>Mon, 29 Oct 2012 17:39:23 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2012/10/29/bamboo-fun-pen-on-ubuntu-12-04-precise-pangoline/</guid>
+      <description>&lt;p&gt;The driver is supplied by &lt;a href=&#34;https://launchpad.net/~lekensteyn/+archive/wacom-tablet&#34;&gt;this PPA&lt;/a&gt;, so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo add-apt-repository ppa:lekensteyn/wacom-tablet
+sudo apt-get update
+sudo apt-get install wacom-dkms
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then we need a program to draw: &lt;a href=&#34;http://mypaint.intilinux.com/&#34;&gt;MyPaint&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install mypaint mypaint-data
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Happy drawing! :)&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>CakePHP: the basics  &middot; ZYBNET</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="cakephp, php, ">
+
+
+<meta property="og:title" content="CakePHP: the basics  &middot; ZYBNET ">
+<meta property="og:site_name" content="ZYBNET"/>
+<meta property="og:url" content="https://www.zybnet.com/2012/07/24/cakephp-the-basics/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="2012-07-24T22:08:33Z" />
+<meta property="og:article:modified_time" content="2012-07-24T22:08:33Z" />
+
+  
+    
+<meta property="og:article:tag" content="cakephp">
+    
+<meta property="og:article:tag" content="php">
+    
+  
+
+  
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@raffaelesgarro" />
+<meta name="twitter:creator" content="@raffaelesgarro" />
+<meta name="twitter:title" content="CakePHP: the basics" />
+<meta name="twitter:description" content="" />
+<meta name="twitter:url" content="https://www.zybnet.com/2012/07/24/cakephp-the-basics/" />
+<meta name="twitter:domain" content="https://www.zybnet.com/">
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "CakePHP: the basics",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+?rel=author"
+    },
+    "datePublished": "2012-07-24",
+    "description": "",
+    "wordCount": 517
+  }
+</script>
+
+
+
+<link rel="canonical" href="https://www.zybnet.com/2012/07/24/cakephp-the-basics/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://www.zybnet.com/touch-icon-144-precomposed.png">
+<link href="https://www.zybnet.com/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.19" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://www.zybnet.com/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://www.zybnet.com/css/style.css">
+<link rel="stylesheet" href="https://www.zybnet.com/css/highlight/default.css">
+
+  
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="https://www.zybnet.com/">
+  ZYBNET
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  My hacking journal
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="https://www.zybnet.com/">Home</a>
+
+
+  
+<a href="https://www.zybnet.com/about">About</a>
+
+<a href="https://www.zybnet.com/post" title="Show list of posts">Posts</a>
+
+<a href="https://www.zybnet.com/tags" title="Show list of tags">Tags</a>
+
+<a href="https://www.zybnet.com/zuml" title="ZUML">ZUML</a>
+
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" href="mailto:raffaeleSgarro@gmail.com">
+  <span class="fa fa-envelope-square"></span><span>email</span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" href="https://github.com/RaffaeleSgarro/raffaelesgarro.github.io">
+  <span class="fa fa-github-square"></span><span>github</span></a>
+
+
+
+
+
+
+
+
+
+<a id="contact-link-facebook" class="contact_link" href="https://www.facebook.com/raffaelesgarro">
+  <span class="fa fa-facebook-square"></span><span>facebook</span></a>
+
+
+
+<a id="contact-link-twitter" class="contact_link" href="https://twitter.com/raffaelesgarro">
+  <span class="fa fa-twitter-square"></span><span>twitter</span></a>
+
+
+
+
+
+
+
+<a id="contact-link-stackoverflow" class="contact_link" href="https://stackoverflow.com/users/315306">
+  <span class="fa fa-stack-overflow"></span><span>stackoverflow</span></a>
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>CakePHP: the basics
+</h1>
+
+  <div class="metas">
+<time datetime="2012-07-24">24 Jul, 2012</time>
+
+
+  
+    &middot; by admin
+  
+  &middot; Read in about 3 min
+  &middot; (517 Words)
+  <br>
+  
+<a class="label" href="https://www.zybnet.com/tags/cakephp">cakephp</a>
+
+<a class="label" href="https://www.zybnet.com/tags/php">php</a>
+
+
+
+</div>
+
+</header>
+
+  <div class="container content">
+  <p>CakePHP is a PHP framework to easily build MVC applications. To install it clone the repository on GitHub</p>
+
+<pre><code>git clone https://github.com/cakephp/cakephp.git cakephp-2.2.1
+git checkout 2.2.1
+</code></pre>
+
+<p>Now we can use the Cake code generator from command line - it&rsquo;s called <code>bake</code> and is run like <code>cake bake</code>. The path to the <code>cake</code> executable (really a tiny shell script which invokes the real PHP-cli one) is like <code>cake-2.2.1/lib/Cake/Console/cake</code>. For convenience, you can add this to your <code>PATH</code>. We are now ready to generate the skeleton of the directory structure plus common files required by a CakePHP application:</p>
+
+<pre><code>cake bake
+</code></pre>
+
+<p>Bake will ask you the path of the project, the credentials for accessing the database and so on. You can keep the default for the majority of the settings. Let&rsquo;s see what files/directory bake just created:</p>
+
+<pre><code>myapp/
+myapp/.htaccess
+myapp/Locale
+myapp/Locale/eng
+myapp/Locale/eng/LC_MESSAGES
+myapp/Lib
+myapp/Console
+myapp/Console/cake.bat
+myapp/Console/Command
+myapp/Console/Command/AppShell.php
+myapp/Console/Command/Task
+myapp/Console/cake.php
+myapp/Console/cake
+myapp/Console/Templates
+myapp/index.php
+myapp/Plugin
+myapp/tmp
+myapp/tmp/cache
+myapp/tmp/cache/models
+myapp/tmp/cache/persistent
+myapp/tmp/cache/persistent/myapp_cake_core_cake_console_
+myapp/tmp/cache/views
+myapp/tmp/logs
+myapp/tmp/tests
+myapp/tmp/sessions
+myapp/Vendor
+myapp/Model
+myapp/Model/AppModel.php
+myapp/Model/Datasource
+myapp/Model/Behavior
+myapp/Controller
+myapp/Controller/Component
+myapp/Controller/AppController.php
+myapp/Controller/PagesController.php
+myapp/Config
+myapp/Config/email.php.default
+myapp/Config/routes.php
+myapp/Config/acl.ini.php
+myapp/Config/database.php.default
+myapp/Config/bootstrap.php
+myapp/Config/core.php
+myapp/Config/database.php
+myapp/Config/Schema
+myapp/Config/Schema/sessions.sql
+myapp/Config/Schema/sessions.php
+myapp/Config/Schema/db_acl.php
+myapp/Config/Schema/db_acl.sql
+myapp/Config/Schema/i18n.sql
+myapp/Config/Schema/i18n.php
+myapp/webroot
+myapp/webroot/img
+myapp/webroot/img/test-fail-icon.png
+myapp/webroot/img/cake.icon.png
+myapp/webroot/img/test-pass-icon.png
+myapp/webroot/img/cake.power.gif
+myapp/webroot/img/test-skip-icon.png
+myapp/webroot/img/test-error-icon.png
+myapp/webroot/.htaccess
+myapp/webroot/index.php
+myapp/webroot/css
+myapp/webroot/css/cake.generic.css
+myapp/webroot/test.php
+myapp/webroot/js
+myapp/webroot/files
+myapp/webroot/favicon.ico
+myapp/Test
+myapp/Test/Fixture
+myapp/Test/Case
+myapp/Test/Case/Model
+myapp/Test/Case/Model/Behavior
+myapp/Test/Case/Controller
+myapp/Test/Case/Controller/Component&lt;cod
+myapp/Test/Case/View
+myapp/Test/Case/View/Helper
+myapp/View
+myapp/View/Elements
+myapp/View/Emails
+myapp/View/Emails/text
+myapp/View/Emails/text/default.ctp
+myapp/View/Emails/html
+myapp/View/Emails/html/default.ctp
+myapp/View/Scaffolds
+myapp/View/Helper
+myapp/View/Helper/AppHelper.php
+myapp/View/Errors
+myapp/View/Errors/error500.ctp
+myapp/View/Errors/error400.ctp
+myapp/View/Pages
+myapp/View/Pages/home.ctp
+myapp/View/Layouts
+myapp/View/Layouts/error.ctp
+myapp/View/Layouts/ajax.ctp
+myapp/View/Layouts/Emails
+myapp/View/Layouts/Emails/text
+myapp/View/Layouts/Emails/text/default.ctp
+myapp/View/Layouts/Emails/html
+myapp/View/Layouts/Emails/html/default.ctp
+myapp/View/Layouts/xml
+myapp/View/Layouts/xml/default.ctp
+myapp/View/Layouts/js
+myapp/View/Layouts/js/default.ctp
+myapp/View/Layouts/rss
+myapp/View/Layouts/rss/default.ctp
+myapp/View/Layouts/flash.ctp
+myapp/View/Layouts/default.ctp
+</code></pre>
+
+<p>Now, enable <code>mod_rewrite</code> on your Apache webserver (or the equivalent) and point a browser to <code>http://localhost/myapp</code>. You will see an error asking you to set the value for the Cake library files under the constant <code>CAKE_CORE_INCLUDE_PATH</code> in <code>webroot/index.php</code>. Before setting this, it&rsquo;s time to init the git repository for our new project:</p>
+
+<pre><code>git init
+find . -empty -type d -not -iwholename '*/.git/*' -exec touch '{}'/EMPTY \;
+touch README.md
+git add .
+git commit -m &quot;Initial commit&quot;
+git remote add origin $URL
+git push -u origin master
+</code></pre>
+
+<p>(Note that the <code>find</code> on line 2 is there to preserve the directory structure in git). Now it&rsquo;s time to configure the cake path seen above, but we don&rsquo;t want to put the edit in Git. Finally, we&rsquo;ll add a <code>.gitignore</code> with the <code>tmp/</code> directory as the only content</p>
+
+<pre><code>git update-index --assume-unchanged webroot/index.php
+# uncomment around line 60 in the file
+echo &quot;tmp/&quot; &gt;&gt; .gitignore
+git add .gitignore
+git commit -m &quot;Added .gitignore&quot;
+</code></pre>
+
+<p>It&rsquo;s time to see out app in a browser window
+<a href="http://zybnet.com/wordpress/wp-content/uploads/CakePHP-the-rapid-development-php-framework-Home.png"><img src="http://zybnet.com/wordpress/wp-content/uploads/CakePHP-the-rapid-development-php-framework-Home.png" alt="" /></a>
+What can be seen here is a <code>View</code> rendered by the <code>PagesController</code>. Here is the flow</p>
+
+<ol>
+<li><p>The browser issues a <code>HTTP GET /myapp/</code></p></li>
+
+<li><p>Cake reads its routing table (defined in <code>Config/routes.php</code>) and finds the line matching <code>/</code></p></li>
+
+<li><p><code>PagesController</code> invokes its  <code>display</code> method</p></li>
+</ol>
+
+<p>These are the main components when dealing a Cake app: first you write a <code>Controller</code> and its associated <code>View</code>, then you declare a <code>route</code> and finally define the DB part: database + <code>Model</code> (in the case of the <code>PagesController</code>, it really doesn&rsquo;t store contents in a db, but access raw files stored under <code>View/Page/</code></p>
+
+<p>In the next post, we&rsquo;ll enhance the <code>PagesController</code> by adding authentication and database storage</p>
+</div>
+
+
+  <footer class="container">
+  <div class="container navigation no-print">
+  <h2>Navigation</h2>
+  
+  
+
+    
+    <a class="prev" href="https://www.zybnet.com/2012/07/13/java-logging-with-log4j/" title="Java logging with log4j">
+      Previous
+    </a>
+    
+
+    
+    <a class="next" href="https://www.zybnet.com/2012/07/28/xpath-and-namespaces/" title="XPath and namespaces">
+      Next
+    </a>
+    
+
+  
+
+
+</div>
+
+  <div class="container comments">
+  <h2>Comments</h2>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//zybnet.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+
+</footer>
+
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+<a href="http://www.wtfpl.net/txt/copying/">Do What The Fuck You Want To Public License</a>
+
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+
+</div>
+
+
+  
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//zybnet.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="https://www.zybnet.com/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+    
+  </body>
+</html>
+

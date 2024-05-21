@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on ZYBNET</title>
+    <link>https://www.zybnet.com/post/index.xml</link>
+    <description>Recent content in Posts on ZYBNET</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <managingEditor>raffaeleSgarro@gmail.com (Raffaele Sgarro)</managingEditor>
+    <webMaster>raffaeleSgarro@gmail.com (Raffaele Sgarro)</webMaster>
+    <lastBuildDate>Sun, 11 Oct 2015 23:04:54 +0200</lastBuildDate>
+    <atom:link href="https://www.zybnet.com/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>How to host a static site (Hugo) on GitHub Pages</title>
+      <link>https://www.zybnet.com/2015/10/11/how-to-host-a-static-site-hugo-on-github-pages/</link>
+      <pubDate>Sun, 11 Oct 2015 23:04:54 +0200</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2015/10/11/how-to-host-a-static-site-hugo-on-github-pages/</guid>
+      <description>&lt;p&gt;GitHub Pages is a free hosting service that can effectively be used for static
+content. For example this site is entirelty made up of HTML files in the &lt;code&gt;master&lt;/code&gt;
+branch of the repository &lt;code&gt;raffaelesgarro.github.io&lt;/code&gt;. Only two things are needed:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;a &lt;code&gt;CNAME&lt;/code&gt; record in the DNS&lt;/li&gt;
+&lt;li&gt;a &lt;code&gt;CNAME&lt;/code&gt; file to instruct the Pages virtual host&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;I use Hugo to write the posts in Markdown, and obviously keep the files in Git.
+The first problem is I can&amp;rsquo;t use the remote &lt;code&gt;master&lt;/code&gt; branch, so I keep the posts
+in a &lt;code&gt;src&lt;/code&gt; branch. Another strange thing is that the build artifacts must be
+kept in version control (!) and since I don&amp;rsquo;t really like it, I clear
+&lt;code&gt;master&lt;/code&gt; every time I push. So this is my typical workflow&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;git checkout src&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&amp;hellip; create posts, tweak theme and commit &amp;hellip;&lt;/li&gt;
+&lt;li&gt;build the site &lt;code&gt;hugo -d dist&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Move the site outside the repo &lt;code&gt;mv dist /tmp/dist&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Come back to master &lt;code&gt;git checkout -f master&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Replace the content of the directory (&lt;code&gt;git rm -rf .&lt;/code&gt; and &lt;code&gt;git clean -fxd&lt;/code&gt;)
+with the content of &lt;code&gt;dist&lt;/code&gt;, and eventually commit&lt;/li&gt;
+&lt;li&gt;Rebase &lt;code&gt;git rebase --root&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Push &lt;code&gt;git push -f origin --all&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I rebase &lt;code&gt;master&lt;/code&gt; because I don&amp;rsquo;t want to keep the builds in the history - it&amp;rsquo;s
+a huge load of files! Obviously that won&amp;rsquo;t take down GitHub, and the commits will
+still be online until garbage collection&amp;hellip; But still I feel better this way :)&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Where is my Tomcat?</title>
+      <link>https://www.zybnet.com/2015/10/11/where-is-my-tomcat/</link>
+      <pubDate>Sun, 11 Oct 2015 18:51:41 +0200</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2015/10/11/where-is-my-tomcat/</guid>
+      <description>&lt;p&gt;I just bootstrapped a droplet on DigitalOcean and deployed a Java app developed
+with Spring boot. I quickly tested it by logging into and clicking here and there,
+and then moved on configuring Nginx.&lt;/p&gt;
+
+&lt;p&gt;And suddenly my app disappeared!&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl -I localhost:8080
+Connection refused
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>The magics of table-layout</title>
+      <link>https://www.zybnet.com/2014/02/12/the-magics-of-table-layout/</link>
+      <pubDate>Wed, 12 Feb 2014 12:20:18 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2014/02/12/the-magics-of-table-layout/</guid>
+      <description>&lt;p&gt;See &lt;a href=&#34;http://jsfiddle.net/7k7Z7/&#34;&gt;this JSFiddle&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;div&amp;gt;
+    &amp;lt;div&amp;gt;cell lorem ipsum&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div&amp;gt;
+    &amp;lt;div&amp;gt;cell lorem ipsum&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;cell lorem ipsum&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div&amp;gt;
+    &amp;lt;div&amp;gt;cell lorem ipsum&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;cell&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;cell lorem ipsum&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div&amp;gt;
+    &amp;lt;div&amp;gt;cell lorem ipsum&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;cell&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;cell&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;c&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div&amp;gt;
+    &amp;lt;div&amp;gt;cell lorem ipsum&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;cell&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;c&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;cell&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;c&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;div&amp;gt;
+    &amp;lt;div&amp;gt;cell lorem ipsum&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;c&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;c&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;cell&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;cell&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;c&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;Now the CSS:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;div {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    margin-bottom: 20px;
+    border-spacing: 5px;
+}
+
+div &amp;gt; div {
+    display: table-cell;
+    border: 1px dotted red;
+    padding: 4px 6px;
+    width: 100%;
+    margin-bottom: 0;
+    overflow:hidden;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The magic is done with &lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout&#34;&gt;&lt;code&gt;table-layout&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Generics demistified</title>
+      <link>https://www.zybnet.com/2013/10/27/generics-demistified/</link>
+      <pubDate>Sun, 27 Oct 2013 10:35:31 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2013/10/27/generics-demistified/</guid>
+      <description>&lt;p&gt;Take this load of questions:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Why can I put an &lt;code&gt;Integer&lt;/code&gt; in a &lt;code&gt;List&amp;lt;Number&amp;gt;&lt;/code&gt; but can&amp;rsquo;t assign a &lt;code&gt;List&amp;lt;Integer&amp;gt;&lt;/code&gt; to a &lt;code&gt;List&amp;lt;Number&amp;gt;&lt;/code&gt;?&lt;/li&gt;
+&lt;li&gt;Why can I put any &lt;code&gt;Number&lt;/code&gt; in a &lt;code&gt;List&amp;lt;? super Number&amp;gt;&lt;/code&gt; but can&amp;rsquo;t do the same with a &lt;code&gt;List&amp;lt;? extends Number&amp;gt;&lt;/code&gt;?&lt;/li&gt;
+&lt;li&gt;Why doesn&amp;rsquo;t &lt;code&gt;List&amp;lt;? extends Number&amp;gt;&lt;/code&gt; extends &lt;code&gt;List&amp;lt;? super Number&amp;gt;&lt;/code&gt;?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;These and similar questions are asked very often, but usually answered like this:&lt;/p&gt;
+
+&lt;blockquote&gt;Consider what happens with arrays:
+&lt;pre&gt;&lt;code&gt;String[] strings = { &#34;Foo&#34;, &#34;Bar&#34;, &#34;Baz&#34; };
+Object[] objects = strings;
+objects[0] = new Integer(1); // BOOOOM!
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This kind of answer is misleading at best, because it pretends that generic types are a feature of the Collections framework of the platform, which is simply not true. Generics are a feature of Java-the-language, and are employed throughout the API (Class, Enum, Comparable) as well as in third party libraries (especially ones dealing with I/O, and thus reflection, like Jackson, jOOQ, etc.)&lt;/p&gt;
+
+&lt;p&gt;Relevant links:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://docs.oracle.com/javase/specs/jls/se7/html/jls-4.html#jls-4.5.2&#34;&gt;4.5.2. Members and Constructors of Parameterized Types&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://docs.oracle.com/javase/specs/jls/se7/html/jls-4.html#jls-4.10.2&#34;&gt;4.10.2. Subtyping among Class and Interface Types&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html#jls-15.12.2.1&#34;&gt;15.12.2.1. Identify Potentially Applicable Methods&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>Derby: UPDATE FROM SELECT</title>
+      <link>https://www.zybnet.com/2013/10/10/update-from-select/</link>
+      <pubDate>Thu, 10 Oct 2013 19:19:38 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2013/10/10/update-from-select/</guid>
+      <description>&lt;p&gt;Derby doesn&amp;rsquo;t support the MS proprietary &lt;code&gt;UPDATE FROM SELECT&lt;/code&gt;, nor does it support the SQL standard &lt;code&gt;MERGE&lt;/code&gt;
+so I had to write the following script to update a table from values retrieved from a select.
+It uses a temporary table and a subquery in the SET clause. I had to add an index to the temporary table to speed up things:&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;    -- store data in a temporary table
+    create table tmp (account_id, last_visit_date) as
+    select f.account_id, max(f.fact_date)
+    from fact f join account a on f.account_id = a.id
+    group by f.account_id
+    with no data
+    ;
+    
+    insert into tmp select f.account_id, max(f.fact_date)
+    from fact f join account a on f.account_id = a.id
+    group by f.account_id
+    ;
+    
+    create unique index tmp_idx_1
+    on tmp (account_id);
+    
+    update account
+    set
+    last_visit_date = (
+      select last_visit_date
+      from tmp
+      where tmp.account_id = account.id
+    )
+    ;
+    
+    -- clear the temporary table
+    drop table tmp;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note the derby baroque syntax for loading a table from a select. Other dialects simply allow &lt;code&gt;SELECT [Query] AS [TableName]&lt;/code&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SimpleTemplateEngine escaping</title>
+      <link>https://www.zybnet.com/2013/10/05/simpletemplateengine-escaping/</link>
+      <pubDate>Sat, 05 Oct 2013 17:27:48 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2013/10/05/simpletemplateengine-escaping/</guid>
+      <description>&lt;p&gt;The method &lt;code&gt;createTemplate()&lt;/code&gt; inside &lt;code&gt;SimpleTemplateEngine&lt;/code&gt; builds a template from a &lt;code&gt;String&lt;/code&gt;, and then &lt;code&gt;make(bindings)&lt;/code&gt; replaces placeholders with values from the hash.&lt;/p&gt;
+
+&lt;p&gt;As advertised &lt;a href=&#34;http://groovy.codehaus.org/api/groovy/text/SimpleTemplateEngine.html&#34;&gt;in the documentation&lt;/a&gt;, placeholders are given in JSP or GString style, so the problem is: how do we escape JSP and GString delimiters? That is, how can we insert a plain &lt;code&gt;$foo&lt;/code&gt; or a literal &lt;code&gt;&amp;lt;%=bar%&amp;gt;&lt;/code&gt; without the engine complaining about missing keys when binding?&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;First, the GString part. Your first bet would be using a backslash to escape the dollar. The intuition is right, but the implementation is tricky. For example using:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;engine.createTemplate(&amp;quot;\$foo&amp;quot;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;won&amp;rsquo;t work, because the backslash is taken from the GString before converting to String, and then you have a &lt;code&gt;&amp;quot;$foo&amp;quot;&lt;/code&gt; which can be evaluated as a GString placeholder from the template engine. We need to keep the backslash in that String, and the solution is a triple backslash:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;engine.createTemplate(&amp;quot;\\\$foo&amp;quot;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The first &lt;code&gt;\\&lt;/code&gt; is a literal &lt;code&gt;\&lt;/code&gt;, the &lt;code&gt;\$&lt;/code&gt; is a literal &lt;code&gt;$&lt;/code&gt;, so the engine receives a &lt;code&gt;\$foo&lt;/code&gt;, and won&amp;rsquo;t attempt to do any substitution. If you don&amp;rsquo;t like the triple escape, another option is:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;engine.createTemplate(&amp;quot;${&#39;foo&#39;}&amp;quot;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;which, to my understanding, means that the code will be evaluated as a GString, but instead of the name of a variable it finds a literal string, so doesn&amp;rsquo;t look for a value for the given name.&lt;/p&gt;
+
+&lt;p&gt;Links:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://ideone.com/Dh12hc&#34;&gt;Working on ideone&lt;/a&gt;
+&lt;a href=&#34;http://groovy.329449.n5.nabble.com/SimpleTemplateEngine-How-to-preserve-strings-in-template-td5717067.html&#34;&gt;Original thread&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Rails content negotiation explained</title>
+      <link>https://www.zybnet.com/2013/06/28/rails-content-negotiation-explained/</link>
+      <pubDate>Fri, 28 Jun 2013 15:10:50 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2013/06/28/rails-content-negotiation-explained/</guid>
+      <description>&lt;p&gt;Explain the following snippet found in a Rails controller:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;def index
+  @posts = Post.all
+
+  respond_to do |format|
+    format.html  # index.html.erb
+    format.json  { render :json =&amp;gt; @posts }
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Useful &lt;a href=&#34;http://www.robertsosinski.com/2008/12/21/understanding-ruby-blocks-procs-and-lambdas/&#34;&gt;link&lt;/a&gt; to Ruby procs, blocks and lambdas&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Defining the types a Trait can be mixed in</title>
+      <link>https://www.zybnet.com/2013/06/28/defining-the-types-a-trait-can-be-mixed-in/</link>
+      <pubDate>Fri, 28 Jun 2013 15:07:29 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2013/06/28/defining-the-types-a-trait-can-be-mixed-in/</guid>
+      <description>&lt;p&gt;In Scala you can write&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;trait ConstrainedTrait { self: ParentType =&amp;gt;
+  // code here
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://scala-programming-language.1934581.n4.nabble.com/Newbie-question-Limiting-where-traits-can-be-mixed-in-td1941813.html&#34;&gt;Mail thread here&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Groovy star-dot operator *.</title>
+      <link>https://www.zybnet.com/2013/06/28/groovy-star-dot-operator/</link>
+      <pubDate>Fri, 28 Jun 2013 15:04:31 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2013/06/28/groovy-star-dot-operator/</guid>
+      <description>&lt;p&gt;Explain the following Groovy code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[ compileJava, compileTestJava ]*.options*.encoding = &#39;UTF-8&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Explanation here&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Puzzled by generics and enums</title>
+      <link>https://www.zybnet.com/2013/06/27/puzzled-by-generics-and-enums/</link>
+      <pubDate>Thu, 27 Jun 2013 20:01:08 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2013/06/27/puzzled-by-generics-and-enums/</guid>
+      <description>&lt;p&gt;I had to write a method which, given an &lt;code&gt;Enum&lt;/code&gt; class, returned the set of values. First signature attempt:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public Set&amp;lt;Enum&amp;lt;?&amp;gt;&amp;gt; getValuesForEnum(Class&amp;lt;Enum&amp;lt;?&amp;gt;&amp;gt; klass);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Unfortunately this doesn&amp;rsquo;t work. When you try to invoke this method you got the error:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;getValuesForEnum() can&#39;t be applied to &amp;quot;name.of.the.Enum&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s say we have an enum named &lt;code&gt;com.example.MyEnum&lt;/code&gt;. The compiler complains because &lt;code&gt;MyEnum.class&lt;/code&gt; is not a subtype of &lt;code&gt;Class&amp;lt;Enum&amp;lt;?&amp;gt;&amp;gt;&lt;/code&gt;. Can you spot the error? Nested type parameters are always tricky to deal with. In this case I had to perform the following reasoning:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;A&amp;lt;Y&amp;gt;&lt;/code&gt; is a subtype of &lt;code&gt;A&amp;lt;X&amp;gt;&lt;/code&gt; if &amp;hellip; well this never happens! For the subtype relationship to exist, wildcard must come into play, and there are no wildcards here. Except, well, there is a wildcard indeed: &lt;code&gt;Enum&amp;lt;?&amp;gt;&lt;/code&gt;! Unfortunately it&amp;rsquo;s in the wrong place. We have:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Class&amp;lt;Enum&amp;lt;?&amp;gt;&amp;gt;&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Class&amp;lt;MyEnum&amp;gt;&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To fix this problem the signature needs to be:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public Set&amp;lt;Enum&amp;lt;?&amp;gt;&amp;gt; getValuesForEnum( Class&amp;lt;? extends Enum&amp;lt;?&amp;gt;&amp;gt; klass);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Generics are invariant in Java: a &lt;code&gt;List&amp;lt;String&amp;gt;&lt;/code&gt; can&amp;rsquo;t be used where a &lt;code&gt;List&amp;lt;Object&amp;gt;&lt;/code&gt; is expected, regardless of the subtype relation between String and Object. It&amp;rsquo;s not different in this case: just that we don&amp;rsquo;t have String and Object, but &lt;code&gt;Enum&amp;lt;?&amp;gt;&lt;/code&gt; and &lt;code&gt;Enum&amp;lt;MyEnum&amp;gt;&lt;/code&gt;. There exists a subtype relation between the two arguments, but it&amp;rsquo;s irrelevant because our &lt;code&gt;X&lt;/code&gt; is &lt;code&gt;Enum&amp;lt;?&amp;gt;&lt;/code&gt;, so it&amp;rsquo;s not a wildcard.&lt;/p&gt;
+
+&lt;p&gt;What puzzled me is that it&amp;rsquo;s a generic type and the type argument happens to be a wildcard.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Floating elements and overflow</title>
+      <link>https://www.zybnet.com/2013/06/27/floating-elements-and-overflow/</link>
+      <pubDate>Thu, 27 Jun 2013 19:32:24 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2013/06/27/floating-elements-and-overflow/</guid>
+      <description>&lt;p&gt;Starting point: a container with N &lt;div&gt; elements: one is float: right and the rest is float: none.&lt;/p&gt;
+
+&lt;p&gt;If you set &lt;code&gt;overflow: hidden&lt;/code&gt; on a &lt;code&gt;float: none&lt;/code&gt; box it will not overlap the floating siblings. In this screenshot, the semi-transparent red box is &lt;code&gt;float: right&lt;/code&gt;, and the yellow box is &lt;code&gt;overflow:hidden&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://zybnet.com/wordpress/wp-content/uploads/zn.png&#34;&gt;&lt;img src=&#34;http://zybnet.com/wordpress/wp-content/uploads/zn.png&#34; alt=&#34;With overflow: hidden&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;And here you what happens when &lt;code&gt;overflow: visible&lt;/code&gt; is applied to the yellow box:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://zybnet.com/wordpress/wp-content/uploads/zn2.png&#34;&gt;&lt;img src=&#34;http://zybnet.com/wordpress/wp-content/uploads/zn2.png&#34; alt=&#34;With overflow: visible&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Play it on &lt;a href=&#34;http://jsbin.com/atopaz/2/edit&#34;&gt;JSBin&lt;/a&gt;
+This is because elements with &lt;code&gt;overflow: hidden&lt;/code&gt; estabilish a new &lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Block_formatting_context&#34;&gt;block formatting context&lt;/a&gt; and&lt;/p&gt;
+
+&lt;blockquote&gt;The rules for positioning and clearing of floats apply only to things within the same block formatting context. Floats do not affect the layout of things in other block formatting contexts&lt;/blockquote&gt;
+
+&lt;p&gt;I played with it to build a search bar that expands to fill the remaining space:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://jsbin.com/riwof/1/embed?html,css,output&#34;&gt;JS Bin&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Rants on C, GCC, ...</title>
+      <link>https://www.zybnet.com/2013/03/03/rants-on-c-gcc/</link>
+      <pubDate>Sun, 03 Mar 2013 22:26:22 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2013/03/03/rants-on-c-gcc/</guid>
+      <description>&lt;p&gt;I don&amp;rsquo;t know C, but as a seasoned Java programmer (not to mention that I do a lot of scripting) I really didn&amp;rsquo;t expect:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Makefile are idiotic (tab is significant!)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;You need those stupid header files&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Shared Objects are a mess&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The order of the arguments on the GCC command line matters!&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Word Of The Day</title>
+      <link>https://www.zybnet.com/2012/11/21/word-of-the-day/</link>
+      <pubDate>Wed, 21 Nov 2012 13:22:39 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2012/11/21/word-of-the-day/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://en.wikipedia.org/wiki/Punycode&#34;&gt;Punycode&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://en.wikipedia.org/wiki/Specials_%28Unicode_block%29&#34;&gt;Unicode Replacement Character&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Bamboo Fun Pen on Ubuntu 12.04 Precise Pangoline</title>
+      <link>https://www.zybnet.com/2012/10/29/bamboo-fun-pen-on-ubuntu-12-04-precise-pangoline/</link>
+      <pubDate>Mon, 29 Oct 2012 17:39:23 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2012/10/29/bamboo-fun-pen-on-ubuntu-12-04-precise-pangoline/</guid>
+      <description>&lt;p&gt;The driver is supplied by &lt;a href=&#34;https://launchpad.net/~lekensteyn/+archive/wacom-tablet&#34;&gt;this PPA&lt;/a&gt;, so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo add-apt-repository ppa:lekensteyn/wacom-tablet
+sudo apt-get update
+sudo apt-get install wacom-dkms
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then we need a program to draw: &lt;a href=&#34;http://mypaint.intilinux.com/&#34;&gt;MyPaint&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install mypaint mypaint-data
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Happy drawing! :)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>ffmpeg: split video and extract audio</title>
+      <link>https://www.zybnet.com/2012/10/20/ffmpeg-split-video-and-extract-audio/</link>
+      <pubDate>Sat, 20 Oct 2012 13:25:08 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2012/10/20/ffmpeg-split-video-and-extract-audio/</guid>
+      <description>&lt;p&gt;This is the command to extract a piece from a video file in the most efficient manner:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ffmpeg -ss $START -i &amp;quot;My 21st Birthday&amp;quot; -t $DURATION -c:v copy -c:a copy &amp;quot;Funny moment.webm&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Where&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;$START&lt;/code&gt; is the start moment, in &lt;code&gt;hh:mm:ss[.mmm]&lt;/code&gt; format&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;$DURATION&lt;/code&gt; is the length in the same format as above&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Note that in this case the order of parameters matters! If the input file is given before &lt;code&gt;-ss&lt;/code&gt;, ffmpeg will still decode the streams from the beginning of the file. Instead, if &lt;code&gt;-ss&lt;/code&gt; is given first, the streams are first seek&amp;rsquo;d, and only after the start point decoding begins.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;-c&lt;/code&gt; switch is parameterized with a stream index, which is a number like 0, 1, 2. In this case &lt;code&gt;-c:v&lt;/code&gt; is a special syntax for all video streams. Following the swich, one should name an explicit decoder; in this case, the special word &lt;code&gt;copy&lt;/code&gt; is used to keep the source format instead of decoding/encoding again.&lt;/p&gt;
+
+&lt;p&gt;To extract the audio stream from a video file, one can use&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ffmpeg -i &amp;quot;my video.webm&amp;quot; -map 0:a -c:a copy &amp;quot;soundtrack.ogg&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;-map&lt;/code&gt; switch &lt;a href=&#34;http://ffmpeg.org/ffmpeg.html#toc-Advanced-options&#34;&gt;explained&lt;/a&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt; the first number is a 0 (zero) which identifies the source file id. In this case only one file is given, so its index will be zero&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;the second character is a stream identifier. Again, here we use the special character a to identify all audio streams&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;-c:a copy&lt;/code&gt; has the same meaning as above: keep the audio encoding&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This little Ruby function can help to compute the &lt;code&gt;$DURATION&lt;/code&gt; parameter&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# first argument is start time, second is end time
+def time_diff(start, end)
+  t = Time.at( Time.parse(end) - Time.parse(start) )
+  (t - t.gmt_offset).strftime(&amp;quot;%H:%M:%S.%L&amp;quot;)
+end
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

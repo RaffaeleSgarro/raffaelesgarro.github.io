@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Derby on ZYBNET</title>
+    <link>https://www.zybnet.com/tags/derby/index.xml</link>
+    <description>Recent content in Derby on ZYBNET</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <managingEditor>raffaeleSgarro@gmail.com (Raffaele Sgarro)</managingEditor>
+    <webMaster>raffaeleSgarro@gmail.com (Raffaele Sgarro)</webMaster>
+    <atom:link href="https://www.zybnet.com/tags/derby/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Derby: UPDATE FROM SELECT</title>
+      <link>https://www.zybnet.com/2013/10/10/update-from-select/</link>
+      <pubDate>Thu, 10 Oct 2013 19:19:38 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2013/10/10/update-from-select/</guid>
+      <description>&lt;p&gt;Derby doesn&amp;rsquo;t support the MS proprietary &lt;code&gt;UPDATE FROM SELECT&lt;/code&gt;, nor does it support the SQL standard &lt;code&gt;MERGE&lt;/code&gt;
+so I had to write the following script to update a table from values retrieved from a select.
+It uses a temporary table and a subquery in the SET clause. I had to add an index to the temporary table to speed up things:&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;    -- store data in a temporary table
+    create table tmp (account_id, last_visit_date) as
+    select f.account_id, max(f.fact_date)
+    from fact f join account a on f.account_id = a.id
+    group by f.account_id
+    with no data
+    ;
+    
+    insert into tmp select f.account_id, max(f.fact_date)
+    from fact f join account a on f.account_id = a.id
+    group by f.account_id
+    ;
+    
+    create unique index tmp_idx_1
+    on tmp (account_id);
+    
+    update account
+    set
+    last_visit_date = (
+      select last_visit_date
+      from tmp
+      where tmp.account_id = account.id
+    )
+    ;
+    
+    -- clear the temporary table
+    drop table tmp;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note the derby baroque syntax for loading a table from a select. Other dialects simply allow &lt;code&gt;SELECT [Query] AS [TableName]&lt;/code&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

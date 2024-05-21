@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ack on ZYBNET</title>
+    <link>https://www.zybnet.com/tags/ack/index.xml</link>
+    <description>Recent content in Ack on ZYBNET</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <managingEditor>raffaeleSgarro@gmail.com (Raffaele Sgarro)</managingEditor>
+    <webMaster>raffaeleSgarro@gmail.com (Raffaele Sgarro)</webMaster>
+    <atom:link href="https://www.zybnet.com/tags/ack/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>ACK: Better than GREP!</title>
+      <link>https://www.zybnet.com/2012/09/06/ack-better-than-grep/</link>
+      <pubDate>Thu, 06 Sep 2012 14:43:49 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2012/09/06/ack-better-than-grep/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://betterthangrep.com&#34;&gt;Better than grep!&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;On Ubuntu, you need to install the package &lt;code&gt;ack-grep&lt;/code&gt; (oddly, the executable is also named ack-grep&amp;hellip;)&lt;/p&gt;
+
+&lt;p&gt;Examples: find the usages of the variable &lt;code&gt;$secret&lt;/code&gt; in the PHP files&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ack-grep --php &#39;\$secret&#39;
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

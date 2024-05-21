@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ssh on ZYBNET</title>
+    <link>https://www.zybnet.com/tags/ssh/index.xml</link>
+    <description>Recent content in Ssh on ZYBNET</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <managingEditor>raffaeleSgarro@gmail.com (Raffaele Sgarro)</managingEditor>
+    <webMaster>raffaeleSgarro@gmail.com (Raffaele Sgarro)</webMaster>
+    <atom:link href="https://www.zybnet.com/tags/ssh/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Git with different SSH identities</title>
+      <link>https://www.zybnet.com/2012/08/26/git-with-different-ssh-identities/</link>
+      <pubDate>Sun, 26 Aug 2012 09:03:52 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2012/08/26/git-with-different-ssh-identities/</guid>
+      <description>&lt;p&gt;Nowdays the best way to access remote Git repositories is through the HTTP transport. However most service still offer SSH connectivity, and there are times when you want to access different hosts with SSH identities different than the default one (id_rsa). Useful links&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://superuser.com/questions/272465/using-multiple-ssh-public-keys&#34;&gt;Superuser question about multiple keys&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://sealedabstract.com/code/github-ssh-with-multiple-identities-the-slightly-more-definitive-guide/&#34;&gt;The blog post that links to the previous question&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Disclaimer: I pasted content from the aforementioned sources. I hope I have the time to review it and clarify and make it my own. For the time, it&amp;rsquo;s only a reference for myself.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;If you have an active _ssh-agent_ that has your &lt;code&gt;id_rsa&lt;/code&gt; key loaded, then the problem is likely that _ssh_ is offering that key first. Unfuddle probably accepts it for authentication (e.g. in &lt;em&gt;sshd&lt;/em&gt;) but rejects it for authorization to access the company repositories (e.g. in whatever internal software they use for authorization, possibly something akin to Gitolite). Perhaps there is a way to add your personal key to the company account (multiple people are not sharing the same &lt;code&gt;corp_rsa&lt;/code&gt; public and private key files, are they?).&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;IdentitiesOnly&lt;/code&gt; &lt;code&gt;.ssh/config&lt;/code&gt; configuration keyword can be used to limit the keys that _ssh_offers to the remote _sshd_ to just those specified via &lt;code&gt;IdentityFile&lt;/code&gt; keywords (i.e. it will refuse to use any additional keys that happen to be loaded into an active &lt;em&gt;ssh-agent&lt;/em&gt;).&lt;/p&gt;
+
+&lt;p&gt;Try these &lt;code&gt;.ssh/config&lt;/code&gt; sections:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Host {personalaccount}.unfuddle.com
+   IdentityFile ~/.ssh/id_rsa
+   IdentitiesOnly yes
+Host {companyaccount}.unfuddle.com
+   IdentityFile ~/.ssh/{companyaccount}_rsa
+   IdentitiesOnly yes
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then, use Git URLs like these:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git@{personalaccount}.unfuddle.com:{personalaccount}/my-stuff.git 
+git@{companyaccount}.unfuddle.com:{companyaccount}/their-stuff.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you want to take full advantage of the &lt;code&gt;.ssh/config&lt;/code&gt; mechanism, you can supply your own custom hostname and change the default user name:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Host uf-mine
+    HostName {personalaccount}.unfuddle.com
+    User git
+    IdentityFile ~/.ssh/id_rsa
+    IdentitiesOnly yes
+Host uf-comp
+    HostName {companyaccount}.unfuddle.com
+    User git
+    IdentityFile ~/.ssh/{companyaccount}_rsa
+    IdentitiesOnly yes
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then, use Git URLs like these:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;uf-mine:{personalaccount}/my-stuff.git
+uf-comp:{companyaccount}/their-stuff.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This SCP-like syntax (which is not a valid URL by the way) is &lt;a href=&#34;http://git-scm.com/docs/git-clone#_git_urls&#34;&gt;permitted by git&lt;/a&gt;. Also note &lt;code&gt;uf-mine&lt;/code&gt; can either be a &lt;a href=&#34;http://git-scm.com/docs/git-remote&#34;&gt;remote&lt;/a&gt; or a &lt;code&gt;Host&lt;/code&gt; set in &lt;code&gt;~/.ssh/config&lt;/code&gt; &lt;a href=&#34;http://www.manpagez.com/man/5/ssh_config/&#34;&gt;[man ssh_config]&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;Restricts the following declarations (up to the next Host keyword) to be only for those hosts that match one of the patterns given after the keyword. If more than one pattern is provided, they should be separated by whitespace. A single `*&#39; as a pattern can be used to provide global defaults for all hosts. The host is the hostname argument given on the command line (i.e. the name is not converted to a canonicalized host name before matching)&lt;/blockquote&gt;
+
+&lt;blockquote&gt;What you actually do, it turns out, is use the IdentitiesOnly “yes” directive in ~/.ssh/config. This means that none of the ssh-agent magical keys will get in the priority queue, and only things explicitly specified either in config or on the commandline are allowed&lt;/blockquote&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

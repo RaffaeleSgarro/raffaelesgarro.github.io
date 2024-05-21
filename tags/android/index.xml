@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Android on ZYBNET</title>
+    <link>https://www.zybnet.com/tags/android/index.xml</link>
+    <description>Recent content in Android on ZYBNET</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <managingEditor>raffaeleSgarro@gmail.com (Raffaele Sgarro)</managingEditor>
+    <webMaster>raffaeleSgarro@gmail.com (Raffaele Sgarro)</webMaster>
+    <atom:link href="https://www.zybnet.com/tags/android/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Android tricks</title>
+      <link>https://www.zybnet.com/2012/10/16/android-tricks/</link>
+      <pubDate>Tue, 16 Oct 2012 15:00:40 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2012/10/16/android-tricks/</guid>
+      <description>&lt;p&gt;This post will gather all those little tricks that speed up your Android development, because I found I often get stuck because of &lt;strong&gt;poor documentation&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;PopupMenu:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;supply x and y, otherwise it won&amp;rsquo;t show up&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;set a background drawable, or it won&amp;rsquo;t react to touch events&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;You need a style with two items for animation to work &lt;a href=&#34;http://stackoverflow.com/a/7550227/315306&#34;&gt;http://stackoverflow.com/a/7550227/315306&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;SQLite&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Primary key must be defined &lt;code&gt;INTEGER PRIMARY KEY NOT NULL&lt;/code&gt; (WTF? Not null?) And be careful that if you use &lt;code&gt;INT&lt;/code&gt; instead of &lt;code&gt;INTEGER&lt;/code&gt;, you won&amp;rsquo;t have the autoincrement behavior&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Primary key must be explicitly enabled with &lt;code&gt;PRAGMA foreign_keys = ON;&lt;/code&gt; (&lt;a href=&#34;http://www.sqlite.org/foreignkeys.html#fk_enable&#34;&gt;doc&lt;/a&gt;). Usually this is done inside &lt;code&gt;onOpen(SQLiteDatabase)&lt;/code&gt;, after checking that the database is writeable&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Use the class DatabaseUtils&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ViewAnimator&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Batch removing children is tricky. First, you must &lt;code&gt;post()&lt;/code&gt; to the animator&amp;rsquo;s Handler. Then you need to set in and out animations to &lt;code&gt;null&lt;/code&gt;. Finally, removeViews(int start, int count) doesn&amp;rsquo;t work well, so you have to remove one child at a time, either with &lt;code&gt;removeView(View view)&lt;/code&gt; or &lt;code&gt;removeChildAt(int index)&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;EditText&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;getText()&lt;/code&gt; returns a &lt;code&gt;CharSequence&lt;/code&gt;. It never returns &lt;code&gt;null&lt;/code&gt;,  so you must check its length to tell if it&amp;rsquo;s empty.&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

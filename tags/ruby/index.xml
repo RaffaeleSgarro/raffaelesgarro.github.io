@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ruby on ZYBNET</title>
+    <link>https://www.zybnet.com/tags/ruby/index.xml</link>
+    <description>Recent content in Ruby on ZYBNET</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <managingEditor>raffaeleSgarro@gmail.com (Raffaele Sgarro)</managingEditor>
+    <webMaster>raffaeleSgarro@gmail.com (Raffaele Sgarro)</webMaster>
+    <atom:link href="https://www.zybnet.com/tags/ruby/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Rails content negotiation explained</title>
+      <link>https://www.zybnet.com/2013/06/28/rails-content-negotiation-explained/</link>
+      <pubDate>Fri, 28 Jun 2013 15:10:50 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2013/06/28/rails-content-negotiation-explained/</guid>
+      <description>&lt;p&gt;Explain the following snippet found in a Rails controller:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;def index
+  @posts = Post.all
+
+  respond_to do |format|
+    format.html  # index.html.erb
+    format.json  { render :json =&amp;gt; @posts }
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Useful &lt;a href=&#34;http://www.robertsosinski.com/2008/12/21/understanding-ruby-blocks-procs-and-lambdas/&#34;&gt;link&lt;/a&gt; to Ruby procs, blocks and lambdas&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Join multidimensional array elements with a Ruby oneliner</title>
+      <link>https://www.zybnet.com/2012/03/14/join-multidimensional-array-elements-with-a-ruby-oneliner/</link>
+      <pubDate>Wed, 14 Mar 2012 23:07:30 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2012/03/14/join-multidimensional-array-elements-with-a-ruby-oneliner/</guid>
+      <description>&lt;p&gt;Just the code&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;matrix = Array[
+[1, 2, 3],
+[4, 5, 6],
+[0, 0, 0]
+]
+puts matrix[0..1].transpose.map {|col| col.join(&#39;, &#39;)}.join(&#39;, &#39;)
+&amp;gt;&amp;gt;&amp;gt; 1, 4, 2, 5, 3, 6
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I thought of this because of &lt;a href=&#34;http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html#dom-context-2d-settransform&#34;&gt;canvas.setTransform()&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Install RVM</title>
+      <link>https://www.zybnet.com/2012/03/07/install-rvm/</link>
+      <pubDate>Wed, 07 Mar 2012 23:22:18 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2012/03/07/install-rvm/</guid>
+      <description>&lt;p&gt;The following downloads and executes the RVM installer&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ bash -s stable &amp;lt; \
+   &amp;lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;I explain what this oneliner does:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;The command in &lt;code&gt;&amp;lt;(...)&lt;/code&gt; is executed and its output is made available through a file descriptor like &lt;code&gt;/dev/fd/$id&lt;/code&gt; (&lt;a href=&#34;http://www.gnu.org/software/bash/manual/bashref.html#Process-Substitution&#34;&gt;Bash guide&lt;/a&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;This filename becomes the argument of standard input redirection (it&amp;rsquo;s the first &lt;code&gt;&amp;lt;&lt;/code&gt; )&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The downloaded data (which is the output of &lt;code&gt;curl&lt;/code&gt;) happens to be a Bash script, so it&amp;rsquo;s executed from bash and it&amp;rsquo;s passed &lt;code&gt;stable&lt;/code&gt; parameter (that&amp;rsquo;s &lt;a href=&#34;http://www.gnu.org/software/bash/manual/bashref.html#Invoking-Bash&#34;&gt;what &lt;code&gt;-s&lt;/code&gt; is for&lt;/a&gt;)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The stable branch of RVM is finally installed&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Run the following as the installer suggests&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$source ~/.rvm/scripts/rvm
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finally append this to .bashrc&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[[ -s &amp;quot;$HOME/.rvm/scripts/rvm&amp;quot; ]] &amp;amp;&amp;amp; . &amp;quot;$HOME/.rvm/scripts/rvm&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Each Ruby interpreter depends on some other software. RVM suggests what to install, depending on your operating system&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$rvm requirements
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

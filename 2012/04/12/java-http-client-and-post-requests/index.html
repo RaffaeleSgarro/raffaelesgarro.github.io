@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Java HTTP client and POST requests  &middot; ZYBNET</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="http, java, ">
+
+
+<meta property="og:title" content="Java HTTP client and POST requests  &middot; ZYBNET ">
+<meta property="og:site_name" content="ZYBNET"/>
+<meta property="og:url" content="https://www.zybnet.com/2012/04/12/java-http-client-and-post-requests/" />
+<meta property="og:locale" content="en-EN">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="2012-04-12T15:48:41Z" />
+<meta property="og:article:modified_time" content="2012-04-12T15:48:41Z" />
+
+  
+    
+<meta property="og:article:tag" content="http">
+    
+<meta property="og:article:tag" content="java">
+    
+  
+
+  
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@raffaelesgarro" />
+<meta name="twitter:creator" content="@raffaelesgarro" />
+<meta name="twitter:title" content="Java HTTP client and POST requests" />
+<meta name="twitter:description" content="" />
+<meta name="twitter:url" content="https://www.zybnet.com/2012/04/12/java-http-client-and-post-requests/" />
+<meta name="twitter:domain" content="https://www.zybnet.com/">
+  
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "Java HTTP client and POST requests",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+?rel=author"
+    },
+    "datePublished": "2012-04-12",
+    "description": "",
+    "wordCount": 1159
+  }
+</script>
+
+
+
+<link rel="canonical" href="https://www.zybnet.com/2012/04/12/java-http-client-and-post-requests/" />
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://www.zybnet.com/touch-icon-144-precomposed.png">
+<link href="https://www.zybnet.com/favicon.png" rel="icon">
+
+<meta name="generator" content="Hugo 0.19" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link href='https://fonts.googleapis.com/css?family=Merriweather:300%7CRaleway%7COpen+Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://www.zybnet.com/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://www.zybnet.com/css/style.css">
+<link rel="stylesheet" href="https://www.zybnet.com/css/highlight/default.css">
+
+  
+</head>
+<body>
+  <main id="main-wrapper" class="container main_wrapper has-sidebar">
+    <header id="main-header" class="container main_header">
+  <div class="container brand">
+  <div class="container title h1-like">
+  <a class="baselink" href="https://www.zybnet.com/">
+  ZYBNET
+
+</a>
+
+</div>
+
+  
+<div class="container topline">
+  
+  My hacking journal
+
+
+</div>
+
+
+</div>
+
+  <nav class="container nav primary no-print">
+  
+
+<a class="homelink" href="https://www.zybnet.com/">Home</a>
+
+
+  
+<a href="https://www.zybnet.com/about">About</a>
+
+<a href="https://www.zybnet.com/post" title="Show list of posts">Posts</a>
+
+<a href="https://www.zybnet.com/tags" title="Show list of tags">Tags</a>
+
+<a href="https://www.zybnet.com/zuml" title="ZUML">ZUML</a>
+
+
+</nav>
+
+<div class="container nav secondary no-print">
+  
+<a id="contact-link-email" class="contact_link" href="mailto:raffaeleSgarro@gmail.com">
+  <span class="fa fa-envelope-square"></span><span>email</span></a>
+
+
+
+<a id="contact-link-github" class="contact_link" href="https://github.com/RaffaeleSgarro/raffaelesgarro.github.io">
+  <span class="fa fa-github-square"></span><span>github</span></a>
+
+
+
+
+
+
+
+
+
+<a id="contact-link-facebook" class="contact_link" href="https://www.facebook.com/raffaelesgarro">
+  <span class="fa fa-facebook-square"></span><span>facebook</span></a>
+
+
+
+<a id="contact-link-twitter" class="contact_link" href="https://twitter.com/raffaelesgarro">
+  <span class="fa fa-twitter-square"></span><span>twitter</span></a>
+
+
+
+
+
+
+
+<a id="contact-link-stackoverflow" class="contact_link" href="https://stackoverflow.com/users/315306">
+  <span class="fa fa-stack-overflow"></span><span>stackoverflow</span></a>
+
+
+
+</div>
+
+
+  
+
+</header>
+
+
+<article id="main-content" class="container main_content single">
+  <header class="container hat">
+  <h1>Java HTTP client and POST requests
+</h1>
+
+  <div class="metas">
+<time datetime="2012-04-12">12 Apr, 2012</time>
+
+
+  
+    &middot; by admin
+  
+  &middot; Read in about 6 min
+  &middot; (1159 Words)
+  <br>
+  
+<a class="label" href="https://www.zybnet.com/tags/http">http</a>
+
+<a class="label" href="https://www.zybnet.com/tags/java">java</a>
+
+
+
+</div>
+
+</header>
+
+  <div class="container content">
+  <p>Apache HttpClient&rsquo;s site is poorly designed, so the documentation is difficult to find and it also assumes you have some confidence with HTTP. So, first things first, <a href="http://hc.apache.org/httpcomponents-client-ga/index.html">this is the link</a> to the project, and <a href="http://hc.apache.org/httpcomponents-client-ga/tutorial/html/">here is the official tutorial</a>. (BTW, you&rsquo;ll often see GA which stands for General Availability - ie a public release)</p>
+
+<p>On the left pane, they say there are three modules: HttpClient, HttpMime and HttpClient Cache. I never used the Cache module myself, but the other two are available in the libs folder <a href="http://hc.apache.org/downloads.cgi">of the archive</a> - often the javascript for choosing the mirror server is broken, so you have to manually type the hostname yourself in the browser. Inside the lib directory of the archive there are 5 jars needed for a HTTP client capable  of doing our POST requests:</p>
+
+<ol>
+<li><p>httpclient</p></li>
+
+<li><p>httpcore (required by httpclient, contains classes in org.apache.http.entity for example)</p></li>
+
+<li><p>httpmime</p></li>
+
+<li><p>mime-4j (required by httpmime I guess)</p></li>
+
+<li><p>commons-logging</p></li>
+</ol>
+
+<p>This is the basic workflow:</p>
+
+<ol>
+<li><p>construct a HttpPost, providing a URL and an HttpEntity (StringEntity, FileEntity or the full featured <a href="http://hc.apache.org/httpcomponents-core-ga/httpcore/apidocs/org/apache/http/HttpEntity.html">MultipartEntity</a>)</p></li>
+
+<li><p>configure a <a href="http://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/org/apache/http/client/HttpClient.html">HttpClient</a> and execute the POST method created at step 1</p></li>
+
+<li><p>examine the StatusLine of the HttpResponse just returned from step 2</p></li>
+
+<li><p>Consume the HttpEntity given by the HttpResponse</p></li>
+</ol>
+
+<p>This is the reference link <a href="http://hc.apache.org/httpcomponents-client-ga/logging.html">for logging configuration</a></p>
+
+<pre><code>public class Main {
+
+    public static void main(String[] args) throws ClientProtocolException, IOException {
+        // 1. construct the multipart entity of the post request
+        MultipartEntity multipart = new MultipartEntity();
+        multipart.addPart(&quot;a_number&quot;, new StringBody(&quot;12345&quot;));
+        multipart.addPart(&quot;a_string&quot;, new StringBody(&quot;Lorem ipsum&quot;));
+        multipart.addPart(&quot;an_array[]&quot;, new StringBody(&quot;element 1&quot;));
+        multipart.addPart(&quot;an_array[]&quot;, new StringBody(&quot;element 2&quot;));
+        String resourceName = &quot;lorem_ipsum.txt&quot;;
+        multipart.addPart(&quot;a_file&quot;, new InputStreamBody(
+                Main.class.getResourceAsStream(resourceName),
+                &quot;text/plain&quot;,
+                resourceName));
+
+        // 2. create the post request
+        HttpPost post = new HttpPost(&quot;http://w.zybnet.com/test/post_from_java.php&quot;);
+        post.setEntity(multipart);
+
+        // 3. execute the post method
+        HttpClient client = new DefaultHttpClient();
+        HttpResponse response = client.execute(post);
+
+        // 4. read the response
+        HttpEntity entity = response.getEntity();
+        System.out.println(response.getStatusLine().toString());
+        BufferedReader reader = new BufferedReader(new InputStreamReader(entity.getContent()));
+        String line = null;
+        while ((line = reader.readLine()) != null)
+            System.out.println(line);
+        reader.close();
+    }
+
+}
+</code></pre>
+
+<p>This is a common debug session:</p>
+
+<pre><code>[DEBUG] SingleClientConnManager - Get connection for route HttpRoute[{}-&gt;http://w.zybnet.com]
+[DEBUG] RequestAddCookies - CookieSpec selected: best-match
+[DEBUG] DefaultHttpClient - Attempt 1 to execute request
+[DEBUG] DefaultClientConnection - Sending request: POST /test/post_from_java.php HTTP/1.1
+[DEBUG] wire - &gt;&gt; &quot;POST /test/post_from_java.php HTTP/1.1[EOL]&quot;
+[DEBUG] wire - &gt;&gt; &quot;Transfer-Encoding: chunked[EOL]&quot;
+[DEBUG] wire - &gt;&gt; &quot;Content-Type: multipart/form-data; boundary=irl07RcWWX5xEGtgFYJo5-mnA168uOtnQ[EOL]&quot;
+[DEBUG] wire - &gt;&gt; &quot;Host: w.zybnet.com[EOL]&quot;
+[DEBUG] wire - &gt;&gt; &quot;Connection: Keep-Alive[EOL]&quot;
+[DEBUG] wire - &gt;&gt; &quot;User-Agent: Apache-HttpClient/4.0.1 (java 1.5)[EOL]&quot;
+[DEBUG] wire - &gt;&gt; &quot;Expect: 100-Continue[EOL]&quot;
+[DEBUG] wire - &gt;&gt; &quot;[EOL]&quot;
+[DEBUG] headers - &gt;&gt; POST /test/post_from_java.php HTTP/1.1
+[DEBUG] headers - &gt;&gt; Transfer-Encoding: chunked
+[DEBUG] headers - &gt;&gt; Content-Type: multipart/form-data; boundary=irl07RcWWX5xEGtgFYJo5-mnA168uOtnQ
+[DEBUG] headers - &gt;&gt; Host: w.zybnet.com
+[DEBUG] headers - &gt;&gt; Connection: Keep-Alive
+[DEBUG] headers - &gt;&gt; User-Agent: Apache-HttpClient/4.0.1 (java 1.5)
+[DEBUG] headers - &gt;&gt; Expect: 100-Continue
+[DEBUG] wire - &lt;&lt; &quot;HTTP/1.1 100 Continue[EOL]&quot;
+[DEBUG] wire - &lt;&lt; &quot;[EOL]&quot;
+[DEBUG] DefaultClientConnection - Receiving response: HTTP/1.1 100 Continue
+[DEBUG] headers - &lt;&lt; HTTP/1.1 100 Continue
+[DEBUG] wire - &gt;&gt; &quot;a7[EOL]&quot;
+[DEBUG] wire - &gt;&gt; &quot;--irl07RcWWX5xEGtgFYJo5-mnA168uOtnQ[\r][\n]&quot;
+[DEBUG] wire - &gt;&gt; &quot;Content-Disposition: form-data; name=&quot;a_number&quot;[\r][\n]&quot;
+[DEBUG] wire - &gt;&gt; &quot;Content-Type: text/plain; charset=UTF-8[\r][\n]&quot;
+[DEBUG] wire - &gt;&gt; &quot;Content-Transfer-Encoding: 8bit[\r][\n]&quot;
+[DEBUG] wire - &gt;&gt; &quot;[\r][\n]&quot;
+[DEBUG] wire - &gt;&gt; &quot;12345&quot;
+[DEBUG] wire - &gt;&gt; &quot;[EOL]&quot;
+[DEBUG] wire - &gt;&gt; &quot;af[EOL]&quot;
+[DEBUG] wire - &gt;&gt; &quot;[\r][\n]&quot;
+[DEBUG] wire - &gt;&gt; &quot;--irl07RcWWX5xEGtgFYJo5-mnA168uOtnQ[\r][\n]&quot;
+[DEBUG] wire - &gt;&gt; &quot;Content-Disposition: form-data; name=&quot;a_string&quot;[\r][\n]&quot;
+[DEBUG] wire - &gt;&gt; &quot;Content-Type: text/plain; charset=UTF-8[\r][\n]&quot;
+[DEBUG] wire - &gt;&gt; &quot;Content-Transfer-Encoding: 8bit[\r][\n]&quot;
+[DEBUG] wire - &gt;&gt; &quot;[\r][\n]&quot;
+[DEBUG] wire - &gt;&gt; &quot;Lorem ipsum&quot;
+[DEBUG] wire - &gt;&gt; &quot;[EOL]&quot;
+[DEBUG] wire - &gt;&gt; &quot;af[EOL]&quot;
+[DEBUG] wire - &gt;&gt; &quot;[\r][\n]&quot;
+[DEBUG] wire - &gt;&gt; &quot;--irl07RcWWX5xEGtgFYJo5-mnA168uOtnQ[\r][\n]&quot;
+[DEBUG] wire - &gt;&gt; &quot;Content-Disposition: form-data; name=&quot;an_array[]&quot;[\r][\n]&quot;
+[DEBUG] wire - &gt;&gt; &quot;Content-Type: text/plain; charset=UTF-8[\r][\n]&quot;
+[DEBUG] wire - &gt;&gt; &quot;Content-Transfer-Encoding: 8bit[\r][\n]&quot;
+[DEBUG] wire - &gt;&gt; &quot;[\r][\n]&quot;
+[DEBUG] wire - &gt;&gt; &quot;element 1&quot;
+[DEBUG] wire - &gt;&gt; &quot;[EOL]&quot;
+[DEBUG] wire - &gt;&gt; &quot;af[EOL]&quot;
+[DEBUG] wire - &gt;&gt; &quot;[\r][\n]&quot;
+[DEBUG] wire - &gt;&gt; &quot;--irl07RcWWX5xEGtgFYJo5-mnA168uOtnQ[\r][\n]&quot;
+[DEBUG] wire - &gt;&gt; &quot;Content-Disposition: form-data; name=&quot;an_array[]&quot;[\r][\n]&quot;
+[DEBUG] wire - &gt;&gt; &quot;Content-Type: text/plain; charset=UTF-8[\r][\n]&quot;
+[DEBUG] wire - &gt;&gt; &quot;Content-Transfer-Encoding: 8bit[\r][\n]&quot;
+[DEBUG] wire - &gt;&gt; &quot;[\r][\n]&quot;
+[DEBUG] wire - &gt;&gt; &quot;element 2&quot;
+[DEBUG] wire - &gt;&gt; &quot;[EOL]&quot;
+[DEBUG] wire - &gt;&gt; &quot;25e[EOL]&quot;
+[DEBUG] wire - &gt;&gt; &quot;[\r][\n]&quot;
+[DEBUG] wire - &gt;&gt; &quot;--irl07RcWWX5xEGtgFYJo5-mnA168uOtnQ[\r][\n]&quot;
+[DEBUG] wire - &gt;&gt; &quot;Content-Disposition: form-data; name=&quot;a_file&quot;; filename=&quot;lorem_ipsum.txt&quot;[\r][\n]&quot;
+[DEBUG] wire - &gt;&gt; &quot;Content-Type: text/plain[\r][\n]&quot;
+[DEBUG] wire - &gt;&gt; &quot;Content-Transfer-Encoding: binary[\r][\n]&quot;
+[DEBUG] wire - &gt;&gt; &quot;[\r][\n]&quot;
+[DEBUG] wire - &gt;&gt; &quot; Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum&quot;
+[DEBUG] wire - &gt;&gt; &quot;[EOL]&quot;
+[DEBUG] wire - &gt;&gt; &quot;29[EOL]&quot;
+[DEBUG] wire - &gt;&gt; &quot;[\r][\n]&quot;
+[DEBUG] wire - &gt;&gt; &quot;--irl07RcWWX5xEGtgFYJo5-mnA168uOtnQ--[\r][\n]&quot;
+[DEBUG] wire - &gt;&gt; &quot;[EOL]&quot;
+[DEBUG] wire - &gt;&gt; &quot;0[EOL]&quot;
+[DEBUG] wire - &gt;&gt; &quot;[EOL]&quot;
+[DEBUG] wire - &lt;&lt; &quot;HTTP/1.1 200 OK[EOL]&quot;
+[DEBUG] wire - &lt;&lt; &quot;Date: Thu, 12 Apr 2012 15:43:20 GMT[EOL]&quot;
+[DEBUG] wire - &lt;&lt; &quot;Server: Apache/2.2.20 (Ubuntu)[EOL]&quot;
+[DEBUG] wire - &lt;&lt; &quot;X-Powered-By: PHP/5.3.6-13ubuntu3.6[EOL]&quot;
+[DEBUG] wire - &lt;&lt; &quot;Vary: Accept-Encoding[EOL]&quot;
+[DEBUG] wire - &lt;&lt; &quot;Content-Length: 442[EOL]&quot;
+[DEBUG] wire - &lt;&lt; &quot;Keep-Alive: timeout=5, max=100[EOL]&quot;
+[DEBUG] wire - &lt;&lt; &quot;Connection: Keep-Alive[EOL]&quot;
+[DEBUG] wire - &lt;&lt; &quot;Content-Type: text/html[EOL]&quot;
+[DEBUG] wire - &lt;&lt; &quot;[EOL]&quot;
+[DEBUG] DefaultClientConnection - Receiving response: HTTP/1.1 200 OK
+[DEBUG] headers - &lt;&lt; HTTP/1.1 200 OK
+[DEBUG] headers - &lt;&lt; Date: Thu, 12 Apr 2012 15:43:20 GMT
+[DEBUG] headers - &lt;&lt; Server: Apache/2.2.20 (Ubuntu)
+[DEBUG] headers - &lt;&lt; X-Powered-By: PHP/5.3.6-13ubuntu3.6
+[DEBUG] headers - &lt;&lt; Vary: Accept-Encoding
+[DEBUG] headers - &lt;&lt; Content-Length: 442
+[DEBUG] headers - &lt;&lt; Keep-Alive: timeout=5, max=100
+[DEBUG] headers - &lt;&lt; Connection: Keep-Alive
+[DEBUG] headers - &lt;&lt; Content-Type: text/html
+[DEBUG] DefaultHttpClient - Connection can be kept alive for 5000 ms
+[DEBUG] wire - &lt;&lt; &quot;array(3) {[\n]&quot;
+[DEBUG] wire - &lt;&lt; &quot;  [&quot;a_number&quot;]=&gt;[\n]&quot;
+[DEBUG] wire - &lt;&lt; &quot;  string(5) &quot;12345&quot;[\n]&quot;
+[DEBUG] wire - &lt;&lt; &quot;  [&quot;a_string&quot;]=&gt;[\n]&quot;
+[DEBUG] wire - &lt;&lt; &quot;  string(11) &quot;Lorem ipsum&quot;[\n]&quot;
+[DEBUG] wire - &lt;&lt; &quot;  [&quot;an_array&quot;]=&gt;[\n]&quot;
+[DEBUG] wire - &lt;&lt; &quot;  array(2) {[\n]&quot;
+[DEBUG] wire - &lt;&lt; &quot;    [0]=&gt;[\n]&quot;
+[DEBUG] wire - &lt;&lt; &quot;    string(9) &quot;element 1&quot;[\n]&quot;
+[DEBUG] wire - &lt;&lt; &quot;    [1]=&gt;[\n]&quot;
+[DEBUG] wire - &lt;&lt; &quot;    string(9) &quot;element 2&quot;[\n]&quot;
+[DEBUG] wire - &lt;&lt; &quot;  }[\n]&quot;
+[DEBUG] wire - &lt;&lt; &quot;}[\n]&quot;
+[DEBUG] wire - &lt;&lt; &quot;array(1) {[\n]&quot;
+[DEBUG] wire - &lt;&lt; &quot;  [&quot;a_file&quot;]=&gt;[\n]&quot;
+[DEBUG] wire - &lt;&lt; &quot;  array(5) {[\n]&quot;
+[DEBUG] wire - &lt;&lt; &quot;    [&quot;name&quot;]=&gt;[\n]&quot;
+[DEBUG] wire - &lt;&lt; &quot;    string(15) &quot;lorem_ipsum.txt&quot;[\n]&quot;
+[DEBUG] wire - &lt;&lt; &quot;    [&quot;type&quot;]=&gt;[\n]&quot;
+[DEBUG] wire - &lt;&lt; &quot;    string(10) &quot;text/plain&quot;[\n]&quot;
+[DEBUG] wire - &lt;&lt; &quot;    [&quot;tmp_name&quot;]=&gt;[\n]&quot;
+[DEBUG] wire - &lt;&lt; &quot;    string(14) &quot;/tmp/phpk7ljPt&quot;[\n]&quot;
+[DEBUG] wire - &lt;&lt; &quot;    [&quot;error&quot;]=&gt;[\n]&quot;
+[DEBUG] wire - &lt;&lt; &quot;    int(0)[\n]&quot;
+[DEBUG] wire - &lt;&lt; &quot;    [&quot;size&quot;]=&gt;[\n]&quot;
+[DEBUG] wire - &lt;&lt; &quot;    int(429)[\n]&quot;
+[DEBUG] wire - &lt;&lt; &quot;  }[\n]&quot;
+[DEBUG] wire - &lt;&lt; &quot;}[\n]&quot;
+[DEBUG] SingleClientConnManager - Releasing connection org.apache.http.impl.conn.SingleClientConnManager$ConnAdapter@6fa9fc
+</code></pre>
+</div>
+
+
+  <footer class="container">
+  <div class="container navigation no-print">
+  <h2>Navigation</h2>
+  
+  
+
+    
+    <a class="prev" href="https://www.zybnet.com/2012/03/16/multiple-substitutions-with-sed/" title="Multiple substitutions with sed">
+      Previous
+    </a>
+    
+
+    
+    <a class="next" href="https://www.zybnet.com/2012/04/12/apache-mod_authz_host-what-do-order-deny-and-allow-mean/" title="Apache mod_authz_host: what do Order, Deny and Allow mean?">
+      Next
+    </a>
+    
+
+  
+
+
+</div>
+
+  <div class="container comments">
+  <h2>Comments</h2>
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//zybnet.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+</div>
+
+</footer>
+
+</article>
+      <footer id="main-footer" class="container main_footer">
+  
+
+  <div class="container nav foot no-print">
+  
+<a href="http://www.wtfpl.net/txt/copying/">Do What The Fuck You Want To Public License</a>
+
+
+  <a class="toplink" href="#">back to top</a>
+
+</div>
+
+  <div class="container credits">
+  
+<div class="container footline">
+  
+
+</div>
+
+
+  
+
+</div>
+
+</footer>
+
+    </main>
+    
+<script type="text/javascript">
+  (function() {
+    
+    
+    if (window.location.hostname == "localhost")
+      return;
+
+    var dsq = document.createElement('script'); dsq.async = true; dsq.type = 'text/javascript';
+    dsq.src = '//zybnet.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<script src="https://www.zybnet.com/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+    
+  </body>
+</html>
+

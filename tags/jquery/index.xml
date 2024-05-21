@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Jquery on ZYBNET</title>
+    <link>https://www.zybnet.com/tags/jquery/index.xml</link>
+    <description>Recent content in Jquery on ZYBNET</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <managingEditor>raffaeleSgarro@gmail.com (Raffaele Sgarro)</managingEditor>
+    <webMaster>raffaeleSgarro@gmail.com (Raffaele Sgarro)</webMaster>
+    <atom:link href="https://www.zybnet.com/tags/jquery/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>jQuery.Deferred to queue ajax calls</title>
+      <link>https://www.zybnet.com/2012/06/24/jquery-deferred-to-queue-ajax-calls/</link>
+      <pubDate>Sun, 24 Jun 2012 21:55:36 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2012/06/24/jquery-deferred-to-queue-ajax-calls/</guid>
+      <description>&lt;p&gt;A &lt;a href=&#34;http://api.jquery.com/category/deferred-object/&#34;&gt;&lt;code&gt;jQuery.Deferred&lt;/code&gt; object&lt;/a&gt; is an interface to describe asynchronous operations. The Deferred interface gives the client programmer two hooks:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Deferred.done(callback)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;and Deferred.fail(callback)&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The callback signature is estabilished by the implementor. For example &lt;code&gt;jQuery.get()&lt;/code&gt; returns a &lt;code&gt;jqXHR&lt;/code&gt;, implementing the Promise interface (a subset of Deferred, used to prevent users from changing the state of the Deferred), and the callback for &lt;code&gt;done()&lt;/code&gt; uses up to three parameters: data, textStatus, jqXHR. So instead of using the jQuery &amp;laquo;proprietary&amp;raquo;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$.get(&amp;quot;http://host/resource&amp;quot;, {}, function(data, textStatus, jqXHR) { /* do something with the response*/ });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;one can use the promise-style (remember $.get returns a promise)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$.get(&amp;quot;http://host/resource&amp;quot;).done(function(data, textStatus, jqXHR) { /* do something with the response*/ });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To enqueue asynchronous calls one can use &lt;code&gt;Deferred.pipe(doneFilter, failFilter)&lt;/code&gt; (prior to 1.8 you must use &lt;code&gt;pipe()&lt;/code&gt;, while in 1.8 the implementation of pipe() is renamed then() and pipe() becomes an alias to it).&lt;/p&gt;
+
+&lt;p&gt;Things get interesting when doneFilter() itself returns a Promise and you want to register a callback when this new promise is resolved. Imagine the scenario where you want to&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;get authorization token&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;get last order&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;delete last order&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Thanks to jQuery and promise we can accomplish this via&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$.get(&amp;quot;/token&amp;quot;, params)
+  .pipe(function(data){
+     // Note that here &amp;quot;this&amp;quot; refers to the
+     // jqXHR, which also is a deferred
+     return $.get(&amp;quot;/order/last&amp;quot;, params);
+  })
+  .pipe(function(data){
+    return $.delete(&amp;quot;/order&amp;quot;, params);
+  })
+  .pipe(function(data){
+    $(&amp;quot;#some_div&amp;quot;).text(&amp;quot;OK&amp;quot;);
+  });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Without promise, we would have needed to nest calls like this&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$.get(&amp;quot;/token&amp;quot;, params, function (data) {
+  $.get(&amp;quot;/order/last&amp;quot;, params2, function(data) {
+    $.delete(&amp;quot;/order&amp;quot;, params3, function(data) {
+      $(&amp;quot;#some_div&amp;quot;).text(&amp;quot;OK&amp;quot;);
+    });
+  });
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As a bonus, we&amp;rsquo;ll review Deferred implementation in another post.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Generics on ZYBNET</title>
+    <link>https://www.zybnet.com/tags/generics/index.xml</link>
+    <description>Recent content in Generics on ZYBNET</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <managingEditor>raffaeleSgarro@gmail.com (Raffaele Sgarro)</managingEditor>
+    <webMaster>raffaeleSgarro@gmail.com (Raffaele Sgarro)</webMaster>
+    <atom:link href="https://www.zybnet.com/tags/generics/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Generics demistified</title>
+      <link>https://www.zybnet.com/2013/10/27/generics-demistified/</link>
+      <pubDate>Sun, 27 Oct 2013 10:35:31 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2013/10/27/generics-demistified/</guid>
+      <description>&lt;p&gt;Take this load of questions:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Why can I put an &lt;code&gt;Integer&lt;/code&gt; in a &lt;code&gt;List&amp;lt;Number&amp;gt;&lt;/code&gt; but can&amp;rsquo;t assign a &lt;code&gt;List&amp;lt;Integer&amp;gt;&lt;/code&gt; to a &lt;code&gt;List&amp;lt;Number&amp;gt;&lt;/code&gt;?&lt;/li&gt;
+&lt;li&gt;Why can I put any &lt;code&gt;Number&lt;/code&gt; in a &lt;code&gt;List&amp;lt;? super Number&amp;gt;&lt;/code&gt; but can&amp;rsquo;t do the same with a &lt;code&gt;List&amp;lt;? extends Number&amp;gt;&lt;/code&gt;?&lt;/li&gt;
+&lt;li&gt;Why doesn&amp;rsquo;t &lt;code&gt;List&amp;lt;? extends Number&amp;gt;&lt;/code&gt; extends &lt;code&gt;List&amp;lt;? super Number&amp;gt;&lt;/code&gt;?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;These and similar questions are asked very often, but usually answered like this:&lt;/p&gt;
+
+&lt;blockquote&gt;Consider what happens with arrays:
+&lt;pre&gt;&lt;code&gt;String[] strings = { &#34;Foo&#34;, &#34;Bar&#34;, &#34;Baz&#34; };
+Object[] objects = strings;
+objects[0] = new Integer(1); // BOOOOM!
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This kind of answer is misleading at best, because it pretends that generic types are a feature of the Collections framework of the platform, which is simply not true. Generics are a feature of Java-the-language, and are employed throughout the API (Class, Enum, Comparable) as well as in third party libraries (especially ones dealing with I/O, and thus reflection, like Jackson, jOOQ, etc.)&lt;/p&gt;
+
+&lt;p&gt;Relevant links:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://docs.oracle.com/javase/specs/jls/se7/html/jls-4.html#jls-4.5.2&#34;&gt;4.5.2. Members and Constructors of Parameterized Types&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://docs.oracle.com/javase/specs/jls/se7/html/jls-4.html#jls-4.10.2&#34;&gt;4.10.2. Subtyping among Class and Interface Types&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html#jls-15.12.2.1&#34;&gt;15.12.2.1. Identify Potentially Applicable Methods&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>Puzzled by generics and enums</title>
+      <link>https://www.zybnet.com/2013/06/27/puzzled-by-generics-and-enums/</link>
+      <pubDate>Thu, 27 Jun 2013 20:01:08 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2013/06/27/puzzled-by-generics-and-enums/</guid>
+      <description>&lt;p&gt;I had to write a method which, given an &lt;code&gt;Enum&lt;/code&gt; class, returned the set of values. First signature attempt:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public Set&amp;lt;Enum&amp;lt;?&amp;gt;&amp;gt; getValuesForEnum(Class&amp;lt;Enum&amp;lt;?&amp;gt;&amp;gt; klass);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Unfortunately this doesn&amp;rsquo;t work. When you try to invoke this method you got the error:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;getValuesForEnum() can&#39;t be applied to &amp;quot;name.of.the.Enum&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s say we have an enum named &lt;code&gt;com.example.MyEnum&lt;/code&gt;. The compiler complains because &lt;code&gt;MyEnum.class&lt;/code&gt; is not a subtype of &lt;code&gt;Class&amp;lt;Enum&amp;lt;?&amp;gt;&amp;gt;&lt;/code&gt;. Can you spot the error? Nested type parameters are always tricky to deal with. In this case I had to perform the following reasoning:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;A&amp;lt;Y&amp;gt;&lt;/code&gt; is a subtype of &lt;code&gt;A&amp;lt;X&amp;gt;&lt;/code&gt; if &amp;hellip; well this never happens! For the subtype relationship to exist, wildcard must come into play, and there are no wildcards here. Except, well, there is a wildcard indeed: &lt;code&gt;Enum&amp;lt;?&amp;gt;&lt;/code&gt;! Unfortunately it&amp;rsquo;s in the wrong place. We have:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Class&amp;lt;Enum&amp;lt;?&amp;gt;&amp;gt;&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Class&amp;lt;MyEnum&amp;gt;&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To fix this problem the signature needs to be:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public Set&amp;lt;Enum&amp;lt;?&amp;gt;&amp;gt; getValuesForEnum( Class&amp;lt;? extends Enum&amp;lt;?&amp;gt;&amp;gt; klass);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Generics are invariant in Java: a &lt;code&gt;List&amp;lt;String&amp;gt;&lt;/code&gt; can&amp;rsquo;t be used where a &lt;code&gt;List&amp;lt;Object&amp;gt;&lt;/code&gt; is expected, regardless of the subtype relation between String and Object. It&amp;rsquo;s not different in this case: just that we don&amp;rsquo;t have String and Object, but &lt;code&gt;Enum&amp;lt;?&amp;gt;&lt;/code&gt; and &lt;code&gt;Enum&amp;lt;MyEnum&amp;gt;&lt;/code&gt;. There exists a subtype relation between the two arguments, but it&amp;rsquo;s irrelevant because our &lt;code&gt;X&lt;/code&gt; is &lt;code&gt;Enum&amp;lt;?&amp;gt;&lt;/code&gt;, so it&amp;rsquo;s not a wildcard.&lt;/p&gt;
+
+&lt;p&gt;What puzzled me is that it&amp;rsquo;s a generic type and the type argument happens to be a wildcard.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

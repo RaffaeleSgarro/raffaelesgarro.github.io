@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Jls on ZYBNET</title>
+    <link>https://www.zybnet.com/tags/jls/index.xml</link>
+    <description>Recent content in Jls on ZYBNET</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-EN</language>
+    <managingEditor>raffaeleSgarro@gmail.com (Raffaele Sgarro)</managingEditor>
+    <webMaster>raffaeleSgarro@gmail.com (Raffaele Sgarro)</webMaster>
+    <atom:link href="https://www.zybnet.com/tags/jls/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Generics demistified</title>
+      <link>https://www.zybnet.com/2013/10/27/generics-demistified/</link>
+      <pubDate>Sun, 27 Oct 2013 10:35:31 +0000</pubDate>
+      <author>raffaeleSgarro@gmail.com (Raffaele Sgarro)</author>
+      <guid>https://www.zybnet.com/2013/10/27/generics-demistified/</guid>
+      <description>&lt;p&gt;Take this load of questions:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Why can I put an &lt;code&gt;Integer&lt;/code&gt; in a &lt;code&gt;List&amp;lt;Number&amp;gt;&lt;/code&gt; but can&amp;rsquo;t assign a &lt;code&gt;List&amp;lt;Integer&amp;gt;&lt;/code&gt; to a &lt;code&gt;List&amp;lt;Number&amp;gt;&lt;/code&gt;?&lt;/li&gt;
+&lt;li&gt;Why can I put any &lt;code&gt;Number&lt;/code&gt; in a &lt;code&gt;List&amp;lt;? super Number&amp;gt;&lt;/code&gt; but can&amp;rsquo;t do the same with a &lt;code&gt;List&amp;lt;? extends Number&amp;gt;&lt;/code&gt;?&lt;/li&gt;
+&lt;li&gt;Why doesn&amp;rsquo;t &lt;code&gt;List&amp;lt;? extends Number&amp;gt;&lt;/code&gt; extends &lt;code&gt;List&amp;lt;? super Number&amp;gt;&lt;/code&gt;?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;These and similar questions are asked very often, but usually answered like this:&lt;/p&gt;
+
+&lt;blockquote&gt;Consider what happens with arrays:
+&lt;pre&gt;&lt;code&gt;String[] strings = { &#34;Foo&#34;, &#34;Bar&#34;, &#34;Baz&#34; };
+Object[] objects = strings;
+objects[0] = new Integer(1); // BOOOOM!
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This kind of answer is misleading at best, because it pretends that generic types are a feature of the Collections framework of the platform, which is simply not true. Generics are a feature of Java-the-language, and are employed throughout the API (Class, Enum, Comparable) as well as in third party libraries (especially ones dealing with I/O, and thus reflection, like Jackson, jOOQ, etc.)&lt;/p&gt;
+
+&lt;p&gt;Relevant links:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://docs.oracle.com/javase/specs/jls/se7/html/jls-4.html#jls-4.5.2&#34;&gt;4.5.2. Members and Constructors of Parameterized Types&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://docs.oracle.com/javase/specs/jls/se7/html/jls-4.html#jls-4.10.2&#34;&gt;4.10.2. Subtyping among Class and Interface Types&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html#jls-15.12.2.1&#34;&gt;15.12.2.1. Identify Potentially Applicable Methods&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
